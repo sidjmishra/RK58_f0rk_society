@@ -17,7 +17,7 @@ we have hosted the web-app for better experience.
 		url-https://anticorruptionweb.herokuapp.com/
 
 
-*****Aharya App***
+***Aharya App***
 		
 
 It is an cross platform application which is been build with the help of flutter. Initially it serves to to perform basic functionality of reporting a bribe and reporting 
@@ -46,7 +46,7 @@ How does Aharya works ?
 
 
 
-***Aharya Website
+***Aharya Website***
 It is Web-App made with Django which is an open source framework by Python. The web-app serves to view the data and reports submitted by the user and also change the status of  the app.The web-app shows the number of 
 cases reported for that particular type.It also shows a pie-chart which is use to segregation of cases into 3 types
 1.Pending cases(cases which are registered but not open)
@@ -55,7 +55,7 @@ cases reported for that particular type.It also shows a pie-chart which is use t
 It also shows all the data which is submitted by the user in proper readable format
 
 
-*****Note- if you sign up for new user then we havent added and validators for Adhar card and security code field is not added which we would add in future course once signup is done you need to login with that credentials again
+***Note***- if you sign up for new user then we havent added and validators for Adhar card and security code field is not added which we would add in future course once signup is done you need to login with that credentials again
 ***** predefine credentials- mail-hyp9820@student.sfit.ac.in
 			     pass-12345678 
 How does Aharya Web-App ?
