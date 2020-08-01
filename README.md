@@ -57,9 +57,10 @@ It also shows all the data which is submitted by the user in proper readable for
 
 
 ***Note***- if you sign up for new user then we havent added and validators for Adhar card and security code field is not added which we would add in future course once signup is done you need to login with that credentials again
-***** predefine credentials- mail-hyp9820@student.sfit.ac.in
+
+***predefine credentials***- mail-hyp9820@student.sfit.ac.in
 			     pass-12345678 
-How does Aharya Web-App ?
+How does Aharya Web-App works ?
 
 • Getting Started : You can either sign-in with predfine credential given by Govt or else you can signup with your details.
 
