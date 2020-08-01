@@ -13,10 +13,12 @@ we have 2 main entity in round 1
 1-Aharya app(user)
 2-Aharya website(Admin)
 
-*****Aharya App**********
-		we have hosted the web-app for better experience.
+we have hosted the web-app for better experience.
 		url-https://anticorruptionweb.herokuapp.com/
 
+
+*****Aharya App
+		
 
 It is an cross platform application which is been build with the help of flutter. Initially it serves to to perform basic functionality of reporting a bribe and reporting 
 an unusual incident.it also has additional features of reporting FIR,NCR,Filing a complaint against prison management,requesting for NOC certificate
