@@ -35,3 +35,32 @@ How does Aharya works ?
 				  ex for status of bribery report- menu(☰)->status->Bribe report
 
 • Other functionalites : You can try Chat function,reporting FIR,NCR,Requesting NOC,Reporting Delay in action,Requesting an appointment with admin,Helpline Number(button) which have multiple Helplines
+
+
+
+
+
+
+**************Aharya Website*******************
+It is Web-App made with Django which is an open source framework by Python. The web-app serves to view the data and reports submitted by the user and also change the status of  the app.The web-app shows the number of 
+cases reported for that particular type.It also shows a pie-chart which is use to segregation of cases into 3 types
+1.Pending cases(cases which are registered but not open)
+2.in process cases(cases which are open but not given verdict)
+3.Accepted cases(cases which are accepted as legit cases)
+It also shows all the data which is submitted by the user in proper readable format
+
+
+*****Note- if you sign up for new user then we havent added and validators for Adhar card and security code field is not added which we would add in future course once signup is done you need to login with that credentials again
+***** predefine credentials- mail-hyp9820@student.sfit.ac.in
+			     pass-12345678 
+How does Aharya Web-App ?
+
+• Getting Started : You can either sign-in with predfine credential given by Govt or else you can signup with your details.
+
+• Viewing Reports : You can view all the reports with their unique id on home screen you select the type of report from top right of the navbar
+
+• Update status : You can change the status of the report by selecting any of the 2 buttons(accept,reject).
+
+• Viewing General data : On left side of the windoe you will se cumilative data of Pending,In-process,Accepted cases with userid of Admin.
+
+• Other fun things : You can view a pie chart to understand the data more precisely.
