@@ -54,7 +54,7 @@ cases reported for that particular type.It also shows a pie-chart which is use t
 It also shows all the data which is submitted by the user in proper readable format
 
 
-*****Note- if you sign up for new user then we havent added and validators for Adhar card and security code field is not added which we would add in future course once signup is done you need to login with that credentials again
+*****Note- if you sign up for new user then we havent added and validators for Adhar card and security code field is not added which we would add in future course once signup is done you need to login with that credentials again.RTI is only working for bribery for further types it would work in future versions
 ***** predefine credentials- mail-hyp9820@student.sfit.ac.in
 			     pass-12345678 
 How does Aharya Web-App ?
