@@ -47,6 +47,7 @@ How does Aharya works ?
 
 
 ***Aharya Website***
+
 It is Web-App made with Django which is an open source framework by Python. The web-app serves to view the data and reports submitted by the user and also change the status of  the app.The web-app shows the number of 
 cases reported for that particular type.It also shows a pie-chart which is use to segregation of cases into 3 types
 1.Pending cases(cases which are registered but not open)
