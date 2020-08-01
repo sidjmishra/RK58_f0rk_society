@@ -3,6 +3,11 @@
 Smart India Hackathon - 2020
 Name of Solution-Aharya
 Round 1-
+
+video presentation- https://drive.google.com/file/d/1bQBxwS037PqGdauF04nRaIc_dwtoIDI6/view?usp=sharing
+we highly recomend to check out this short video as it show complete working of application.
+
+
 Here we have tried to provide basic functionality of reporting updating the status of reports submitted by the user
 we have 2 main entity in round 1
 1-Aharya app(user)
