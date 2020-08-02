@@ -16,7 +16,6 @@ class Otp extends StatefulWidget {
 }
 
 class _OtpState extends State<Otp> {
-
   bool isLoading = false;
   final _formKey = GlobalKey<FormState>();
 
@@ -29,7 +28,7 @@ class _OtpState extends State<Otp> {
   var id;
   void randomId() async {
     id = number.nextInt(999999).toString();
-    if(id.length < 6) {
+    if (id.length < 6) {
       setState(() {
         id = number.nextInt(9999999).toString();
       });
@@ -63,9 +62,10 @@ class _OtpState extends State<Otp> {
         isLoading = true;
       });
 
-      await Firestore.instance.collection('User Details').document(Constants.myUid).updateData({
-        'User': 'Verified'
-      });
+      await Firestore.instance
+          .collection('User Details')
+          .document(Constants.myUid)
+          .updateData({'User': 'Verified'});
       await Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (context) => HomePage()));
       randomId();
@@ -86,8 +86,7 @@ class _OtpState extends State<Otp> {
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(60),
-              topRight: Radius.circular(60)),
+              topLeft: Radius.circular(60), topRight: Radius.circular(60)),
         ),
         child: Padding(
           padding: EdgeInsets.all(35),
@@ -99,7 +98,8 @@ class _OtpState extends State<Otp> {
                   SizedBox(height: 20),
 
                   Center(
-                    child: Text('You would receive an OTP on the phone number same as on Aadhar Card',
+                    child: Text(
+                      'You would receive an OTP on the phone number same as on Aadhar Card',
                       maxLines: 3,
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
@@ -119,7 +119,7 @@ class _OtpState extends State<Otp> {
                         borderRadius: BorderRadius.circular(10),
                         boxShadow: [
                           BoxShadow(
-                            color: Color.fromRGBO(225, 95, 27, .3),
+                            color: Color(0xff99D5D5),
                             blurRadius: 20,
                             offset: Offset(0, 10),
                           ),
@@ -132,14 +132,14 @@ class _OtpState extends State<Otp> {
                             Container(
                               decoration: BoxDecoration(
                                 border: Border(
-                                  bottom: BorderSide(
-                                      color: Colors.grey[300]),
+                                  bottom: BorderSide(color: Colors.grey[300]),
                                 ),
                               ),
                               child: TextFormField(
                                 validator: (val) {
                                   return val.isEmpty &&
-                                      val.length < 6 && val == id
+                                          val.length < 6 &&
+                                          val == id
                                       ? 'Invalid OTP! Try again'
                                       : null;
                                 },
@@ -147,8 +147,7 @@ class _OtpState extends State<Otp> {
                                 keyboardType: TextInputType.text,
                                 decoration: InputDecoration(
                                   hintText: 'Enter Otp',
-                                  hintStyle: TextStyle(
-                                      color: Colors.grey[300]),
+                                  hintStyle: TextStyle(color: Colors.grey[300]),
                                   border: InputBorder.none,
                                 ),
                               ),
@@ -178,7 +177,7 @@ class _OtpState extends State<Otp> {
                         margin: EdgeInsets.symmetric(horizontal: 50),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(50),
-                          color: Colors.orange[900],
+                          color: Color(0xff212832),
                         ),
                         child: Center(
                           child: Text(

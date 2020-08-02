@@ -31,7 +31,7 @@ class _MyAppState extends State<MyApp> {
         debugShowCheckedModeBanner: false,
         title: 'Aharya',
         theme: ThemeData(
-          primarySwatch: Colors.orange,
+          primarySwatch: Colors.teal,
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
         home: Wrapper(),

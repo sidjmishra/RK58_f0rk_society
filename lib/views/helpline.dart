@@ -30,27 +30,31 @@ class HelpLine extends StatelessWidget {
               child: Container(
                 height: 300.0,
                 decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    colors: [
-                      Colors.yellow[900],
-                      Colors.yellow[800],
-                      Colors.yellow[400],
-                    ],
-                  ),
+//                  gradient: LinearGradient(
+//                    begin: Alignment.topCenter,
+//                    colors: [
+//                      Colors.yellow[900],
+//                      Colors.yellow[800],
+//                      Colors.yellow[400],
+//                    ],
+//                  ),
+                  color: Color(0xff99D5D5),
                   borderRadius: BorderRadius.only(
                       bottomLeft: Radius.circular(60),
                       bottomRight: Radius.circular(60)),
                 ),
                 child: Padding(
-                  padding: EdgeInsets.only(left: 20.0, right: 20.0, bottom: 20.0),
+                  padding:
+                      EdgeInsets.only(left: 20.0, right: 20.0, bottom: 20.0),
                   child: Center(
                     child: Column(
                       children: [
-                        Image.asset('assets/help.png',
+                        Image.asset(
+                          'assets/help.png',
                           height: 230.0,
                         ),
-                        Text('Click to dial number',
+                        Text(
+                          'Click to dial number',
                           style: TextStyle(
                             fontSize: 15,
                             fontWeight: FontWeight.w400,
@@ -72,12 +76,13 @@ class HelpLine extends StatelessWidget {
                         SizedBox(
                           height: 10.0,
                         ),
-                        Contain(name: 'NATIONAL EMERGENCY NUMBER', number: '112'),
+                        Contain(
+                            name: 'NATIONAL EMERGENCY NUMBER', number: '112'),
                         SizedBox(
                           height: 2.0,
                           width: 50.0,
                           child: Container(
-                            color: Colors.orange,
+                            color: Colors.teal,
                           ),
                         ),
                         Contain(name: 'POLICE', number: '100'),
@@ -85,7 +90,7 @@ class HelpLine extends StatelessWidget {
                           height: 2.0,
                           width: 50.0,
                           child: Container(
-                            color: Colors.orange,
+                            color: Colors.teal,
                           ),
                         ),
                         Contain(name: 'FIRE', number: '101'),
@@ -93,7 +98,7 @@ class HelpLine extends StatelessWidget {
                           height: 2.0,
                           width: 50.0,
                           child: Container(
-                            color: Colors.orange,
+                            color: Colors.teal,
                           ),
                         ),
                         Contain(name: 'HOSPITAL', number: '102'),
@@ -101,16 +106,17 @@ class HelpLine extends StatelessWidget {
                           height: 2.0,
                           width: 50.0,
                           child: Container(
-                            color: Colors.orange,
+                            color: Colors.teal,
                           ),
                         ),
                         Contain(
-                            name: 'Disaster Management Services', number: '108'),
+                            name: 'Disaster Management Services',
+                            number: '108'),
                         SizedBox(
                           height: 2.0,
                           width: 50.0,
                           child: Container(
-                            color: Colors.orange,
+                            color: Colors.teal,
                           ),
                         ),
                         Contain(name: 'Women Helpline', number: '1091'),
@@ -118,7 +124,7 @@ class HelpLine extends StatelessWidget {
                           height: 2.0,
                           width: 50.0,
                           child: Container(
-                            color: Colors.orange,
+                            color: Colors.teal,
                           ),
                         ),
                         Contain(
@@ -128,7 +134,7 @@ class HelpLine extends StatelessWidget {
                           height: 2.0,
                           width: 50.0,
                           child: Container(
-                            color: Colors.orange,
+                            color: Colors.teal,
                           ),
                         ),
                         Contain(name: 'Air Ambulance', number: '9540161344'),
@@ -136,7 +142,7 @@ class HelpLine extends StatelessWidget {
                           height: 2.0,
                           width: 50.0,
                           child: Container(
-                            color: Colors.orange,
+                            color: Colors.teal,
                           ),
                         ),
                         Contain(name: 'Aids Helpline', number: '1097'),
@@ -144,7 +150,7 @@ class HelpLine extends StatelessWidget {
                           height: 2.0,
                           width: 50.0,
                           child: Container(
-                            color: Colors.orange,
+                            color: Colors.teal,
                           ),
                         ),
                         Contain(
@@ -153,7 +159,7 @@ class HelpLine extends StatelessWidget {
                           height: 2.0,
                           width: 50.0,
                           child: Container(
-                            color: Colors.orange,
+                            color: Colors.teal,
                           ),
                         ),
                         Contain(
@@ -163,7 +169,7 @@ class HelpLine extends StatelessWidget {
                           height: 2.0,
                           width: 50.0,
                           child: Container(
-                            color: Colors.orange,
+                            color: Colors.teal,
                           ),
                         ),
                         Contain(
@@ -173,7 +179,7 @@ class HelpLine extends StatelessWidget {
                           height: 2.0,
                           width: 50.0,
                           child: Container(
-                            color: Colors.orange,
+                            color: Colors.teal,
                           ),
                         ),
                         Contain(
@@ -183,7 +189,7 @@ class HelpLine extends StatelessWidget {
                           height: 2.0,
                           width: 50.0,
                           child: Container(
-                            color: Colors.orange,
+                            color: Colors.teal,
                           ),
                         ),
                         Contain(
@@ -194,7 +200,7 @@ class HelpLine extends StatelessWidget {
                           height: 2.0,
                           width: 50.0,
                           child: Container(
-                            color: Colors.orange,
+                            color: Colors.teal,
                           ),
                         ),
                         Contain(name: 'NDRF HELPLINE NO', number: '9711077372'),
@@ -202,7 +208,7 @@ class HelpLine extends StatelessWidget {
                           height: 2.0,
                           width: 50.0,
                           child: Container(
-                            color: Colors.orange,
+                            color: Colors.teal,
                           ),
                         ),
                         Contain(
@@ -213,7 +219,7 @@ class HelpLine extends StatelessWidget {
                           height: 2.0,
                           width: 50.0,
                           child: Container(
-                            color: Colors.orange,
+                            color: Colors.teal,
                           ),
                         ),
                         Contain(name: 'Railway Enquiry', number: '139'),
@@ -221,23 +227,25 @@ class HelpLine extends StatelessWidget {
                           height: 2.0,
                           width: 50.0,
                           child: Container(
-                            color: Colors.orange,
+                            color: Colors.teal,
                           ),
                         ),
-                        Contain(name: 'Senior Citizen Helpline', number: '1091'),
+                        Contain(
+                            name: 'Senior Citizen Helpline', number: '1091'),
                         SizedBox(
                           height: 2.0,
                           width: 50.0,
                           child: Container(
-                            color: Colors.orange,
+                            color: Colors.teal,
                           ),
                         ),
-                        Contain(name: 'Senior Citizen Helpline', number: '1291'),
+                        Contain(
+                            name: 'Senior Citizen Helpline', number: '1291'),
                         SizedBox(
                           height: 2.0,
                           width: 50.0,
                           child: Container(
-                            color: Colors.orange,
+                            color: Colors.teal,
                           ),
                         ),
                         Contain(
@@ -247,7 +255,7 @@ class HelpLine extends StatelessWidget {
                           height: 2.0,
                           width: 50.0,
                           child: Container(
-                            color: Colors.orange,
+                            color: Colors.teal,
                           ),
                         ),
                         Contain(
@@ -257,7 +265,7 @@ class HelpLine extends StatelessWidget {
                           height: 2.0,
                           width: 50.0,
                           child: Container(
-                            color: Colors.orange,
+                            color: Colors.teal,
                           ),
                         ),
                         Contain(
@@ -268,7 +276,7 @@ class HelpLine extends StatelessWidget {
                           height: 2.0,
                           width: 50.0,
                           child: Container(
-                            color: Colors.orange,
+                            color: Colors.teal,
                           ),
                         ),
                         Contain(
@@ -279,7 +287,7 @@ class HelpLine extends StatelessWidget {
                           height: 2.0,
                           width: 50.0,
                           child: Container(
-                            color: Colors.orange,
+                            color: Colors.teal,
                           ),
                         ),
                         Contain(name: 'Kisan Call Centre', number: '1551'),
@@ -287,7 +295,7 @@ class HelpLine extends StatelessWidget {
                           height: 2.0,
                           width: 50.0,
                           child: Container(
-                            color: Colors.orange,
+                            color: Colors.teal,
                           ),
                         ),
                         Contain(
@@ -297,7 +305,7 @@ class HelpLine extends StatelessWidget {
                           height: 2.0,
                           width: 50.0,
                           child: Container(
-                            color: Colors.orange,
+                            color: Colors.teal,
                           ),
                         ),
                         Contain(
@@ -307,7 +315,7 @@ class HelpLine extends StatelessWidget {
                           height: 2.0,
                           width: 50.0,
                           child: Container(
-                            color: Colors.orange,
+                            color: Colors.teal,
                           ),
                         ),
                         Contain(
@@ -318,7 +326,7 @@ class HelpLine extends StatelessWidget {
                           height: 2.0,
                           width: 50.0,
                           child: Container(
-                            color: Colors.orange,
+                            color: Colors.teal,
                           ),
                         ),
                         Contain(
@@ -329,7 +337,7 @@ class HelpLine extends StatelessWidget {
                           height: 2.0,
                           width: 50.0,
                           child: Container(
-                            color: Colors.orange,
+                            color: Colors.teal,
                           ),
                         ),
                         Contain(
@@ -340,7 +348,7 @@ class HelpLine extends StatelessWidget {
                           height: 2.0,
                           width: 50.0,
                           child: Container(
-                            color: Colors.orange,
+                            color: Colors.teal,
                           ),
                         ),
                         Contain(name: 'Tourist Helpline', number: '1363'),
@@ -348,7 +356,7 @@ class HelpLine extends StatelessWidget {
                           height: 2.0,
                           width: 50.0,
                           child: Container(
-                            color: Colors.orange,
+                            color: Colors.teal,
                           ),
                         ),
                         Contain(name: 'Tourist Helpline', number: '1800111363'),
@@ -356,7 +364,7 @@ class HelpLine extends StatelessWidget {
                           height: 2.0,
                           width: 50.0,
                           child: Container(
-                            color: Colors.orange,
+                            color: Colors.teal,
                           ),
                         ),
                         Contain(name: 'LPG Leak Helpline', number: '1906'),

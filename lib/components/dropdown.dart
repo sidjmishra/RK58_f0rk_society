@@ -7,10 +7,44 @@ class Dropdown extends StatefulWidget {
 }
 
 class DropdownState extends State<Dropdown> {
-  final _states = ['Andhra Pradesh', 'Andaman and Nicobar', 'Arunachal Pradesh', 'Assam',	'Bihar', 'Chandigarh', 'Chhattisgarh',
-    'Dadra and Nagar Haveli', 'Daman and Diu', 'Delhi', 'Goa', 'Gujarat', 'Haryana', 'Himachal Pradesh',	'Jammu and kashmir',	'Ladakh',
-    'Lakshadweep', 'Jharkhand',	'Karnataka', 'Kerala',	'Madhya Pradesh',	'Maharashtra', 'Manipur',	'Meghalaya', 'Mizoram',	'Nagaland',
-    'Odisha',	'Punjab', 'Rajasthan', 'Sikkim',	'Tamil Nadu',	'Telangana', 'Tripura',	'Uttarakhand', 'Uttar Pradesh', 'West Bengal'];
+  final _states = [
+    'Andhra Pradesh',
+    'Andaman and Nicobar',
+    'Arunachal Pradesh',
+    'Assam',
+    'Bihar',
+    'Chandigarh',
+    'Chhattisgarh',
+    'Dadra and Nagar Haveli',
+    'Daman and Diu',
+    'Delhi',
+    'Goa',
+    'Gujarat',
+    'Haryana',
+    'Himachal Pradesh',
+    'Jammu and kashmir',
+    'Ladakh',
+    'Lakshadweep',
+    'Jharkhand',
+    'Karnataka',
+    'Kerala',
+    'Madhya Pradesh',
+    'Maharashtra',
+    'Manipur',
+    'Meghalaya',
+    'Mizoram',
+    'Nagaland',
+    'Odisha',
+    'Punjab',
+    'Rajasthan',
+    'Sikkim',
+    'Tamil Nadu',
+    'Telangana',
+    'Tripura',
+    'Uttarakhand',
+    'Uttar Pradesh',
+    'West Bengal'
+  ];
   var _currentItemSelected;
   TextEditingController state = TextEditingController();
   var category;
@@ -29,7 +63,7 @@ class DropdownState extends State<Dropdown> {
           borderRadius: BorderRadius.circular(10),
           boxShadow: [
             BoxShadow(
-              color: Color.fromRGBO(225, 95, 27, .3),
+              color: Color(0xff99D5D5),
               blurRadius: 20,
               offset: Offset(0, 10),
             ),

@@ -69,7 +69,7 @@ class _PaidState extends State<Paid> {
                               borderRadius: BorderRadius.circular(10),
                               boxShadow: [
                                 BoxShadow(
-                                  color: Color.fromRGBO(225, 95, 27, .3),
+                                  color: Color(0xff99D5D5),
                                   blurRadius: 20,
                                   offset: Offset(0, 10),
                                 ),
@@ -241,7 +241,7 @@ class _HotStatusState extends State<HotStatus> {
                               borderRadius: BorderRadius.circular(10),
                               boxShadow: [
                                 BoxShadow(
-                                  color: Color.fromRGBO(225, 95, 27, .3),
+                                  color: Color(0xff99D5D5),
                                   blurRadius: 20,
                                   offset: Offset(0, 10),
                                 ),
@@ -392,7 +392,7 @@ class _UnusualState extends State<Unusual> {
                               borderRadius: BorderRadius.circular(10),
                               boxShadow: [
                                 BoxShadow(
-                                  color: Color.fromRGBO(225, 95, 27, .3),
+                                  color: Color(0xff99D5D5),
                                   blurRadius: 20,
                                   offset: Offset(0, 10),
                                 ),
@@ -573,7 +573,7 @@ class _FIRState extends State<FIR> {
                               borderRadius: BorderRadius.circular(10),
                               boxShadow: [
                                 BoxShadow(
-                                  color: Color.fromRGBO(225, 95, 27, .3),
+                                  color: Color(0xff99D5D5),
                                   blurRadius: 20,
                                   offset: Offset(0, 10),
                                 ),
@@ -758,7 +758,7 @@ class _NOCState extends State<NOC> {
                               borderRadius: BorderRadius.circular(10),
                               boxShadow: [
                                 BoxShadow(
-                                  color: Color.fromRGBO(225, 95, 27, .3),
+                                  color: Color(0xff99D5D5),
                                   blurRadius: 20,
                                   offset: Offset(0, 10),
                                 ),
@@ -926,7 +926,7 @@ class _RTIState extends State<RTI> {
                               borderRadius: BorderRadius.circular(10),
                               boxShadow: [
                                 BoxShadow(
-                                  color: Color.fromRGBO(225, 95, 27, .3),
+                                  color: Color(0xff99D5D5),
                                   blurRadius: 20,
                                   offset: Offset(0, 10),
                                 ),
@@ -1090,7 +1090,7 @@ class _ApointState extends State<Apoint> {
                               borderRadius: BorderRadius.circular(10),
                               boxShadow: [
                                 BoxShadow(
-                                  color: Color.fromRGBO(225, 95, 27, .3),
+                                  color: Color(0xff99D5D5),
                                   blurRadius: 20,
                                   offset: Offset(0, 10),
                                 ),
@@ -1286,7 +1286,7 @@ class _JailState extends State<Jail> {
                               borderRadius: BorderRadius.circular(10),
                               boxShadow: [
                                 BoxShadow(
-                                  color: Color.fromRGBO(225, 95, 27, .3),
+                                  color: Color(0xff99D5D5),
                                   blurRadius: 20,
                                   offset: Offset(0, 10),
                                 ),

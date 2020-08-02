@@ -125,13 +125,12 @@ class _NCRFilingState extends State<NCRFiling> {
       );
       _paths.forEach((filePath) async {
         _extension = filePath.toString().split('.').last;
-        storageReference =
-            FirebaseStorage.instance.ref().child('FIR_NCR');
+        storageReference = FirebaseStorage.instance.ref().child('FIR_NCR');
         storageUploadTask = storageReference
             .child(date.toString() + '.$_extension')
             .putFile(filePath);
         String url =
-        await (await storageUploadTask.onComplete).ref.getDownloadURL();
+            await (await storageUploadTask.onComplete).ref.getDownloadURL();
         setState(() {
           urls.add(url);
         });
@@ -150,12 +149,17 @@ class _NCRFilingState extends State<NCRFiling> {
     QuerySnapshot dataID;
 
     id = Constants.myUid.substring(0, 4) + number.nextInt(9999).toString();
-    dataID = await Firestore.instance.collection('FIR_NCR').document(Constants.myUid).collection(widget.typeReport).getDocuments();
-    if(dataID.documents.isNotEmpty) {
-      for(var index = 0; index < dataID.documents.length; index++) {
-        if(dataID.documents[index].data['id'] == id && id.length < 8) {
+    dataID = await Firestore.instance
+        .collection('FIR_NCR')
+        .document(Constants.myUid)
+        .collection(widget.typeReport)
+        .getDocuments();
+    if (dataID.documents.isNotEmpty) {
+      for (var index = 0; index < dataID.documents.length; index++) {
+        if (dataID.documents[index].data['id'] == id && id.length < 8) {
           setState(() {
-            id = Constants.myUid.substring(0, 4) + number.nextInt(9999).toString();
+            id = Constants.myUid.substring(0, 4) +
+                number.nextInt(9999).toString();
           });
         }
       }
@@ -193,30 +197,30 @@ class _NCRFilingState extends State<NCRFiling> {
       });
       NCRDatabase(uid: Constants.myUid, type: widget.typeReport)
           .userSubmitted(
-          id,
-          Constants.myEmail,
-          Constants.myName,
-          _currentSelectedCategory,
-          fatherName.text,
-          add_1.text,
-          add_2.text,
-          city.text,
-          pincode.text,
-          _currentSelectedState,
-          _currentSelectedID,
-          idNumber.text,
-          userContact.text,
-          details.text,
-          suspectdesc.text,
-          dateCtl.text,
-          urls)
+              id,
+              Constants.myEmail,
+              Constants.myName,
+              _currentSelectedCategory,
+              fatherName.text,
+              add_1.text,
+              add_2.text,
+              city.text,
+              pincode.text,
+              _currentSelectedState,
+              _currentSelectedID,
+              idNumber.text,
+              userContact.text,
+              details.text,
+              suspectdesc.text,
+              dateCtl.text,
+              urls)
           .then((value) {
         Alert(
             context: context,
             type: AlertType.success,
             title: 'Data Submitted',
             desc:
-            'Report with id: $id\nCategory: $_currentSelectedCategory\nU.I.D Number: ${idNumber.text}'
+                'Report with id: $id\nCategory: $_currentSelectedCategory\nU.I.D Number: ${idNumber.text}'
                 'UserName: ${Constants.myName}, Email: ${Constants.myEmail}\nFiles Submitted: ${urls.length}\n\n'
                 '(Would recommend to take screenshot of it)',
             buttons: [
@@ -264,15 +268,15 @@ class _NCRFilingState extends State<NCRFiling> {
       body: Container(
         width: double.infinity,
         decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            colors: [
-              Colors.orange[900],
-              Colors.orange[800],
-              Colors.orange[400],
-            ],
-          ),
-        ),
+//          gradient: LinearGradient(
+//            begin: Alignment.topCenter,
+//            colors: [
+//              Colors.orange[900],
+//              Colors.orange[800],
+//              Colors.orange[400],
+//            ],
+//          ),
+            color: Color(0xff212832)),
         child: Column(
           children: <Widget>[
             Padding(
@@ -345,7 +349,7 @@ class _NCRFilingState extends State<NCRFiling> {
                                 borderRadius: BorderRadius.circular(10),
                                 boxShadow: [
                                   BoxShadow(
-                                    color: Color.fromRGBO(225, 95, 27, .3),
+                                    color: Color(0xff99D5D5),
                                     blurRadius: 20,
                                     offset: Offset(0, 10),
                                   ),
@@ -357,19 +361,19 @@ class _NCRFilingState extends State<NCRFiling> {
                                     child: DropdownButton<String>(
                                       items: widget.typeReport == 'FIR'
                                           ? _category
-                                          .map((String dropDownStringItem) {
-                                        return DropdownMenuItem<String>(
-                                          value: dropDownStringItem,
-                                          child: Text(dropDownStringItem),
-                                        );
-                                      }).toList()
+                                              .map((String dropDownStringItem) {
+                                              return DropdownMenuItem<String>(
+                                                value: dropDownStringItem,
+                                                child: Text(dropDownStringItem),
+                                              );
+                                            }).toList()
                                           : _categoryNCR
-                                          .map((String dropDownStringItem) {
-                                        return DropdownMenuItem<String>(
-                                          value: dropDownStringItem,
-                                          child: Text(dropDownStringItem),
-                                        );
-                                      }).toList(),
+                                              .map((String dropDownStringItem) {
+                                              return DropdownMenuItem<String>(
+                                                value: dropDownStringItem,
+                                                child: Text(dropDownStringItem),
+                                              );
+                                            }).toList(),
                                       value: _currentSelectedCategory,
                                       onChanged: (String newValueSelected) {
                                         setState(() {
@@ -380,7 +384,7 @@ class _NCRFilingState extends State<NCRFiling> {
                                       hint: Text(
                                         hintCategory,
                                         style:
-                                        TextStyle(color: Colors.grey[300]),
+                                            TextStyle(color: Colors.grey[300]),
                                       ),
                                     ),
                                   ),
@@ -415,7 +419,7 @@ class _NCRFilingState extends State<NCRFiling> {
                                 borderRadius: BorderRadius.circular(10),
                                 boxShadow: [
                                   BoxShadow(
-                                    color: Color.fromRGBO(225, 95, 27, .3),
+                                    color: Color(0xff99D5D5),
                                     blurRadius: 20,
                                     offset: Offset(0, 10),
                                   ),
@@ -427,7 +431,7 @@ class _NCRFilingState extends State<NCRFiling> {
                                     decoration: BoxDecoration(
                                       border: Border(
                                         bottom:
-                                        BorderSide(color: Colors.grey[300]),
+                                            BorderSide(color: Colors.grey[300]),
                                       ),
                                     ),
                                     child: TextFormField(
@@ -459,7 +463,7 @@ class _NCRFilingState extends State<NCRFiling> {
                                       decoration: InputDecoration(
                                         hintText: 'Enter the Date',
                                         hintStyle:
-                                        TextStyle(color: Colors.grey[300]),
+                                            TextStyle(color: Colors.grey[300]),
                                         border: InputBorder.none,
                                         counterText: '',
                                       ),
@@ -495,7 +499,7 @@ class _NCRFilingState extends State<NCRFiling> {
                                 borderRadius: BorderRadius.circular(10),
                                 boxShadow: [
                                   BoxShadow(
-                                    color: Color.fromRGBO(225, 95, 27, .3),
+                                    color: Color(0xff99D5D5),
                                     blurRadius: 20,
                                     offset: Offset(0, 10),
                                   ),
@@ -507,7 +511,7 @@ class _NCRFilingState extends State<NCRFiling> {
                                     decoration: BoxDecoration(
                                       border: Border(
                                         bottom:
-                                        BorderSide(color: Colors.grey[300]),
+                                            BorderSide(color: Colors.grey[300]),
                                       ),
                                     ),
                                     child: TextFormField(
@@ -522,9 +526,9 @@ class _NCRFilingState extends State<NCRFiling> {
                                       keyboardType: TextInputType.text,
                                       decoration: InputDecoration(
                                         hintText:
-                                        'Complainant\'s Father/Husband Name',
+                                            'Complainant\'s Father/Husband Name',
                                         hintStyle:
-                                        TextStyle(color: Colors.grey[300]),
+                                            TextStyle(color: Colors.grey[300]),
                                         border: InputBorder.none,
                                         counterText: '',
                                       ),
@@ -563,7 +567,7 @@ class _NCRFilingState extends State<NCRFiling> {
                                 borderRadius: BorderRadius.circular(10),
                                 boxShadow: [
                                   BoxShadow(
-                                    color: Color.fromRGBO(225, 95, 27, .3),
+                                    color: Color(0xff99D5D5),
                                     blurRadius: 20,
                                     offset: Offset(0, 10),
                                   ),
@@ -575,7 +579,7 @@ class _NCRFilingState extends State<NCRFiling> {
                                     decoration: BoxDecoration(
                                       border: Border(
                                         bottom:
-                                        BorderSide(color: Colors.grey[300]),
+                                            BorderSide(color: Colors.grey[300]),
                                       ),
                                     ),
                                     child: TextFormField(
@@ -592,7 +596,7 @@ class _NCRFilingState extends State<NCRFiling> {
                                       decoration: InputDecoration(
                                         hintText: 'Address Line 1',
                                         hintStyle:
-                                        TextStyle(color: Colors.grey[300]),
+                                            TextStyle(color: Colors.grey[300]),
                                         border: InputBorder.none,
                                         counterText: '',
                                       ),
@@ -614,7 +618,7 @@ class _NCRFilingState extends State<NCRFiling> {
                                 borderRadius: BorderRadius.circular(10),
                                 boxShadow: [
                                   BoxShadow(
-                                    color: Color.fromRGBO(225, 95, 27, .3),
+                                    color: Color(0xff99D5D5),
                                     blurRadius: 20,
                                     offset: Offset(0, 10),
                                   ),
@@ -626,7 +630,7 @@ class _NCRFilingState extends State<NCRFiling> {
                                     decoration: BoxDecoration(
                                       border: Border(
                                         bottom:
-                                        BorderSide(color: Colors.grey[300]),
+                                            BorderSide(color: Colors.grey[300]),
                                       ),
                                     ),
                                     child: TextFormField(
@@ -643,7 +647,7 @@ class _NCRFilingState extends State<NCRFiling> {
                                       decoration: InputDecoration(
                                         hintText: 'Address Line 2',
                                         hintStyle:
-                                        TextStyle(color: Colors.grey[300]),
+                                            TextStyle(color: Colors.grey[300]),
                                         border: InputBorder.none,
                                         counterText: '',
                                       ),
@@ -667,7 +671,7 @@ class _NCRFilingState extends State<NCRFiling> {
                                 borderRadius: BorderRadius.circular(10),
                                 boxShadow: [
                                   BoxShadow(
-                                    color: Color.fromRGBO(225, 95, 27, .3),
+                                    color: Color(0xff99D5D5),
                                     blurRadius: 20,
                                     offset: Offset(0, 10),
                                   ),
@@ -679,7 +683,7 @@ class _NCRFilingState extends State<NCRFiling> {
                                     decoration: BoxDecoration(
                                       border: Border(
                                         bottom:
-                                        BorderSide(color: Colors.grey[300]),
+                                            BorderSide(color: Colors.grey[300]),
                                       ),
                                     ),
                                     child: TextFormField(
@@ -695,7 +699,7 @@ class _NCRFilingState extends State<NCRFiling> {
                                       decoration: InputDecoration(
                                         hintText: 'City/Locality',
                                         hintStyle:
-                                        TextStyle(color: Colors.grey[300]),
+                                            TextStyle(color: Colors.grey[300]),
                                         border: InputBorder.none,
                                         counterText: '',
                                       ),
@@ -724,8 +728,7 @@ class _NCRFilingState extends State<NCRFiling> {
                                       borderRadius: BorderRadius.circular(10),
                                       boxShadow: [
                                         BoxShadow(
-                                          color:
-                                          Color.fromRGBO(225, 95, 27, .3),
+                                          color: Color(0xff99D5D5),
                                           blurRadius: 20,
                                           offset: Offset(0, 10),
                                         ),
@@ -736,12 +739,12 @@ class _NCRFilingState extends State<NCRFiling> {
                                         Container(
                                           child: DropdownButton<String>(
                                             items: _states.map(
-                                                    (String dropDownStringItem) {
-                                                  return DropdownMenuItem<String>(
-                                                    value: dropDownStringItem,
-                                                    child: Text(dropDownStringItem),
-                                                  );
-                                                }).toList(),
+                                                (String dropDownStringItem) {
+                                              return DropdownMenuItem<String>(
+                                                value: dropDownStringItem,
+                                                child: Text(dropDownStringItem),
+                                              );
+                                            }).toList(),
                                             value: _currentSelectedState,
                                             onChanged:
                                                 (String newValueSelected) {
@@ -776,8 +779,7 @@ class _NCRFilingState extends State<NCRFiling> {
                                       borderRadius: BorderRadius.circular(10),
                                       boxShadow: [
                                         BoxShadow(
-                                          color:
-                                          Color.fromRGBO(225, 95, 27, .3),
+                                          color: Color(0xff99D5D5),
                                           blurRadius: 20,
                                           offset: Offset(0, 10),
                                         ),
@@ -850,8 +852,7 @@ class _NCRFilingState extends State<NCRFiling> {
                                       borderRadius: BorderRadius.circular(10),
                                       boxShadow: [
                                         BoxShadow(
-                                          color:
-                                          Color.fromRGBO(225, 95, 27, .3),
+                                          color: Color(0xff99D5D5),
                                           blurRadius: 20,
                                           offset: Offset(0, 10),
                                         ),
@@ -862,12 +863,12 @@ class _NCRFilingState extends State<NCRFiling> {
                                         Container(
                                           child: DropdownButton<String>(
                                             items: _idType.map(
-                                                    (String dropDownStringItem) {
-                                                  return DropdownMenuItem<String>(
-                                                    value: dropDownStringItem,
-                                                    child: Text(dropDownStringItem),
-                                                  );
-                                                }).toList(),
+                                                (String dropDownStringItem) {
+                                              return DropdownMenuItem<String>(
+                                                value: dropDownStringItem,
+                                                child: Text(dropDownStringItem),
+                                              );
+                                            }).toList(),
                                             value: _currentSelectedID,
                                             onChanged:
                                                 (String newValueSelected) {
@@ -901,8 +902,7 @@ class _NCRFilingState extends State<NCRFiling> {
                                       borderRadius: BorderRadius.circular(10),
                                       boxShadow: [
                                         BoxShadow(
-                                          color:
-                                          Color.fromRGBO(225, 95, 27, .3),
+                                          color: Color(0xff99D5D5),
                                           blurRadius: 20,
                                           offset: Offset(0, 10),
                                         ),
@@ -919,18 +919,19 @@ class _NCRFilingState extends State<NCRFiling> {
                                           ),
                                           child: TextFormField(
                                             validator: (value) {
-                                              if (value.isEmpty && value.length < 8) {
+                                              if (value.isEmpty &&
+                                                  value.length < 8) {
                                                 return 'Please Enter valid data';
                                               }
                                               return null;
                                             },
                                             controller: idNumber,
                                             maxLength:
-                                            _currentSelectedID == 'Passport'
-                                                ? 8
-                                                : 12,
+                                                _currentSelectedID == 'Passport'
+                                                    ? 8
+                                                    : 12,
                                             keyboardType: _currentSelectedID ==
-                                                'Aadhar Card'
+                                                    'Aadhar Card'
                                                 ? TextInputType.number
                                                 : TextInputType.text,
                                             decoration: InputDecoration(
@@ -978,7 +979,7 @@ class _NCRFilingState extends State<NCRFiling> {
                                 borderRadius: BorderRadius.circular(10),
                                 boxShadow: [
                                   BoxShadow(
-                                    color: Color.fromRGBO(225, 95, 27, .3),
+                                    color: Color(0xff99D5D5),
                                     blurRadius: 20,
                                     offset: Offset(0, 10),
                                   ),
@@ -990,7 +991,7 @@ class _NCRFilingState extends State<NCRFiling> {
                                     decoration: BoxDecoration(
                                       border: Border(
                                         bottom:
-                                        BorderSide(color: Colors.grey[300]),
+                                            BorderSide(color: Colors.grey[300]),
                                       ),
                                     ),
                                     child: TextFormField(
@@ -1005,9 +1006,9 @@ class _NCRFilingState extends State<NCRFiling> {
                                       keyboardType: TextInputType.text,
                                       decoration: InputDecoration(
                                         hintText:
-                                        'Give Details About the Incident',
+                                            'Give Details About the Incident',
                                         hintStyle:
-                                        TextStyle(color: Colors.grey[300]),
+                                            TextStyle(color: Colors.grey[300]),
                                         border: InputBorder.none,
                                         counterText: '',
                                       ),
@@ -1046,7 +1047,7 @@ class _NCRFilingState extends State<NCRFiling> {
                                 borderRadius: BorderRadius.circular(10),
                                 boxShadow: [
                                   BoxShadow(
-                                    color: Color.fromRGBO(225, 95, 27, .3),
+                                    color: Color(0xff99D5D5),
                                     blurRadius: 20,
                                     offset: Offset(0, 10),
                                   ),
@@ -1058,7 +1059,7 @@ class _NCRFilingState extends State<NCRFiling> {
                                     decoration: BoxDecoration(
                                       border: Border(
                                         bottom:
-                                        BorderSide(color: Colors.grey[300]),
+                                            BorderSide(color: Colors.grey[300]),
                                       ),
                                     ),
                                     child: TextFormField(
@@ -1073,9 +1074,9 @@ class _NCRFilingState extends State<NCRFiling> {
                                       keyboardType: TextInputType.text,
                                       decoration: InputDecoration(
                                         hintText:
-                                        'Give Description of the Suspect',
+                                            'Give Description of the Suspect',
                                         hintStyle:
-                                        TextStyle(color: Colors.grey[300]),
+                                            TextStyle(color: Colors.grey[300]),
                                         border: InputBorder.none,
                                         counterText: '',
                                       ),
@@ -1114,7 +1115,7 @@ class _NCRFilingState extends State<NCRFiling> {
                                 borderRadius: BorderRadius.circular(10),
                                 boxShadow: [
                                   BoxShadow(
-                                    color: Color.fromRGBO(225, 95, 27, .3),
+                                    color: Color(0xff99D5D5),
                                     blurRadius: 20,
                                     offset: Offset(0, 10),
                                   ),
@@ -1126,7 +1127,7 @@ class _NCRFilingState extends State<NCRFiling> {
                                     decoration: BoxDecoration(
                                       border: Border(
                                         bottom:
-                                        BorderSide(color: Colors.grey[300]),
+                                            BorderSide(color: Colors.grey[300]),
                                       ),
                                     ),
                                     child: Row(
@@ -1134,12 +1135,12 @@ class _NCRFilingState extends State<NCRFiling> {
                                         Expanded(
                                           child: Column(
                                             crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                                CrossAxisAlignment.start,
                                             children: <Widget>[
                                               ListTile(
                                                 title:
-                                                _buildCountryPickerDropdown(
-                                                    hasPriorityList: true),
+                                                    _buildCountryPickerDropdown(
+                                                        hasPriorityList: true),
                                                 dense: true,
                                               ),
                                             ],
@@ -1160,8 +1161,8 @@ class _NCRFilingState extends State<NCRFiling> {
                           urls.isEmpty
                               ? Text('No files submitted(If added then wait)')
                               : _paths.isNotEmpty && urls.isEmpty
-                              ? CircularProgressIndicator()
-                              : Text('${urls.length} Files Uploaded'),
+                                  ? CircularProgressIndicator()
+                                  : Text('${urls.length} Files Uploaded'),
                           SizedBox(height: 20),
                           Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
@@ -1173,7 +1174,7 @@ class _NCRFilingState extends State<NCRFiling> {
                                 margin: EdgeInsets.symmetric(horizontal: 5),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(50),
-                                  color: Colors.orange[400],
+                                  color: Color(0xff32E0C3),
                                 ),
                                 child: Center(
                                   child: FlatButton(
@@ -1197,7 +1198,7 @@ class _NCRFilingState extends State<NCRFiling> {
                                 margin: EdgeInsets.symmetric(horizontal: 5),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(50),
-                                  color: Colors.red[400],
+                                  color: Color(0xff212832),
                                 ),
                                 child: Center(
                                   child: FlatButton(
@@ -1234,9 +1235,9 @@ class _NCRFilingState extends State<NCRFiling> {
 
   _buildCountryPickerDropdown(
       {bool filtered = false,
-        bool sortedByIsoCode = false,
-        bool hasPriorityList = false,
-        bool hasSelectedItemBuilder = false}) {
+      bool sortedByIsoCode = false,
+      bool hasPriorityList = false,
+      bool hasSelectedItemBuilder = false}) {
     double dropdownButtonWidth = MediaQuery.of(context).size.width * 0.4;
     //respect dropdown button icon size
     double dropdownItemWidth = dropdownButtonWidth - 50;
@@ -1251,7 +1252,7 @@ class _NCRFilingState extends State<NCRFiling> {
             isDense: false,
             selectedItemBuilder: hasSelectedItemBuilder == true
                 ? (Country country) => _buildDropdownSelectedItemBuilder(
-                country, dropdownSelectedItemWidth)
+                    country, dropdownSelectedItemWidth)
                 : null,
             itemBuilder: (Country country) => hasSelectedItemBuilder == true
                 ? _buildDropdownItemWithLongText(country, dropdownItemWidth)
@@ -1262,8 +1263,8 @@ class _NCRFilingState extends State<NCRFiling> {
                 : null,
             priorityList: hasPriorityList
                 ? [
-              CountryPickerUtils.getCountryByIsoCode('IN'),
-            ]
+                    CountryPickerUtils.getCountryByIsoCode('IN'),
+                  ]
                 : null,
             sortComparator: sortedByIsoCode
                 ? (Country a, Country b) => a.isoCode.compareTo(b.isoCode)
@@ -1322,7 +1323,7 @@ class _NCRFilingState extends State<NCRFiling> {
       );
 
   Widget _buildDropdownItemWithLongText(
-      Country country, double dropdownItemWidth) =>
+          Country country, double dropdownItemWidth) =>
       SizedBox(
         width: dropdownItemWidth,
         child: Padding(
@@ -1340,7 +1341,7 @@ class _NCRFilingState extends State<NCRFiling> {
       );
 
   Widget _buildDropdownSelectedItemBuilder(
-      Country country, double dropdownItemWidth) =>
+          Country country, double dropdownItemWidth) =>
       SizedBox(
         width: dropdownItemWidth,
         child: Padding(
@@ -1353,10 +1354,10 @@ class _NCRFilingState extends State<NCRFiling> {
               ),
               Expanded(
                   child: Text(
-                    '${country.name}',
-                    style:
+                '${country.name}',
+                style:
                     TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
-                  )),
+              )),
             ],
           ),
         ),

@@ -26,7 +26,7 @@ class DropdownCategoryState extends State<DropdownCategory> {
           borderRadius: BorderRadius.circular(10),
           boxShadow: [
             BoxShadow(
-              color: Color.fromRGBO(225, 95, 27, .3),
+              color: Color(0xff99D5D5),
               blurRadius: 20,
               offset: Offset(0, 10),
             ),

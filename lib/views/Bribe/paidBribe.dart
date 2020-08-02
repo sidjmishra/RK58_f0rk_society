@@ -40,12 +40,58 @@ class _PaidBribeState extends State<PaidBribe> {
   TextEditingController dateCtl = TextEditingController();
   TextEditingController userContact = TextEditingController();
 
-  final _states = ['Andhra Pradesh', 'Andaman and Nicobar', 'Arunachal Pradesh', 'Assam',	'Bihar', 'Chandigarh', 'Chhattisgarh',
-    'Dadra and Nagar Haveli', 'Daman and Diu', 'Delhi', 'Goa', 'Gujarat', 'Haryana', 'Himachal Pradesh',	'Jammu and kashmir',	'Ladakh',
-    'Lakshadweep', 'Jharkhand',	'Karnataka', 'Kerala',	'Madhya Pradesh',	'Maharashtra', 'Manipur',	'Meghalaya', 'Mizoram',	'Nagaland',
-    'Odisha',	'Punjab', 'Rajasthan', 'Sikkim',	'Tamil Nadu',	'Telangana', 'Tripura',	'Uttarakhand', 'Uttar Pradesh', 'West Bengal'];
-  final _category = ['Police', 'Traffic', 'Prison Management', 'Driver licensing', 'Document Verification', 'Property Registration',
-    'Municipal Corporation', 'Electricity Board', 'Transport Office', 'Tax office', 'Water Department', 'Others'];
+  final _states = [
+    'Andhra Pradesh',
+    'Andaman and Nicobar',
+    'Arunachal Pradesh',
+    'Assam',
+    'Bihar',
+    'Chandigarh',
+    'Chhattisgarh',
+    'Dadra and Nagar Haveli',
+    'Daman and Diu',
+    'Delhi',
+    'Goa',
+    'Gujarat',
+    'Haryana',
+    'Himachal Pradesh',
+    'Jammu and kashmir',
+    'Ladakh',
+    'Lakshadweep',
+    'Jharkhand',
+    'Karnataka',
+    'Kerala',
+    'Madhya Pradesh',
+    'Maharashtra',
+    'Manipur',
+    'Meghalaya',
+    'Mizoram',
+    'Nagaland',
+    'Odisha',
+    'Punjab',
+    'Rajasthan',
+    'Sikkim',
+    'Tamil Nadu',
+    'Telangana',
+    'Tripura',
+    'Uttarakhand',
+    'Uttar Pradesh',
+    'West Bengal'
+  ];
+  final _category = [
+    'Police',
+    'Traffic',
+    'Prison Management',
+    'Driver licensing',
+    'Document Verification',
+    'Property Registration',
+    'Municipal Corporation',
+    'Electricity Board',
+    'Transport Office',
+    'Tax office',
+    'Water Department',
+    'Others'
+  ];
   String hintCategory = 'Select Category';
   String hintState = 'Select State';
   var _currentSelectedCategory;
@@ -82,7 +128,6 @@ class _PaidBribeState extends State<PaidBribe> {
 //      if(_path != null) {
 //        await uploadData(_path.toString());
 //      }
-
 
 //      _paths.forEach((filePath) async {
 //        _extension = filePath.toString().split('.').last.toLowerCase();
@@ -128,12 +173,17 @@ class _PaidBribeState extends State<PaidBribe> {
     QuerySnapshot dataID;
 
     id = Constants.myUid.substring(0, 4) + number.nextInt(9999).toString();
-    dataID = await Firestore.instance.collection('PaidBribe').document(Constants.myUid).collection('all_data').getDocuments();
-    if(dataID.documents.isNotEmpty) {
-      for(var index = 0; index < dataID.documents.length; index++) {
-        if(dataID.documents[index].data['id'] == id && id.length < 8) {
+    dataID = await Firestore.instance
+        .collection('PaidBribe')
+        .document(Constants.myUid)
+        .collection('all_data')
+        .getDocuments();
+    if (dataID.documents.isNotEmpty) {
+      for (var index = 0; index < dataID.documents.length; index++) {
+        if (dataID.documents[index].data['id'] == id && id.length < 8) {
           setState(() {
-            id = Constants.myUid.substring(0, 4) + number.nextInt(9999).toString();
+            id = Constants.myUid.substring(0, 4) +
+                number.nextInt(9999).toString();
           });
         }
       }
@@ -168,28 +218,27 @@ class _PaidBribeState extends State<PaidBribe> {
       });
       PaidBribeDatabase(uid: Constants.myUid)
           .userPaid(
-        id,
-        Constants.myEmail,
-        _currentSelectedCategory,
-        add_1.text,
-        add_2.text,
-        city.text,
-        _currentSelectedState,
-        pincode.text,
-        userContact.text,
-        details.text,
-        amount.text,
-        dateCtl.text,
-        pickedCountry.toString(),
-        pickedCountryName.toString(),
-              urls
-      ).then((value) {
+              id,
+              Constants.myEmail,
+              _currentSelectedCategory,
+              add_1.text,
+              add_2.text,
+              city.text,
+              _currentSelectedState,
+              pincode.text,
+              userContact.text,
+              details.text,
+              amount.text,
+              dateCtl.text,
+              pickedCountry.toString(),
+              pickedCountryName.toString(),
+              urls)
+          .then((value) {
         Alert(
             context: context,
             type: AlertType.success,
             title: 'Data Submitted',
-            desc:
-            'Report with id: $id\nCategory: $_currentSelectedCategory\n'
+            desc: 'Report with id: $id\nCategory: $_currentSelectedCategory\n'
                 'UserName: ${Constants.myName}, Email: ${Constants.myEmail}'
                 '\n\n(Would recommend to take screenshot of it)',
             buttons: [
@@ -239,14 +288,15 @@ class _PaidBribeState extends State<PaidBribe> {
       body: Container(
         width: double.infinity,
         decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            colors: [
-              Colors.orange[900],
-              Colors.orange[800],
-              Colors.orange[400],
-            ],
-          ),
+//          gradient: LinearGradient(
+//            begin: Alignment.topCenter,
+//            colors: [
+//              Colors.orange[900],
+//              Colors.orange[800],
+//              Colors.orange[400],
+//            ],
+//          ),
+          color: Color(0xff212832),
         ),
         child: Column(
           children: <Widget>[
@@ -317,7 +367,7 @@ class _PaidBribeState extends State<PaidBribe> {
                                 borderRadius: BorderRadius.circular(10),
                                 boxShadow: [
                                   BoxShadow(
-                                    color: Color.fromRGBO(225, 95, 27, .3),
+                                    color: Color(0xff99D5D5),
                                     blurRadius: 20,
                                     offset: Offset(0, 10),
                                   ),
@@ -343,9 +393,9 @@ class _PaidBribeState extends State<PaidBribe> {
                                           ),
                                         ),
                                         validator: (_currentSelectedCategory) =>
-                                        _currentSelectedCategory == null
-                                            ? 'Field Required'
-                                            : null,
+                                            _currentSelectedCategory == null
+                                                ? 'Field Required'
+                                                : null,
                                         value: _currentSelectedCategory,
                                         onChanged: (String newValueSelected) {
                                           setState(() {
@@ -388,7 +438,7 @@ class _PaidBribeState extends State<PaidBribe> {
                                 borderRadius: BorderRadius.circular(10),
                                 boxShadow: [
                                   BoxShadow(
-                                    color: Color.fromRGBO(225, 95, 27, .3),
+                                    color: Color(0xff99D5D5),
                                     blurRadius: 20,
                                     offset: Offset(0, 10),
                                   ),
@@ -400,7 +450,7 @@ class _PaidBribeState extends State<PaidBribe> {
                                     decoration: BoxDecoration(
                                       border: Border(
                                         bottom:
-                                        BorderSide(color: Colors.grey[300]),
+                                            BorderSide(color: Colors.grey[300]),
                                       ),
                                     ),
                                     child: TextFormField(
@@ -416,7 +466,7 @@ class _PaidBribeState extends State<PaidBribe> {
                                       decoration: InputDecoration(
                                         hintText: 'Address Line 1',
                                         hintStyle:
-                                        TextStyle(color: Colors.grey[300]),
+                                            TextStyle(color: Colors.grey[300]),
                                         border: InputBorder.none,
                                         counterText: '',
                                       ),
@@ -438,7 +488,7 @@ class _PaidBribeState extends State<PaidBribe> {
                                 borderRadius: BorderRadius.circular(10),
                                 boxShadow: [
                                   BoxShadow(
-                                    color: Color.fromRGBO(225, 95, 27, .3),
+                                    color: Color(0xff99D5D5),
                                     blurRadius: 20,
                                     offset: Offset(0, 10),
                                   ),
@@ -494,7 +544,7 @@ class _PaidBribeState extends State<PaidBribe> {
                                 borderRadius: BorderRadius.circular(10),
                                 boxShadow: [
                                   BoxShadow(
-                                    color: Color.fromRGBO(225, 95, 27, .3),
+                                    color: Color(0xff99D5D5),
                                     blurRadius: 20,
                                     offset: Offset(0, 10),
                                   ),
@@ -555,8 +605,7 @@ class _PaidBribeState extends State<PaidBribe> {
                                       borderRadius: BorderRadius.circular(10),
                                       boxShadow: [
                                         BoxShadow(
-                                          color:
-                                          Color.fromRGBO(225, 95, 27, .3),
+                                          color: Color(0xff99D5D5),
                                           blurRadius: 20,
                                           offset: Offset(0, 10),
                                         ),
@@ -568,14 +617,15 @@ class _PaidBribeState extends State<PaidBribe> {
                                         children: <Widget>[
                                           Container(
                                             child:
-                                            DropdownButtonFormField<String>(
+                                                DropdownButtonFormField<String>(
                                               items: _states.map(
-                                                      (String dropDownStringItem) {
-                                                    return DropdownMenuItem<String>(
-                                                      value: dropDownStringItem,
-                                                      child: Text(dropDownStringItem),
-                                                    );
-                                                  }).toList(),
+                                                  (String dropDownStringItem) {
+                                                return DropdownMenuItem<String>(
+                                                  value: dropDownStringItem,
+                                                  child:
+                                                      Text(dropDownStringItem),
+                                                );
+                                              }).toList(),
                                               decoration: InputDecoration(
                                                 errorStyle: TextStyle(
                                                   fontSize: 12,
@@ -584,10 +634,10 @@ class _PaidBribeState extends State<PaidBribe> {
                                               ),
                                               validator:
                                                   (_currentSelectedState) =>
-                                              _currentSelectedState ==
-                                                  null
-                                                  ? 'Field Required'
-                                                  : null,
+                                                      _currentSelectedState ==
+                                                              null
+                                                          ? 'Field Required'
+                                                          : null,
                                               value: _currentSelectedState,
                                               onChanged:
                                                   (String newValueSelected) {
@@ -623,8 +673,7 @@ class _PaidBribeState extends State<PaidBribe> {
                                       borderRadius: BorderRadius.circular(10),
                                       boxShadow: [
                                         BoxShadow(
-                                          color:
-                                          Color.fromRGBO(225, 95, 27, .3),
+                                          color: Color(0xff99D5D5),
                                           blurRadius: 20,
                                           offset: Offset(0, 10),
                                         ),
@@ -652,7 +701,7 @@ class _PaidBribeState extends State<PaidBribe> {
                                               controller: pincode,
                                               maxLength: 6,
                                               keyboardType:
-                                              TextInputType.number,
+                                                  TextInputType.number,
                                               decoration: InputDecoration(
                                                 hintText: 'Pincode',
                                                 hintStyle: TextStyle(
@@ -695,7 +744,7 @@ class _PaidBribeState extends State<PaidBribe> {
                                 borderRadius: BorderRadius.circular(10),
                                 boxShadow: [
                                   BoxShadow(
-                                    color: Color.fromRGBO(225, 95, 27, .3),
+                                    color: Color(0xff99D5D5),
                                     blurRadius: 20,
                                     offset: Offset(0, 10),
                                   ),
@@ -725,7 +774,7 @@ class _PaidBribeState extends State<PaidBribe> {
                                         keyboardType: TextInputType.text,
                                         decoration: InputDecoration(
                                           hintText:
-                                          'Give Details About the Incident',
+                                              'Give Details About the Incident',
                                           hintStyle: TextStyle(
                                               color: Colors.grey[300]),
                                           border: InputBorder.none,
@@ -762,7 +811,7 @@ class _PaidBribeState extends State<PaidBribe> {
                                 borderRadius: BorderRadius.circular(10),
                                 boxShadow: [
                                   BoxShadow(
-                                    color: Color.fromRGBO(225, 95, 27, .3),
+                                    color: Color(0xff99D5D5),
                                     blurRadius: 20,
                                     offset: Offset(0, 10),
                                   ),
@@ -828,7 +877,7 @@ class _PaidBribeState extends State<PaidBribe> {
                                 borderRadius: BorderRadius.circular(10),
                                 boxShadow: [
                                   BoxShadow(
-                                    color: Color.fromRGBO(225, 95, 27, .3),
+                                    color: Color(0xff99D5D5),
                                     blurRadius: 20,
                                     offset: Offset(0, 10),
                                   ),
@@ -840,7 +889,7 @@ class _PaidBribeState extends State<PaidBribe> {
                                     decoration: BoxDecoration(
                                       border: Border(
                                         bottom:
-                                        BorderSide(color: Colors.grey[300]),
+                                            BorderSide(color: Colors.grey[300]),
                                       ),
                                     ),
                                     child: TextFormField(
@@ -871,7 +920,7 @@ class _PaidBribeState extends State<PaidBribe> {
                                       decoration: InputDecoration(
                                         hintText: 'Enter the Date',
                                         hintStyle:
-                                        TextStyle(color: Colors.grey[300]),
+                                            TextStyle(color: Colors.grey[300]),
                                         border: InputBorder.none,
                                         counterText: '',
                                       ),
@@ -905,7 +954,7 @@ class _PaidBribeState extends State<PaidBribe> {
                                 borderRadius: BorderRadius.circular(10),
                                 boxShadow: [
                                   BoxShadow(
-                                    color: Color.fromRGBO(225, 95, 27, .3),
+                                    color: Color(0xff99D5D5),
                                     blurRadius: 20,
                                     offset: Offset(0, 10),
                                   ),
@@ -921,13 +970,13 @@ class _PaidBribeState extends State<PaidBribe> {
                                           Expanded(
                                             child: Column(
                                               crossAxisAlignment:
-                                              CrossAxisAlignment.start,
+                                                  CrossAxisAlignment.start,
                                               children: <Widget>[
                                                 ListTile(
                                                   title:
-                                                  _buildCountryPickerDropdown(
-                                                      hasPriorityList:
-                                                      true),
+                                                      _buildCountryPickerDropdown(
+                                                          hasPriorityList:
+                                                              true),
                                                   dense: true,
                                                 ),
                                               ],
@@ -949,11 +998,13 @@ class _PaidBribeState extends State<PaidBribe> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
-                                Text('Copy complaint ID for evidence submission',
+                                Text(
+                                  'Copy complaint ID for evidence submission',
                                   style: TextStyle(color: Colors.grey),
                                 ),
                                 SizedBox(width: 10.0),
-                                Icon(Icons.launch,
+                                Icon(
+                                  Icons.launch,
                                   color: Colors.greenAccent,
                                 ),
                               ],
@@ -979,9 +1030,10 @@ class _PaidBribeState extends State<PaidBribe> {
                                 isLoading = true;
                               });
                               Clipboard.setData(ClipboardData(text: id));
-                              Navigator.push(context, MaterialPageRoute(
-                                  builder: (context) => DataModel()
-                              ));
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => DataModel()));
 //                              openFileExplorer();
                             },
                             child: Text('Add files'),
@@ -1000,7 +1052,7 @@ class _PaidBribeState extends State<PaidBribe> {
                                 margin: EdgeInsets.symmetric(horizontal: 5),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(50),
-                                  color: Colors.orange[400],
+                                  color: Color(0xff32E0C3),
                                 ),
                                 child: Center(
                                   child: FlatButton(
@@ -1024,7 +1076,7 @@ class _PaidBribeState extends State<PaidBribe> {
                                 margin: EdgeInsets.symmetric(horizontal: 5),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(50),
-                                  color: Colors.red[400],
+                                  color: Color(0xff212832),
                                 ),
                                 child: Center(
                                   child: FlatButton(
@@ -1061,9 +1113,9 @@ class _PaidBribeState extends State<PaidBribe> {
 
   _buildCountryPickerDropdown(
       {bool filtered = false,
-        bool sortedByIsoCode = false,
-        bool hasPriorityList = false,
-        bool hasSelectedItemBuilder = false}) {
+      bool sortedByIsoCode = false,
+      bool hasPriorityList = false,
+      bool hasSelectedItemBuilder = false}) {
     double dropdownButtonWidth = MediaQuery.of(context).size.width * 0.4;
     //respect dropdown button icon size
     double dropdownItemWidth = dropdownButtonWidth - 50;
@@ -1078,7 +1130,7 @@ class _PaidBribeState extends State<PaidBribe> {
             isDense: false,
             selectedItemBuilder: hasSelectedItemBuilder == true
                 ? (Country country) => _buildDropdownSelectedItemBuilder(
-                country, dropdownSelectedItemWidth)
+                    country, dropdownSelectedItemWidth)
                 : null,
             itemBuilder: (Country country) => hasSelectedItemBuilder == true
                 ? _buildDropdownItemWithLongText(country, dropdownItemWidth)
@@ -1089,8 +1141,8 @@ class _PaidBribeState extends State<PaidBribe> {
                 : null,
             priorityList: hasPriorityList
                 ? [
-              CountryPickerUtils.getCountryByIsoCode('IN'),
-            ]
+                    CountryPickerUtils.getCountryByIsoCode('IN'),
+                  ]
                 : null,
             sortComparator: sortedByIsoCode
                 ? (Country a, Country b) => a.isoCode.compareTo(b.isoCode)
@@ -1153,7 +1205,7 @@ class _PaidBribeState extends State<PaidBribe> {
       );
 
   Widget _buildDropdownItemWithLongText(
-      Country country, double dropdownItemWidth) =>
+          Country country, double dropdownItemWidth) =>
       SizedBox(
         width: dropdownItemWidth,
         child: Padding(
@@ -1171,7 +1223,7 @@ class _PaidBribeState extends State<PaidBribe> {
       );
 
   Widget _buildDropdownSelectedItemBuilder(
-      Country country, double dropdownItemWidth) =>
+          Country country, double dropdownItemWidth) =>
       SizedBox(
         width: dropdownItemWidth,
         child: Padding(
@@ -1184,10 +1236,10 @@ class _PaidBribeState extends State<PaidBribe> {
               ),
               Expanded(
                   child: Text(
-                    '${country.name}',
-                    style:
+                '${country.name}',
+                style:
                     TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
-                  )),
+              )),
             ],
           ),
         ),

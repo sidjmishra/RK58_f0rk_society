@@ -93,14 +93,15 @@ class _LogInState extends State<LogIn> {
       return Container(
         width: double.infinity,
         decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            colors: [
-              Colors.orange[900],
-              Colors.orange[800],
-              Colors.orange[400],
-            ],
-          ),
+//          gradient: LinearGradient(
+//            begin: Alignment.topCenter,
+//            colors: [
+//              Color(0xff212832),
+//              Color(0x212832),
+//              Colors.orange[400],
+//            ],
+//          ),
+          color: Color(0xff212832),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -167,7 +168,7 @@ class _LogInState extends State<LogIn> {
                                 borderRadius: BorderRadius.circular(10),
                                 boxShadow: [
                                   BoxShadow(
-                                    color: Color.fromRGBO(225, 95, 27, .3),
+                                    color: Color(0xff99D5D5),
                                     blurRadius: 20,
                                     offset: Offset(0, 10),
                                   ),
@@ -220,7 +221,7 @@ class _LogInState extends State<LogIn> {
                                 borderRadius: BorderRadius.circular(10),
                                 boxShadow: [
                                   BoxShadow(
-                                    color: Color.fromRGBO(225, 95, 27, .3),
+                                    color: Color(0xff99D5D5),
                                     blurRadius: 20,
                                     offset: Offset(0, 10),
                                   ),
@@ -287,7 +288,7 @@ class _LogInState extends State<LogIn> {
                               margin: EdgeInsets.symmetric(horizontal: 50),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(50),
-                                color: Colors.orange[900],
+                                color: Color(0xff212832),
                               ),
                               child: Center(
                                 child: FlatButton(
@@ -343,7 +344,7 @@ class _LogInState extends State<LogIn> {
                             height: 1,
                             width: 100,
                             child: Container(
-                              color: Colors.orange,
+                              color: Colors.teal,
                             ),
                           ),
                           SizedBox(height: 10),
@@ -369,7 +370,7 @@ class _LogInState extends State<LogIn> {
                                         EdgeInsets.symmetric(horizontal: 25),
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(50),
-                                      color: Colors.amberAccent,
+                                      color: Color(0xff32E0C3),
                                     ),
                                     child: Center(
                                       child: FlatButton.icon(
@@ -382,7 +383,7 @@ class _LogInState extends State<LogIn> {
                                         },
                                         icon: Icon(
                                           AntDesign.google,
-                                          color: Colors.blueAccent,
+                                          color: Colors.blueGrey,
                                           size: 20,
                                         ),
                                         label: Text(
@@ -402,14 +403,17 @@ class _LogInState extends State<LogIn> {
                                         EdgeInsets.symmetric(horizontal: 25),
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(50),
-                                      color: Colors.orange[400],
+                                      color: Color(0xff212832),
                                     ),
                                     child: Center(
                                       child: FlatButton(
                                         onPressed: () {
 //                                          widget.toggle();
-                                            Navigator.pushReplacement(
-                                                context, MaterialPageRoute(builder: (context) => SignUp()));
+                                          Navigator.pushReplacement(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      SignUp()));
                                         },
                                         child: Text(
                                           'SignUp',

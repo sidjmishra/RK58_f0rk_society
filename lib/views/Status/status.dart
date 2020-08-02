@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 FirebaseUser loggedInUser;
 
 class Status extends StatelessWidget {
-
   final String uid;
   Status({this.uid});
 
@@ -14,7 +13,10 @@ class Status extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: Text('Report Status', style: TextStyle(color: Colors.white),),
+        title: Text(
+          'Report Status',
+          style: TextStyle(color: Colors.white),
+        ),
         actions: [
           GestureDetector(
             onTap: () {
@@ -36,7 +38,6 @@ class Status extends StatelessWidget {
 }
 
 class Options extends StatelessWidget {
-
   final String userId;
   Options({this.userId});
 
@@ -52,8 +53,7 @@ class Options extends StatelessWidget {
                   return Paid(uid: userId);
                 }));
               },
-              child: ButtonDesign(text: 'Bribe Report')
-          ),
+              child: ButtonDesign(text: 'Bribe Report')),
           GestureDetector(
               onTap: () {
                 print(userId);
@@ -61,17 +61,15 @@ class Options extends StatelessWidget {
                   return Unusual(uid: userId);
                 }));
               },
-              child: ButtonDesign(text: 'Unusual Incident')
-          ),
-    GestureDetector(
+              child: ButtonDesign(text: 'Unusual Incident')),
+          GestureDetector(
               onTap: () {
                 print(userId);
                 Navigator.push(context, MaterialPageRoute(builder: (context) {
                   return HotStatus(uid: userId);
                 }));
               },
-              child: ButtonDesign(text: 'Hot Report')
-          ),
+              child: ButtonDesign(text: 'Hot Report')),
           GestureDetector(
             onTap: () {
               Navigator.push(context, MaterialPageRoute(builder: (context) {
@@ -123,7 +121,6 @@ class Options extends StatelessWidget {
 }
 
 class ButtonDesign extends StatelessWidget {
-
   final String text;
   ButtonDesign({this.text});
 
@@ -135,21 +132,23 @@ class ButtonDesign extends StatelessWidget {
         width: MediaQuery.of(context).size.width,
         height: 45.0,
         decoration: BoxDecoration(
-          gradient: LinearGradient(
-              colors: [
-                Colors.orange[100],
-                Colors.orange[200],
-                Colors.orange[100],
-              ]
-          ),
+          gradient: LinearGradient(colors: [
+            Colors.grey[100],
+            Colors.grey[200],
+            Colors.grey[100],
+          ]),
           borderRadius: BorderRadius.circular(20.0),
           border: Border.all(
-            color: Colors.orange[300],
+            color: Colors.teal[800],
           ),
         ),
         child: Padding(
           padding: EdgeInsets.all(5.0),
-          child: Center(child: Text(text)),
+          child: Center(
+              child: Text(
+            text,
+//            style: TextStyle(color: Colors.white),
+          )),
         ),
       ),
     );

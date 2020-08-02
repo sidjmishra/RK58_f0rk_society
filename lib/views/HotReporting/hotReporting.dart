@@ -18,7 +18,13 @@ class HotReport extends StatefulWidget {
   final String fullName;
   final String phoneNumber;
 
-  HotReport({this.uid, this.hotAddress, this.fullName, this.phoneNumber, this.UID, this.startStamp});
+  HotReport(
+      {this.uid,
+      this.hotAddress,
+      this.fullName,
+      this.phoneNumber,
+      this.UID,
+      this.startStamp});
 
   @override
   _HotReportState createState() => _HotReportState();
@@ -72,7 +78,7 @@ class _HotReportState extends State<HotReport> {
       storageUploadTask =
           storageReference.child(endStamp + '.mp4').putFile(videoFile);
       String url =
-      await (await storageUploadTask.onComplete).ref.getDownloadURL();
+          await (await storageUploadTask.onComplete).ref.getDownloadURL();
       _sendReport(url);
       Navigator.pop(context);
     }
@@ -83,19 +89,24 @@ class _HotReportState extends State<HotReport> {
     QuerySnapshot dataID;
 
     id = Constants.myUid.substring(0, 4) + number.nextInt(9999).toString();
-    dataID = await Firestore.instance.collection('Hot Report').document(widget.uid).collection('all_data').getDocuments();
-    if(dataID.documents.isNotEmpty) {
-      for(var index = 0; index < dataID.documents.length; index++) {
-        if(dataID.documents[index].data['complaintID'] == id && id.length < 8) {
+    dataID = await Firestore.instance
+        .collection('Hot Report')
+        .document(widget.uid)
+        .collection('all_data')
+        .getDocuments();
+    if (dataID.documents.isNotEmpty) {
+      for (var index = 0; index < dataID.documents.length; index++) {
+        if (dataID.documents[index].data['complaintID'] == id &&
+            id.length < 8) {
           setState(() {
-            id = Constants.myUid.substring(0, 4) + number.nextInt(9999).toString();
+            id = Constants.myUid.substring(0, 4) +
+                number.nextInt(9999).toString();
           });
         }
       }
     }
     print(id);
   }
-
 
   void _sendReport(url) async {
     await Firestore.instance
@@ -128,7 +139,7 @@ class _HotReportState extends State<HotReport> {
   @override
   void dispose() {
     super.dispose();
-    if(videoPlayerController != null) {
+    if (videoPlayerController != null) {
       videoPlayerController.dispose();
     }
   }
@@ -156,28 +167,30 @@ class _HotReportState extends State<HotReport> {
                   height: MediaQuery.of(context).size.height * (0.4),
                   child: videoFile == null
                       ? Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: Colors.orange[200],
-                      ),
-                    ),
-                    child: Center(
-                      child: Text(
-                        'No Data Available',
-                      ),
-                    ),
-                  )
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: Colors.teal,
+                            ),
+                          ),
+                          child: Center(
+                            child: Text(
+                              'No Data Available',
+                            ),
+                          ),
+                        )
                       : FittedBox(
-                    fit: BoxFit.contain,
-                    child: mounted
-                        ? Chewie(
-                      controller: ChewieController(
-                        videoPlayerController: videoPlayerController,
-                        aspectRatio: 3 / 2,
-                        autoPlay: true,
-                      ),
-                    ) : Container(),
-                  ),
+                          fit: BoxFit.contain,
+                          child: mounted
+                              ? Chewie(
+                                  controller: ChewieController(
+                                    videoPlayerController:
+                                        videoPlayerController,
+                                    aspectRatio: 3 / 2,
+                                    autoPlay: true,
+                                  ),
+                                )
+                              : Container(),
+                        ),
                 ),
                 SizedBox(height: 15.0),
                 Container(
@@ -186,7 +199,7 @@ class _HotReportState extends State<HotReport> {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20.0),
                     border: Border.all(
-                      color: Colors.orange[200],
+                      color: Color(0xff212832),
                     ),
                   ),
                   child: Padding(
@@ -285,10 +298,10 @@ class _HotReportState extends State<HotReport> {
                     height: 40.0,
                     width: MediaQuery.of(context).size.width,
                     margin:
-                    EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+                        EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(50),
-                      color: Colors.orange[400],
+                      color: Colors.teal,
                     ),
                     child: Center(
                       child: Text(
