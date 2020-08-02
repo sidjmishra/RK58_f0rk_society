@@ -19,6 +19,7 @@ It is an cross platform application which is been build with the help of flutter
 an unusual incident.it also has additional features of reporting FIR,NCR,Filing a complaint against prison management,requesting for NOC certificate
 The user can also complain for delay in action for there current complains with easy,we have also provided status function which shows the status of all the request the user 
 have made and it get updated dynamically whenever the status of that report changes.
+
 ***Key Features***
 1. Quick reporting of bribe with the help of immutable decentralized system.
 
