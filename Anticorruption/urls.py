@@ -24,21 +24,21 @@ from home import views
 urlpatterns = [
     path('', views.login, name='login'),
     path('register', views.register, name='register'),
+    path('sendotp/', views.sendOtp, name="sendOtp"),
 
     # path('home', views.home, name='home'),
     path('fir/<user>/', views.home, name='fir'),
     path('noc/<user>/', views.noc, name='noc'),
     path('ncr/<user>/', views.ncr, name='ncr'),
-    path('rti/<user>/', views.rti, name='rti'),
     path('paidbribe/<user>/', views.paidBribe, name='paidbribe'),
-    # path('hotreport/<user>/', views.hotReport, name='hotreport'),
-    # path('fighter/<user>/', views.bribeFighter, name='fighter'),
+    path('hotreport/<user>/', views.hotReport, name='hotreport'),
+    path('rti/<user>/', views.rti, name='rti'),
     path('unusual/<user>/', views.unusualBehaviour, name='unusual'),
-
 
     # path('details/<user>/<uid>/<case_id>/', views.details, name='details'),
     path('details/<category>/<user>/<uid>/<case_id>/', views.details, name='details'),
     path('logout',views.logout, name='logout'), 
     path('police', views.police, name='police'),
-
+    path('faceevidence/<doc_id>/<rep_id>/',views.faceevidence,name='faceevidence'),
+    
 ]

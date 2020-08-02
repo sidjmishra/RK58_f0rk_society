@@ -1,92 +1,124 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 {% include "header.html" %}
-  <style>
-        body{
-            overflow-x: hidden;
-        }
-        aside{
-            display: inline-block;
-            float:left;
-        }
-        .card{
-            padding: 0.5em;
-            overflow: auto;
-        }
-        .mycard{
-            padding: 0;
-            margin: 0.5em 0;
-        }
-        .mycontainer{
-            height: auto;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-        }
-        .card a{
-            color: #212529;
-        }
-        .card ul li{
-            list-style-type: none;
-        }
-        .card a:hover{
-            color: blue;
-        }
-        .card a:link {
-            text-decoration: none;
-        }
-    </style>
-
-    <script>
-        window.onload = function() {
-
-        var chart = new CanvasJS.Chart("chartContainer", {
-            animationEnabled: true,
-            title: {
-                text: "Cases Representation"
-            },
-            data: [{
-                type: "pie",
-                startAngle: 240,
-                yValueFormatString: "##0",
-                indexLabel: "{label} {y}",
-                dataPoints: [
-                    {y: {{ assesedNo }}, label: "Assesed Cases:"},
-                    {y: {{ progressNo }}, label: "Cases in Process:"},
-                    {y: {{ newNo }}, label: "New/Pending Cases:"},
-                ]
-            }]
-        });
-        chart.render();
-        
-        }
-    </script>     
+    <link rel="stylesheet" href="{% static "styles/card.css" %}" >
     <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>   
 <body>
     {% include "navbar.html" %}   
-        <aside>
-            <div class="card">            
-                <b>User:</b> {{user}}
-                <strong>Total Number of Cases:</strong> {{newNo|add:progressNo|add:assesedNo}}
-                <strong>Pending Cases:</strong> {{newNo}}
-                <strong>In Process Cases:</strong> {{progressNo}}
-                <strong>Accepted Cases:</strong> {{assesedNo}}
-            </div>
-        </aside>
-        <div class="row justify-content-around">
+    {% include "card2.html" %}
+        {% comment %} <div class="row justify-content-around">
             <div id="chartContainer" style="height: 370px; width: 100%;"></div>
-        </div>
+        </div> {% endcomment %}
         <div class="mycontainer">
+            <div class="row justify-content-around">
+                <div class="col-lg-4">
+                    <div class="card chartcard">
+                        <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+                        {% comment %} <div id="chartContainer" style="height: auto; width: auto;"></div> {% endcomment %}
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="card chartcard">
+                        <div id="chartContainerState" style="height: 300px; width: 100%;"></div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="card chartcard">
+                        <div id="chartContainerTime" style="height: 300px; width: 100%;"></div>        
+                    </div>
+                </div>
+            </div>
+
+            <div class="container">
+                <ul class="nav nav-tabs">
+                  <li class="nav-item">
+                    <a class="nav-link" id="pills-home-tab" data-toggle="pill" href="#home" role="tab" aria-controls="pills-home" aria-selected="true">Cases Accepted</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#menu1" role="tab" aria-controls="pills-profile" aria-selected="false">Cases In Process</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#menu2" role="tab" aria-controls="pills-contact" aria-selected="false">New/Pending Cases</a>
+                  </li>
+                </ul>
+              <!--   <div class="tab-content" id="pills-tabContent">
+                    <div class="tab-pane fade" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">...</div>
+                    <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">...</div>
+                    <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">...</div>
+                  </div> -->
+              
+                <div class="tab-content">
+                  <div id="home" class="tab-pane fade">
+                    <div>
+                        <div class="card mycard">
+                            <div class="card-header">
+                                <b>Cases Assessed</b>
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                {% for i,j,e in assessed_id_list %}
+                                <a href="{% url "details" category=category user=user uid=j case_id=i %}"
+                                    class="list-group-item">
+                                    <li>{{i}}<br>
+                                        <span class="text-muted">{{e}}</span></li>
+                                </a>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                  </div>
+                  <div id="menu1" class="tab-pane fade">
+                    <div >
+                        <div class="card mycard">
+                            <div class="card-header">
+                                <b>Cases In Process</b>
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                {% for i,j,e in progress_id_list %}
+                                <a href="{% url "details" category=category user=user uid=j case_id=i %}"
+                                    class="list-group-item">
+                                    <li>{{i}}<br>
+                                        <span class="text-muted">{{e}}</span></li>
+                                </a>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                  </div>
+                  <div id="menu2" class="tab-pane fade">
+                    <div>
+                        <div class="card mycard">
+                            <div class="card-header">
+                                <b>New/Pending Cases</b>
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                {% for i,j,e in pending_id_list %}
+                                <a href="{% url "details" category=category user=user uid=j case_id=i %}"
+                                    class="list-group-item">
+                                    <li>{{i}}<br>
+                                        <span class="text-muted">{{e}}</span></li>
+                                </a>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
             <div class="row justify-content-around">
                 <div class="col-lg-4">
                     <div class="card mycard">
                         <div class="card-header">
-                            Cases Assessed
+                            <b>Cases Assessed</b>
                         </div>
                         <ul class="list-group list-group-flush">
                             {% for i,j,e in assessed_id_list %}
-                                <a href="{% url "details" category=category user=user uid=j case_id=i %}" class="list-group-item"><li>{{i}}<br>
-                                <span class="text-muted">{{e}}</span></li></a>
+                            <a href="{% url "details" category=category user=user uid=j case_id=i %}"
+                                class="list-group-item">
+                                <li>{{i}}<br>
+                                    <span class="text-muted">{{e}}</span></li>
+                            </a>
                             {% endfor %}
                         </ul>
                     </div>
@@ -94,12 +126,15 @@
                 <div class="col-lg-4">
                     <div class="card mycard">
                         <div class="card-header">
-                            Cases In Process
+                            <b>Cases In Process</b>
                         </div>
                         <ul class="list-group list-group-flush">
                             {% for i,j,e in progress_id_list %}
-                                <a href="{% url "details" category=category user=user uid=j case_id=i %}" class="list-group-item"><li>{{i}}<br>
-                                <span class="text-muted">{{e}}</span></li></a>
+                            <a href="{% url "details" category=category user=user uid=j case_id=i %}"
+                                class="list-group-item">
+                                <li>{{i}}<br>
+                                    <span class="text-muted">{{e}}</span></li>
+                            </a>
                             {% endfor %}
                         </ul>
                     </div>
@@ -107,12 +142,15 @@
                 <div class="col-lg-4">
                     <div class="card mycard">
                         <div class="card-header">
-                            New/Pending Cases
+                            <b>New/Pending Cases</b>
                         </div>
                         <ul class="list-group list-group-flush">
                             {% for i,j,e in pending_id_list %}
-                                <a href="{% url "details" category=category user=user uid=j case_id=i %}" class="list-group-item"><li>{{i}}<br>
-                                <span class="text-muted">{{e}}</span></li></a>
+                            <a href="{% url "details" category=category user=user uid=j case_id=i %}"
+                                class="list-group-item">
+                                <li>{{i}}<br>
+                                    <span class="text-muted">{{e}}</span></li>
+                            </a>
                             {% endfor %}
                         </ul>
                     </div>
@@ -134,4 +172,107 @@
         });
     </script>
 </body>
+    <script>
+        function drawGraphPie() {
+            var chart = new CanvasJS.Chart("chartContainer", {
+                animationEnabled: true,
+                exportFileName: "NCR Status Categorized Reports",  //Give any name accordingly
+		        exportEnabled: true,
+                title: {
+                    text: "Status Categorized Reports"
+                },
+                data: [{
+                    type: "pie",
+                    startAngle: 240,
+                    yValueFormatString: "##0",
+                    indexLabel: "{label} {y}",
+                    dataPoints: [
+                        {y: {{ assesedNo }}, label: "Assesed Cases:"},
+                        {y: {{ progressNo }}, label: "Cases in Process:"},
+                        {y: {{ newNo }}, label: "New/Pending Cases:"},
+                    ]
+                }]
+            });
+            chart.render();
+        }
+    </script> 
+    <script>
+        function drawGraphTime() {
+            var chart = new CanvasJS.Chart("chartContainerTime", {
+                animationEnabled: true,
+                zoomEnabled: true,
+                zoomType: "x",
+                exportFileName: "NCR TimeLine Of Report Arrival",  //Give any name accordingly
+		        exportEnabled: true,
+                title: {
+                    text: "TimeLine Of Report Arrival"
+                },
+                data: [{
+                    type: "spline",
+                    dataPoints: [
+                        {% for date, value in dates.items %}
+                            {x:new Date("{{date}}"), y: {{ value }} },
+                        {% endfor %}
+                    ]
+                }]
+            });
+            chart.render();
+        }
+    </script> 
+    <script>
+        function drawGraphState() {
+            graphData = []
+            for (item in stateCount) {
+                // console.log(item)
+                graphData.push({y : stateCount[item], label:item});
+            }
+            console.log(graphData)
+            var chart = new CanvasJS.Chart("chartContainerState",
+            {
+            animationEnabled: true,
+            animationDuration: 2000,
+            exportFileName: "NCR State Caegorized Reports",  //Give any name accordingly
+		    exportEnabled: true,
+            title:{
+                text: "State Categorized Reports"
+            },
+            data: [
+
+            {
+                dataPoints: graphData
+            }
+            ]
+            });
+            chart.render();
+            setTimeout(drawGraphPie, 100);
+            setTimeout(drawGraphTime, 100);
+
+        }
+    </script>
+    <script>
+    states = "{{states|escapejs}}"
+    states = states.replace(/[^0-9,A-z]/g, '');
+    states = states.slice(1,states.length-1).split(",")
+    console.log(states)
+    stateCount = {}
+    for (i=0; i<states.length; i++) {
+        let name = states[i];
+        name = name.toLowerCase().trim();
+        let temp = name.split(" ");
+        name = ""
+        for (let i=0; i<temp.length; i++) {
+            if(i != 0) {
+                name += " ";
+            }
+            name += temp[i][0].toUpperCase() + temp[i].slice(1,temp[i].length);
+        }
+        if(stateCount.hasOwnProperty(name)) {
+            stateCount[name] += 1
+        }
+        else {
+            stateCount[name] = 1;
+        }
+    }    
+    drawGraphState();
+    </script> 
 </html>

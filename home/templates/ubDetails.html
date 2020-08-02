@@ -1,48 +1,33 @@
 <!DOCTYPE html>
 {% load getkey %}
+{% load static %}
 <html lang="en">
     {% include "header.html" %}
+    <link rel="stylesheet" href="{% static "styles/card.css" %}" >
     <style>
-        body{
-            overflow-x: hidden;
-        }
-        aside{
-            display: inline-block;
-            float:left;
-        }
         .card{
-            padding: 0.5em;
+            padding: 0.6em;
             overflow: auto;
+        }
+        .userinfo {
+            padding-top: 25px;
         }
         .mycard{
             padding: 0 0.5em;
             margin: 0.5em 0;
         }
         .card-header{
-            padding: 0.2em 0.5em;   
+            padding: 0.3em 0.5em; 
+  
         }
         .mycontainer{
-            height: auto;
-            align-items: center;
-            justify-content: center;
-        }
-        .card a{
-            color: #212529;
-        }
-        .card ul li{
-            list-style-type: none;
-        }
-        .card a:hover{
-            color: blue;
-        }
-        .card a:link {
-            text-decoration: none;
+            margin-bottom: 40px;
         }
     </style>
 <body>
     {% include "navbar.html" %}
         <aside>
-            <div class="card">             
+            <div class="card userinfo">             
                 <b>User:</b> {{user}}
             </div>
         </aside>
@@ -144,8 +129,10 @@
             </div>
             <div class="row justify-content-center">
                 <form action="{% url "details" category=metadata|getkey:"category" user=metadata|getkey:"user" uid=metadata|getkey:"uid" case_id=metadata|getkey:"case_id" %}" method="GET">
+                    {% if data|getkey:"Status" != "Accepted" %}
                     <button type="submit" name="accept" class="btn btn-success" style="margin-right:5px" value="accpt">Accept</button>
-                    <button type="submit" name="delete" class="btn btn-danger" value="del">Decline</button>
+                    {% endif %}  
+                    <button type="submit" name="delete" class="btn btn-danger" style="margin-right:5px" value="del">Delete</button>
                     <button type="submit" name="evid" class="btn btn-info" value="evidence">View Evidence</button>
                 </form>
             </div>

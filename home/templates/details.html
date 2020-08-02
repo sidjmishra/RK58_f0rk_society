@@ -1,43 +1,29 @@
 <!DOCTYPE html>
 {% load getkey %}
+{% load static %}
 <html lang="en">
     {% include "header.html" %}
+    <link rel="stylesheet" href="{% static "styles/card.css" %}">
     <style>
-        body{
-            overflow-x: hidden;
-        }
-        aside{
-            display: inline-block;
-            float:left;
-        }
+        
         .card{
             padding: 0.5em;
             overflow: auto;
         }
         .mycard{
             padding: 0 0.5em;
-            margin: 0.5em 0;
+            margin: 0.6em 0;
+        }
+        .userinfo {
+        padding-top: 25px;
         }
         .card-header{
-            padding: 0.2em 0.5em;   
+            padding: 0.3em 0.5em;   
         }
         .mycontainer{
-            height: auto;
-            align-items: center;
-            justify-content: center;
+        padding-bottom: 25px;
         }
-        .card a{
-            color: #212529;
-        }
-        .card ul li{
-            list-style-type: none;
-        }
-        .card a:hover{
-            color: blue;
-        }
-        .card a:link {
-            text-decoration: none;
-        }
+
     </style>
 {% comment %} 
     <!-- The core Firebase JS SDK is always required and must be listed first -->
@@ -79,7 +65,7 @@
 <body>
     {% include "navbar.html" %}
         <aside>
-            <div class="card">             
+            <div class="card userinfo">             
                 <b>User:</b> {{user}}
             </div>
         </aside>
@@ -87,24 +73,24 @@
             <div class="row justify-content-around">
                 <div class="col-lg-4">
                     <div class="card mycard">
-                       Category: {{ data|getkey:"category" }}                                  
+                       Category:<b>{{ data|getkey:"category" }} </b>                                  
                     </div>
                 </div>
                 <div class="col-lg-4">
                     <div class="card mycard">
-                        Date of Incident: {{ data|getkey:"Date of Incident" }}       
+                        Date of Incident:<b>{{ data|getkey:"Date of Incident" }} </b> 
                     </div>
                 </div>
                 <div class="col-lg-4">
                     <div class="card mycard">
-                        Date of Filing: {{ data|getkey:"Date of Filing" }}                                  
+                        Date of Filing:<b>{{ data|getkey:"Date of Filing" }} </b>                                  
                     </div>
                 </div>
             </div>
             <div class="row justify-content-around">
                 <div class="col-lg">
                     <div class="card mycard">                       
-                        Status: {{ data|getkey:"Status" }}                      
+                        Status:<b>{{ data|getkey:"Status" }} </b>                      
                     </div>
                 </div>
             </div>
@@ -114,7 +100,7 @@
                         <div class="card-header text-light bg-dark">
                             Details of Incident
                         </div>
-                        {{ data|getkey:"Details of Incident" }}      
+                        <b>{{ data|getkey:"Details of Incident" }} </b>     
                     </div>
                 </div>
             </div>
@@ -124,76 +110,76 @@
                         <div class="card-header text-light bg-dark">
                             Details of Suspect
                         </div>
-                        {{ data|getkey:"Details of Suspect" }}       
+                        <b>{{ data|getkey:"Details of Suspect" }} </b>      
                     </div>
                 </div>
             </div>
             <div class="row justify-content-around">
                 <div class="col-lg-3">
                     <div class="card mycard">
-                        Father/Husband Name: {{ data|getkey:"Father/Husband Name" }}       
+                        Father/Husband Name:<b>{{ data|getkey:"Father/Husband Name" }} </b>       
                     </div>
                 </div>
                 <div class="col-lg-3">
                     <div class="card mycard">
-                        ID: {{ data|getkey:"id" }}       
+                        ID:<b>{{ data|getkey:"id" }} </b>       
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="card mycard">                       
-                        Name of User: {{ data|getkey:"Name of User" }}                      
+                        Name of User:<b>{{ data|getkey:"Name of User" }} </b>                      
                     </div>
                 </div>
             </div>
             <div class="row justify-content-around">
                 <div class="col-lg-3">
                     <div class="card mycard">
-                        U.I.D. Number: {{ data|getkey:"U.I.D. Number" }}       
+                        U.I.D. Number:<b>{{ data|getkey:"U.I.D. Number" }} </b>       
                     </div>
                 </div>
                 <div class="col-lg-3">
                     <div class="card mycard">                       
-                        U.I.D. Type: {{ data|getkey:"U.I.D. Type" }}                      
+                        U.I.D. Type:<b>{{ data|getkey:"U.I.D. Type" }} </b>                      
                     </div>
                 </div>
                 <div class="col-lg-3">
                     <div class="card mycard">
-                       Email: {{ data|getkey:"email" }}                                  
+                       Email:<b>{{ data|getkey:"email" }} </b>                                  
                     </div>
                 </div>
 
                 <div class="col-lg-3">
                     <div class="card mycard">
-                       Contact: {{ data|getkey:"contact" }}                                  
+                       Contact:<b>{{ data|getkey:"contact" }} </b>                                  
                     </div>
                 </div>
             </div>
             <div class="row justify-content-around">
                 <div class="col-lg-6">
                     <div class="card mycard">
-                       Address Line 1: {{ data|getkey:"address1" }}       
+                       Address Line 1:<b>{{ data|getkey:"address1" }} </b>       
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="card mycard">                       
-                        Address Line 2: {{ data|getkey:"address2" }}                      
+                        Address Line 2:<b>{{ data|getkey:"address2" }} </b>                      
                     </div>
                 </div>
             </div>
             <div class="row justify-content-around">
                 <div class="col-lg-4">
                     <div class="card mycard">
-                        City: {{ data|getkey:"city" }}       
+                        City:<b>{{ data|getkey:"city" }} </b>       
                     </div>
                 </div>
                 <div class="col-lg-4">
                     <div class="card mycard">                       
-                        Pin code: {{ data|getkey:"pincode" }}                      
+                        Pin code:<b>{{ data|getkey:"pincode" }} </b>                      
                     </div>
                 </div>
                 <div class="col-lg-4">
                     <div class="card mycard">
-                        State: {{ data|getkey:"state" }}                                  
+                        State:<b>{{ data|getkey:"state" }} </b>                                  
                     </div>
                 </div>
             </div>
@@ -201,8 +187,9 @@
                 <form action="{% url "details" category=metadata|getkey:"category" user=metadata|getkey:"user" uid=metadata|getkey:"uid" case_id=metadata|getkey:"case_id" %}" method="GET">
                     {% if data|getkey:"Status" != "Assessed" %}
                     <button type="submit" name="accept" class="btn btn-success" style="margin-right:5px" value="accpt">Accept</button>
-                    {% endif %}
-                    <button type="submit" name="delete" class="btn btn-danger" value="del">Decline</button>
+                    {% endif %}                    
+                    <button type="submit" name="delete" class="btn btn-danger" style="margin-right:5px" value="del">Delete</button>
+                    <button type="submit" name="evid" class="btn btn-info" value="evidence">View Evidence</button>
                 </form>
             </div>
         </div>
