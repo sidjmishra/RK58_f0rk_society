@@ -25,19 +25,19 @@ have made and it get updated dynamically whenever the status of that report chan
 
 we have use most mordern technology to store the data and try to implement minimal steps to report a bribe. we have store evidence's on ipfs and there Hash on Ethereum Rinkby test network.The copy of this image link is stored
 in our cloud data base (EvidenceLinks database) they are been segregated with the help of UID given to every report
-
-
-
-
-you can check out the ipfs code in-https://github.com/sidjmishra/RK58_f0rk_society/tree/ipfs-webapp
+Code Link: https://github.com/sidjmishra/RK58_f0rk_society/tree/ipfs-webapp
 
 
 2.One Click reporting for emergencies.
 
 With our wow feature named Hot reporting if user is stuck in some unwanted situation and he wants to report a bribe he can do that with a click and all the data would be stored securly with the current time stamp from the user when video was recorded soo the authenticity 
 of data is maintained
-you can check the code in-https://github.com/sidjmishra/RK58_f0rk_society/blob/app/lib/views/HotReporting/hotReporting.dart
+Code Link: https://github.com/sidjmishra/RK58_f0rk_society/blob/app/lib/views/HotReporting/hotReporting.dart
 
+3. Live instantaneous interaction
+
+One of our key feature called as Aharya Stream. It supports live streaming of the videos from the admin to the user which can be useful to stream the live court cases of the use, so the user physically presence is not required in the court. It also supports video call feature upto 4 users.
+Code Link: https://github.com/sidjmishra/RK58_f0rk_society/tree/app/lib/views/LiveStream
 
 
 How does Aharya works ?
