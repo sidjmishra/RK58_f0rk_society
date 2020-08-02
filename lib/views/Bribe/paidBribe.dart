@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 import 'dart:math';
 
 import 'package:block/modal/constants.dart';
@@ -60,30 +61,21 @@ class _PaidBribeState extends State<PaidBribe> {
   String subLocal;
 
   // Files
-  List<String> urls = [];
-  List _paths;
-  String _extension;
-  DateTime date = DateTime.now();
+//  List<String> urls = [];
+//  List _paths;
+//  String _extension;
+//  DateTime date = DateTime.now();
 //
 //  Future openFileExplorer() async {
 //    try {
-//      StorageReference storageReference;
-//      StorageUploadTask storageUploadTask;
 //      var _path;
-
+//
+//      StorageUploadTask storageUploadTask;
+//      StorageReference storageReference;
 //      _paths = await FilePicker.getMultiFile(
 //        type: FileType.custom,
 //        allowedExtensions: ['jpg', 'jpeg', 'png', 'svg', 'mp4'],
 //      );
-
-//      storageReference = FirebaseStorage.instance.ref().child('PaidBribe');
-//      storageUploadTask = storageReference.child(date.toString() + '.$_extension').putFile(_path);
-//      String url = await (await storageUploadTask.onComplete).ref.getDownloadURL();
-//      if(_path != null) {
-//        await uploadData(_path.toString());
-//      }
-
-
 //      _paths.forEach((filePath) async {
 //        _extension = filePath.toString().split('.').last.toLowerCase();
 //        print(_extension);
@@ -100,7 +92,16 @@ class _PaidBribeState extends State<PaidBribe> {
 //          });
 //        }
 //      });
+
+//      _path = await FilePicker.getMultiFile(
+//        type: FileType.custom,
+//        allowedExtensions: ['jpg', 'jpeg', 'png', 'svg', 'mp4'],
+//      );
 //
+//      if(_path != null) {
+//        await uploadData(_path.toString());
+//      }
+
 //    } on PlatformException catch (e) {
 //      print(e.toString());
 //    }
@@ -110,17 +111,34 @@ class _PaidBribeState extends State<PaidBribe> {
 //  }
 
 //  Future uploadData(var path) async {
+
+//    var request = http.MultipartRequest('POST', Uri.parse('https://ipfsapi.herokuapp.com/api/ipfsRoutes/viewfromblockchain'));
+//    request.files.add(
+//      http.MultipartFile.fromBytes(
+//          'bufferfile',
+//          File(path).readAsBytesSync(),
+//          filename: path.split('/').last
+//      )
+//    );
+//    var res = await request.send();
+//    print(res.statusCode);
+//
 //    Map data;
 //    String body;
-////    http.Response response;
+//    http.Response response;
 //
 //    data = {
 //      'bufferfile': path
 //    };
 //    body = json.encode(data);
 //
-//    var response = await http.MultipartFile.fromPath();
-//    print(response);
+//    response = await http.post(
+//      'https://ipfsapi.herokuapp.com/api/ipfsRoutes/uploadfiles',
+//      headers: {'Content-Type': 'application/json'},
+//      body: body,
+//    );
+//    print(response.statusCode);
+//    print(response.headers);
 //  }
 
   void randomId() async {
@@ -157,6 +175,33 @@ class _PaidBribeState extends State<PaidBribe> {
 //    urls.clear();
   }
 
+  void setBlock() {
+    if (_formKey.currentState.validate()) {
+      setState(() {
+        isLoading = true;
+      });
+      PaidBribeDatabase(uid: Constants.myUid)
+          .userPaid(
+        id,
+        Constants.myEmail,
+        _currentSelectedCategory,
+        add_1.text,
+        add_2.text,
+        city.text,
+        _currentSelectedState,
+        pincode.text,
+        userContact.text,
+        details.text,
+        amount.text,
+        dateCtl.text,
+        pickedCountry.toString(),
+        pickedCountryName.toString(),
+//              urls
+      ).then((value) {
+      });
+    }
+  }
+
   void setData() {
     if (pickedCountryName == null && pickedCountry == null) {
       pickedCountry = '+91';
@@ -182,7 +227,7 @@ class _PaidBribeState extends State<PaidBribe> {
         dateCtl.text,
         pickedCountry.toString(),
         pickedCountryName.toString(),
-              urls
+//              urls
       ).then((value) {
         Alert(
             context: context,
@@ -975,6 +1020,7 @@ class _PaidBribeState extends State<PaidBribe> {
                           SizedBox(height: 20),
                           OutlineButton(
                             onPressed: () {
+                              setBlock();
                               setState(() {
                                 isLoading = true;
                               });

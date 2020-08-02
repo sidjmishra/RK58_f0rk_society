@@ -628,7 +628,7 @@ class _ProfileState extends State<Profile> {
                       var val = await setData();
                       print(val);
                       if (val == 'error') {
-                        print('error recieved');
+                        print('error received');
                         Scaffold.of(context)
                             .showSnackBar(SnackBar(
                               content: Text('Please add files'),

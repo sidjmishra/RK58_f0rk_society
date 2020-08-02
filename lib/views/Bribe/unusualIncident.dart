@@ -127,6 +127,33 @@ class _HonestOfficialState extends State<HonestOfficial> {
     urls.clear();
   }
 
+  void setBlock() {
+    if (_formKey.currentState.validate()) {
+      setState(() {
+        isLoading = true;
+      });
+      PaidBribeDatabase(uid: Constants.myUid)
+          .unusualBehaviour(
+          id,
+          Constants.myEmail,
+          _currentSelectedCategory,
+          add_1.text,
+          add_2.text,
+          city.text,
+          _currentSelectedState,
+          pincode.text,
+          userContact.text,
+          details.text,
+          officialName.text,
+          dateCtl.text,
+          pickedCountry,
+          pickedCountryName,
+//          urls
+      ).then((value) {});
+    }
+  }
+
+
   void setData() {
     if (pickedCountryName == null && pickedCountry == null) {
       pickedCountry = '+91';
@@ -152,7 +179,7 @@ class _HonestOfficialState extends State<HonestOfficial> {
         dateCtl.text,
         pickedCountry,
         pickedCountryName,
-              urls
+//              urls
       ).then((value) {
         Alert(
             context: context,
@@ -1000,6 +1027,7 @@ class _HonestOfficialState extends State<HonestOfficial> {
                                 SizedBox(height: 20),
                                 OutlineButton(
                                   onPressed: () {
+                                    setBlock();
 //                                    openFileExplorer();
                                     setState(() {
                                       isLoading = true;
@@ -1011,7 +1039,7 @@ class _HonestOfficialState extends State<HonestOfficial> {
                                   },
                                   child: Text('Add files'),
                                 ),
-                                urls.isNotEmpty
+                                isLoading
                                     ? Text('Files Uploaded')
                                     : Text('No Files Uploaded'),
                           SizedBox(height: 20),

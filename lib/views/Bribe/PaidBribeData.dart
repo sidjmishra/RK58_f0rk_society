@@ -9,7 +9,7 @@ class PaidBribeDatabase {
   List evidenceUrl = [];
 
   // Done
-  Future userPaid(String id, String email, String category, String address1, String address2, String city, String state, String pincode, String userContact, String details, String amount, String date, String countryIso, String countryName, urls) async {
+  Future userPaid(String id, String email, String category, String address1, String address2, String city, String state, String pincode, String userContact, String details, String amount, String date, String countryIso, String countryName) async {
     userCollection = Firestore.instance.collection('PaidBribe');
     await userCollection.document(uid).setData({
       'UserName': Constants.myName,
@@ -33,14 +33,14 @@ class PaidBribeDatabase {
       'Date of Filing': DateTime.now().toString(),
       'CountryCode': countryIso,
       'CountryName': countryName,
-      'Urls': urls,
+//      'Urls': urls,
       'Status': 'Pending'
     });
     await evidenceData(id, 'PaidBribe');
   }
 
   // Done
-  Future unusualBehaviour(String id, String email, String category, String address1, String address2, String city, String state, String pincode, String userContact, String details, String official, String date, String countryIso, String countryName, urls) async {
+  Future unusualBehaviour(String id, String email, String category, String address1, String address2, String city, String state, String pincode, String userContact, String details, String official, String date, String countryIso, String countryName) async {
     userCollection = Firestore.instance.collection('UnusualBehaviour');
     await userCollection.document(uid).setData({
       'UserName': Constants.myName,
@@ -64,7 +64,7 @@ class PaidBribeDatabase {
       'Date of Filing': DateTime.now().toString(),
       'CountryCode': countryIso,
       'CountryName': countryName,
-      'Urls': urls,
+//      'Urls': urls,
       'Status': 'Pending'
     });
     await evidenceData(id, 'UnusualBehaviour');

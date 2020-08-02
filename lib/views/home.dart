@@ -12,6 +12,7 @@ import 'package:block/views/DelayAction/delayAction.dart';
 import 'package:block/views/FirNcr/Reporting.dart';
 import 'package:block/views/HotReporting/hotReporting.dart';
 import 'package:block/views/JailManagement/jailManage.dart';
+import 'package:block/views/LiveStream/index.dart';
 import 'package:block/views/NOC/Noc.dart';
 import 'package:block/views/Profile/profile.dart';
 import 'package:block/views/Profile/profileView.dart';
@@ -284,6 +285,18 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ],
               ),
+            ),
+            ListTile(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) {
+                    return IndexPage();
+                  }),
+                );
+              },
+              leading: Icon(Icons.live_tv),
+              title: Text('Live Stream', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15.0)),
             ),
             ListTile(
               onTap: () {
@@ -705,6 +718,73 @@ class _HomePageState extends State<HomePage> {
                                 ),
                               ),
                               SizedBox(height: 20.0),
+
+                              // Live Stream
+                        Container(
+                          width: MediaQuery.of(context).size.width,
+                          height: MediaQuery.of(context).size.height * (0.35),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20.0),
+                            border: Border.all(
+                              color: Colors.orange[200],
+                            ),
+                          ),
+                          child: Padding(
+                            padding: EdgeInsets.all(20.0),
+                            child: Column(
+                              children: <Widget>[
+                                Row(
+                                  children: <Widget>[
+                                    Image.asset('assets/live.png',
+                                      width: 50.0,
+                                      height: 50.0,
+                                    ),
+                                    SizedBox(width: 20.0),
+                                    Text('Live Stream',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.w700,
+                                        fontSize: 20.0,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(height: 10.0),
+                                Text('A way from where you can stream a live video which is hosted to the admin side having your name and the current location for exposing corruption.',
+                                  maxLines: 10,
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 15.0,
+                                  ),
+                                ),
+                                SizedBox(height: 10.0),
+                                GestureDetector(
+                                  onTap: () {
+                                    locator();
+                                    Navigator.push(context, MaterialPageRoute(
+                                        builder: (context) => IndexPage(streamAddress: currentAddress)
+                                    ));
+                                  },
+                                  child: Row(
+                                    children: <Widget>[
+                                      Text('Stream Live',
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: 18.0
+                                        ),
+                                      ),
+                                      SizedBox(width: 20.0),
+                                      Icon(Icons.arrow_forward,
+                                        color: Colors.orangeAccent,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: 20.0),
 
                               // Aharya Blogs
                               Container(
