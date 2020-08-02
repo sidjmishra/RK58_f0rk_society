@@ -153,7 +153,7 @@ class IndexState extends State<IndexPage> {
                               child: RaisedButton(
                                 onPressed: onJoin,
                                 child: Text('Join'),
-                                color: Colors.orangeAccent,
+                                color: Colors.teal[200],
                                 textColor: Colors.white,
                               ),
                             )
@@ -193,10 +193,9 @@ class IndexState extends State<IndexPage> {
                                   borderRadius: BorderRadius.circular(10),
                                   boxShadow: [
                                     BoxShadow(
-                                      color:
-                                      Color.fromRGBO(225, 95, 27, .3),
-                                      blurRadius: 20,
-                                      offset: Offset(0, 10),
+                                      color: Color(0xff99D5D5),
+                                      blurRadius: 10,
+                                      offset: Offset(0, 5),
                                     ),
                                   ],
                                 ),

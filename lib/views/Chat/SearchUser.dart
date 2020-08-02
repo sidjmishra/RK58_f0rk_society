@@ -77,10 +77,10 @@ class _SearchScreenState extends State<SearchScreen> {
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 15.0),
               decoration: BoxDecoration(
-                color: Colors.orangeAccent,
+                color: Colors.tealAccent,
                 borderRadius: BorderRadius.circular(20.0),
               ),
-              child: Center(child: Text('Message', style: TextStyle(color: Colors.white),)),
+              child: Center(child: Text('Message', style: TextStyle(color: Colors.grey),)),
             ),
           ),
         ],
@@ -141,9 +141,9 @@ class _SearchScreenState extends State<SearchScreen> {
                         borderRadius: BorderRadius.circular(40.0) ,
                         gradient: LinearGradient(
                           colors: [
-                            Colors.orange[500],
-                            Colors.orange[300],
-                            Colors.orange[100],
+                            Colors.teal[500],
+                            Colors.teal[300],
+                            Colors.teal[100],
                           ]
                         )
                       ),
@@ -166,9 +166,9 @@ class _SearchScreenState extends State<SearchScreen> {
 
 getChatRoomId(String a, String b) {
   if(a.substring(0, 1).codeUnitAt(0) > b.substring(0, 1).codeUnitAt(0)) {
-    return "$b\_$a";
+    return '$b\_$a';
   } else {
-    return "$a\_$b";
+    return '$a\_$b';
   }
 }
 

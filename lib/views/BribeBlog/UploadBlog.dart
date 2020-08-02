@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:block/services/auth.dart';
-import 'package:block/views/Bribe/bribeReport.dart';
+import 'package:block/views/home.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -20,11 +20,12 @@ class _UploadBlogState extends State<UploadBlog> {
 
   File dataImage;
   final _formKey = GlobalKey<FormState>();
-  TextEditingController blogItem = new TextEditingController();
+  TextEditingController blogItem = TextEditingController();
 
-  AuthMethods authMethods = new AuthMethods();
+  AuthMethods authMethods = AuthMethods();
   final _auth = FirebaseAuth.instance;
 
+  @override
   void initState() {
     super.initState();
     getCurrentUser();
@@ -72,7 +73,7 @@ class _UploadBlogState extends State<UploadBlog> {
           context,
           MaterialPageRoute(
               builder: (context) {
-                return BribeReport();
+                return HomePage();
               }
           )
       );
@@ -195,7 +196,7 @@ class _UploadBlogState extends State<UploadBlog> {
                   decoration: BoxDecoration(
                     borderRadius:
                     BorderRadius.circular(50),
-                    color: Colors.orange[400],
+                    color: Colors.teal[800],
                   ),
                   child: Center(
                     child: FlatButton(

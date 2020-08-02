@@ -67,25 +67,7 @@ class _ProfileViewState extends State<ProfileView> {
           ),
         ),
       ),
-      body: HotConstants.myPhone == ''
-          ? Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-            Text('User Not verified'),
-            SizedBox(height: 20.0),
-            RaisedButton(
-              onPressed: () {
-                Navigator.pushReplacement(context, MaterialPageRoute(
-                    builder: (context) => Profile()
-                ));
-              },
-              color: Colors.orangeAccent,
-              child: Text('Add Information'),
-            ),
-        ],
-      ),
-          ) : SingleChildScrollView(
+      body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.all(20.0),
           child: Container(
@@ -93,7 +75,7 @@ class _ProfileViewState extends State<ProfileView> {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20.0),
               border: Border.all(
-                color: Colors.orange[200],
+                color: Colors.teal[200],
               ),
             ),
             child: Padding(
@@ -170,7 +152,7 @@ class _ProfileViewState extends State<ProfileView> {
                         margin: EdgeInsets.symmetric(horizontal: 5),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(50),
-                          color: Colors.orange[400],
+                          color: Colors.teal,
                         ),
                         child: Center(
                           child: Text(

@@ -9,7 +9,7 @@ Widget buildDropdownItem(Country country) => Container(
           SizedBox(
             width: 8.0,
           ),
-          Text("+${country.phoneCode}(${country.isoCode})"),
+          Text('+${country.phoneCode}(${country.isoCode})'),
         ],
       ),
     );

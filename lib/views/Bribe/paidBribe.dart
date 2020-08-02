@@ -286,7 +286,8 @@ class _PaidBribeState extends State<PaidBribe> {
               dateCtl.text,
               pickedCountry.toString(),
               pickedCountryName.toString(),
-              urls)
+//              urls
+      )
           .then((value) {
         Alert(
             context: context,
@@ -422,8 +423,8 @@ class _PaidBribeState extends State<PaidBribe> {
                                 boxShadow: [
                                   BoxShadow(
                                     color: Color(0xff99D5D5),
-                                    blurRadius: 20,
-                                    offset: Offset(0, 10),
+                                    blurRadius: 10,
+                                    offset: Offset(0, 5),
                                   ),
                                 ],
                               ),
@@ -493,8 +494,8 @@ class _PaidBribeState extends State<PaidBribe> {
                                 boxShadow: [
                                   BoxShadow(
                                     color: Color(0xff99D5D5),
-                                    blurRadius: 20,
-                                    offset: Offset(0, 10),
+                                    blurRadius: 10,
+                                    offset: Offset(0, 5),
                                   ),
                                 ],
                               ),
@@ -543,8 +544,8 @@ class _PaidBribeState extends State<PaidBribe> {
                                 boxShadow: [
                                   BoxShadow(
                                     color: Color(0xff99D5D5),
-                                    blurRadius: 20,
-                                    offset: Offset(0, 10),
+                                    blurRadius: 10,
+                                    offset: Offset(0, 5),
                                   ),
                                 ],
                               ),
@@ -599,8 +600,8 @@ class _PaidBribeState extends State<PaidBribe> {
                                 boxShadow: [
                                   BoxShadow(
                                     color: Color(0xff99D5D5),
-                                    blurRadius: 20,
-                                    offset: Offset(0, 10),
+                                    blurRadius: 10,
+                                    offset: Offset(0, 5),
                                   ),
                                 ],
                               ),
@@ -660,8 +661,8 @@ class _PaidBribeState extends State<PaidBribe> {
                                       boxShadow: [
                                         BoxShadow(
                                           color: Color(0xff99D5D5),
-                                          blurRadius: 20,
-                                          offset: Offset(0, 10),
+                                          blurRadius: 10,
+                                          offset: Offset(0, 5),
                                         ),
                                       ],
                                     ),
@@ -728,8 +729,8 @@ class _PaidBribeState extends State<PaidBribe> {
                                       boxShadow: [
                                         BoxShadow(
                                           color: Color(0xff99D5D5),
-                                          blurRadius: 20,
-                                          offset: Offset(0, 10),
+                                          blurRadius: 10,
+                                          offset: Offset(0, 5),
                                         ),
                                       ],
                                     ),
@@ -799,8 +800,8 @@ class _PaidBribeState extends State<PaidBribe> {
                                 boxShadow: [
                                   BoxShadow(
                                     color: Color(0xff99D5D5),
-                                    blurRadius: 20,
-                                    offset: Offset(0, 10),
+                                    blurRadius: 10,
+                                    offset: Offset(0, 5),
                                   ),
                                 ],
                               ),
@@ -866,8 +867,8 @@ class _PaidBribeState extends State<PaidBribe> {
                                 boxShadow: [
                                   BoxShadow(
                                     color: Color(0xff99D5D5),
-                                    blurRadius: 20,
-                                    offset: Offset(0, 10),
+                                    blurRadius: 10,
+                                    offset: Offset(0, 5),
                                   ),
                                 ],
                               ),
@@ -932,8 +933,8 @@ class _PaidBribeState extends State<PaidBribe> {
                                 boxShadow: [
                                   BoxShadow(
                                     color: Color(0xff99D5D5),
-                                    blurRadius: 20,
-                                    offset: Offset(0, 10),
+                                    blurRadius: 10,
+                                    offset: Offset(0, 5),
                                   ),
                                 ],
                               ),
@@ -1009,8 +1010,8 @@ class _PaidBribeState extends State<PaidBribe> {
                                 boxShadow: [
                                   BoxShadow(
                                     color: Color(0xff99D5D5),
-                                    blurRadius: 20,
-                                    offset: Offset(0, 10),
+                                    blurRadius: 10,
+                                    offset: Offset(0, 5),
                                   ),
                                 ],
                               ),

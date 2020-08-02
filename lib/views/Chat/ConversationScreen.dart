@@ -96,9 +96,9 @@ class _ConversationScreenState extends State<ConversationScreen> {
                         decoration: BoxDecoration(
                           gradient: LinearGradient(
                               colors: [
-                                Colors.orange[500],
-                                Colors.orange[300],
-                                Colors.orange[100],
+                                Colors.teal[100],
+                                Colors.teal[300],
+                                Colors.teal[100],
                               ]
                           ),
                           borderRadius: BorderRadius.circular(40.0),
@@ -135,11 +135,11 @@ class MessageTile extends StatelessWidget {
         decoration: BoxDecoration(
             gradient: LinearGradient(
                 colors: isSendBy ? [
-                  Colors.yellow[800],
-                  Colors.yellow[800],
+                  Colors.teal[800],
+                  Colors.teal[800],
                 ] : [
-                  Colors.orange[200],
-                  Colors.orange[200]
+                  Colors.teal[200],
+                  Colors.teal[200]
                 ]
             ),
           borderRadius: isSendBy ?

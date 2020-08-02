@@ -176,7 +176,7 @@ class _ProfileState extends State<Profile> {
   }
 
   Future setData() async {
-    if (_formKey.currentState.validate() && urls.length == 2) {
+    if (_formKey.currentState.validate()) {
       setState(() {
         isLoading = true;
       });
@@ -266,9 +266,9 @@ class _ProfileState extends State<Profile> {
                       borderRadius: BorderRadius.circular(10),
                       boxShadow: [
                         BoxShadow(
-                          color: Color.fromRGBO(225, 95, 27, .3),
-                          blurRadius: 20,
-                          offset: Offset(0, 10),
+                          color: Color(0xff99D5D5),
+                          blurRadius: 10,
+                          offset: Offset(0, 5),
                         ),
                       ],
                     ),
@@ -304,9 +304,9 @@ class _ProfileState extends State<Profile> {
                       borderRadius: BorderRadius.circular(10),
                       boxShadow: [
                         BoxShadow(
-                          color: Color.fromRGBO(225, 95, 27, .3),
-                          blurRadius: 20,
-                          offset: Offset(0, 10),
+                          color: Color(0xff99D5D5),
+                          blurRadius: 10,
+                          offset: Offset(0, 5),
                         ),
                       ],
                     ),
@@ -495,9 +495,9 @@ class _ProfileState extends State<Profile> {
                       borderRadius: BorderRadius.circular(10),
                       boxShadow: [
                         BoxShadow(
-                          color: Color.fromRGBO(225, 95, 27, .3),
-                          blurRadius: 20,
-                          offset: Offset(0, 10),
+                          color: Color(0xff99D5D5),
+                          blurRadius: 10,
+                          offset: Offset(0, 5),
                         ),
                       ],
                     ),
@@ -532,9 +532,9 @@ class _ProfileState extends State<Profile> {
                       borderRadius: BorderRadius.circular(10),
                       boxShadow: [
                         BoxShadow(
-                          color: Color.fromRGBO(225, 95, 27, .3),
-                          blurRadius: 20,
-                          offset: Offset(0, 10),
+                          color: Color(0xff99D5D5),
+                          blurRadius: 10,
+                          offset: Offset(0, 5),
                         ),
                       ],
                     ),
@@ -568,9 +568,9 @@ class _ProfileState extends State<Profile> {
                       borderRadius: BorderRadius.circular(10),
                       boxShadow: [
                         BoxShadow(
-                          color: Color.fromRGBO(225, 95, 27, .3),
-                          blurRadius: 20,
-                          offset: Offset(0, 10),
+                          color: Color(0xff99D5D5),
+                          blurRadius: 10,
+                          offset: Offset(0, 5),
                         ),
                       ],
                     ),
@@ -641,7 +641,7 @@ class _ProfileState extends State<Profile> {
                       margin: EdgeInsets.symmetric(horizontal: 5),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(50),
-                        color: Colors.orange[400],
+                        color: Color(0xff99D5D5),
                       ),
                       child: Center(
                         child: Text(
@@ -681,9 +681,9 @@ class ProfileArea extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
           boxShadow: [
             BoxShadow(
-              color: Color.fromRGBO(225, 95, 27, .3),
-              blurRadius: 20,
-              offset: Offset(0, 10),
+              color: Color(0xff99D5D5),
+              blurRadius: 10,
+              offset: Offset(0, 5),
             ),
           ],
         ),

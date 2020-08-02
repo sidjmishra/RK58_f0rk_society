@@ -78,9 +78,9 @@ class _FeedbackPageState extends State<FeedbackPage> {
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             colors: [
-              Colors.orange[900],
-              Colors.orange[800],
-              Colors.orange[400],
+              Colors.teal[900],
+              Colors.teal[800],
+              Colors.teal[400],
             ],
           ),
         ),
@@ -256,7 +256,7 @@ class _FeedbackPageState extends State<FeedbackPage> {
                                           });
                                         },
                                         hint: Text(
-                                          "Please Rate Our Service",
+                                          'Please Rate Our Service',
                                           style: TextStyle(
                                               color: Colors.grey[300]),
                                         ),
@@ -280,7 +280,7 @@ class _FeedbackPageState extends State<FeedbackPage> {
                                 margin: EdgeInsets.symmetric(horizontal: 5),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(50),
-                                  color: Colors.orange[400],
+                                  color: Colors.teal[400],
                                 ),
                                 child: Center(
                                   child: FlatButton(

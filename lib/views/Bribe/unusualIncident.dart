@@ -236,14 +236,15 @@ class _HonestOfficialState extends State<HonestOfficial> {
       body: Container(
         width: double.infinity,
         decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            colors: [
-              Colors.orange[900],
-              Colors.orange[800],
-              Colors.orange[400],
-            ],
-          ),
+//          gradient: LinearGradient(
+//            begin: Alignment.topCenter,
+//            colors: [
+//              Colors.orange[900],
+//              Colors.orange[800],
+//              Colors.orange[400],
+//            ],
+//          ),
+        color: Color(0xff212832),
         ),
         child: Column(
           children: <Widget>[
@@ -317,9 +318,9 @@ class _HonestOfficialState extends State<HonestOfficial> {
                                 boxShadow: [
                                   BoxShadow(
                                     color:
-                                    Color.fromRGBO(225, 95, 27, .3),
-                                    blurRadius: 20,
-                                    offset: Offset(0, 10),
+                                    Color(0xff99D5D5),
+                                    blurRadius: 10,
+                                    offset: Offset(0, 5),
                                   ),
                                 ],
                               ),
@@ -390,9 +391,9 @@ class _HonestOfficialState extends State<HonestOfficial> {
                                 boxShadow: [
                                   BoxShadow(
                                     color:
-                                    Color.fromRGBO(225, 95, 27, .3),
-                                    blurRadius: 20,
-                                    offset: Offset(0, 10),
+                                    Color(0xff99D5D5),
+                                    blurRadius: 10,
+                                    offset: Offset(0, 5),
                                   ),
                                 ],
                               ),
@@ -445,9 +446,9 @@ class _HonestOfficialState extends State<HonestOfficial> {
                                 boxShadow: [
                                   BoxShadow(
                                     color:
-                                    Color.fromRGBO(225, 95, 27, .3),
-                                    blurRadius: 20,
-                                    offset: Offset(0, 10),
+                                    Color(0xff99D5D5),
+                                    blurRadius: 10,
+                                    offset: Offset(0, 5),
                                   ),
                                 ],
                               ),
@@ -502,9 +503,9 @@ class _HonestOfficialState extends State<HonestOfficial> {
                                 boxShadow: [
                                   BoxShadow(
                                     color:
-                                    Color.fromRGBO(225, 95, 27, .3),
-                                    blurRadius: 20,
-                                    offset: Offset(0, 10),
+                                    Color(0xff99D5D5),
+                                    blurRadius: 10,
+                                    offset: Offset(0, 5),
                                   ),
                                 ],
                               ),
@@ -564,10 +565,9 @@ class _HonestOfficialState extends State<HonestOfficial> {
                                       BorderRadius.circular(10),
                                       boxShadow: [
                                         BoxShadow(
-                                          color: Color.fromRGBO(
-                                              225, 95, 27, .3),
-                                          blurRadius: 20,
-                                          offset: Offset(0, 10),
+                                          color: Color(0xff99D5D5),
+                                          blurRadius: 10,
+                                          offset: Offset(0, 5),
                                         ),
                                       ],
                                     ),
@@ -631,10 +631,9 @@ class _HonestOfficialState extends State<HonestOfficial> {
                                       BorderRadius.circular(10),
                                       boxShadow: [
                                         BoxShadow(
-                                          color: Color.fromRGBO(
-                                              225, 95, 27, .3),
-                                          blurRadius: 20,
-                                          offset: Offset(0, 10),
+                                          color: Color(0xff99D5D5),
+                                          blurRadius: 10,
+                                          offset: Offset(0, 5),
                                         ),
                                       ],
                                     ),
@@ -705,9 +704,9 @@ class _HonestOfficialState extends State<HonestOfficial> {
                                 boxShadow: [
                                   BoxShadow(
                                     color:
-                                    Color.fromRGBO(225, 95, 27, .3),
-                                    blurRadius: 20,
-                                    offset: Offset(0, 10),
+                                    Color(0xff99D5D5),
+                                    blurRadius: 10,
+                                    offset: Offset(0, 5),
                                   ),
                                 ],
                               ),
@@ -798,9 +797,9 @@ class _HonestOfficialState extends State<HonestOfficial> {
                                 boxShadow: [
                                   BoxShadow(
                                     color:
-                                    Color.fromRGBO(225, 95, 27, .3),
-                                    blurRadius: 20,
-                                    offset: Offset(0, 10),
+                                    Color(0xff99D5D5),
+                                    blurRadius: 10,
+                                    offset: Offset(0, 5),
                                   ),
                                 ],
                               ),
@@ -870,9 +869,9 @@ class _HonestOfficialState extends State<HonestOfficial> {
                                 boxShadow: [
                                   BoxShadow(
                                     color:
-                                    Color.fromRGBO(225, 95, 27, .3),
-                                    blurRadius: 20,
-                                    offset: Offset(0, 10),
+                                    Color(0xff99D5D5),
+                                    blurRadius: 10,
+                                    offset: Offset(0, 5),
                                   ),
                                 ],
                               ),
@@ -956,9 +955,9 @@ class _HonestOfficialState extends State<HonestOfficial> {
                                 boxShadow: [
                                   BoxShadow(
                                     color:
-                                    Color.fromRGBO(225, 95, 27, .3),
-                                    blurRadius: 20,
-                                    offset: Offset(0, 10),
+                                    Color(0xff99D5D5),
+                                    blurRadius: 10,
+                                    offset: Offset(0, 5),
                                   ),
                                 ],
                               ),
@@ -1054,7 +1053,7 @@ class _HonestOfficialState extends State<HonestOfficial> {
                                 EdgeInsets.symmetric(horizontal: 5),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(50),
-                                  color: Colors.orange[400],
+                                  color: Color(0xff32E0C3),
                                 ),
                                 child: Center(
                                   child: FlatButton(
@@ -1079,7 +1078,7 @@ class _HonestOfficialState extends State<HonestOfficial> {
                                 EdgeInsets.symmetric(horizontal: 5),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(50),
-                                  color: Colors.red[400],
+                                  color: Color(0xff212832),
                                 ),
                                 child: Center(
                                   child: FlatButton(

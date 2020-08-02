@@ -114,6 +114,7 @@ class Options extends StatelessWidget {
                 }));
               },
               child: ButtonDesign(text: 'Prison Management')),
+          SizedBox(height: 50.0),
         ],
       ),
     );

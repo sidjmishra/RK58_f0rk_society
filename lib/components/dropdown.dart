@@ -84,7 +84,7 @@ class DropdownState extends State<Dropdown> {
                   value: _currentItemSelected,
                   onChanged: (String newValueSelected) {
                     setState(() {
-                      this._currentItemSelected = newValueSelected;
+                      _currentItemSelected = newValueSelected;
                     });
                   },
                   hint: Text(
