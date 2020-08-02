@@ -2,6 +2,9 @@
 ## RK58_sih2020
 Smart India Hackathon - 2020
 Name of Solution-Aharya
+Database - Firebase
+emailid(firebase)-sidjmishra007@student.sfit.ac.in
+password(firebase)-siddevy@2513
 Round 1-
 
 video presentation- https://drive.google.com/file/d/1bQBxwS037PqGdauF04nRaIc_dwtoIDI6/view?usp=sharing
