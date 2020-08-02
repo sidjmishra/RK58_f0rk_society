@@ -25,20 +25,12 @@ aside{
     
 }
 .card-header{
-    background-color: #ffaf01be;
+    background-color: #45a29e;
 }
 .chartcard{
     margin: 0.5em 0;
 }
-.mycontainer{
-    height: auto;
-    align-items: center;
-    justify-content: center;
-    text-align: center; 
-    margin-right: 30px;
-    padding-top: 30px;
 
-}
 .card a{
     color: #212529;
 }

@@ -3,7 +3,11 @@
 <html lang="en">
 {% include "header.html" %}
 <link rel="stylesheet" href="{% static "styles/card.css" %}" >
-
+<style>
+    .nav-link{
+        color: black;
+    }
+</style>
     <script>
         window.onload = function() {
 
@@ -34,14 +38,15 @@
     {% include "card1.html" %}
 
 
-        <div class="mycontainer">
-            <div class="row justify-content-around">
-                <div class="col-lg-4">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-4">
                     <div class="card chartcard">
                         <div id="chartContainer" style="height: 370px; width: 100%;"></div>
                     </div>
                 </div>
             </div>
+        </div>
             <div class="container">
                 <ul class="nav nav-tabs">
                   <li class="nav-item">
@@ -54,15 +59,10 @@
                     <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#menu2" role="tab" aria-controls="pills-contact" aria-selected="false">New/Pending Cases</a>
                   </li>
                 </ul>
-              <!--   <div class="tab-content" id="pills-tabContent">
-                    <div class="tab-pane fade" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">...</div>
-                    <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">...</div>
-                    <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">...</div>
-                  </div> -->
-              
+                
                 <div class="tab-content">
                   <div id="home" class="tab-pane fade">
-                    <div class="col-lg-9">
+                    <div class="col-lg-12">
                         <div class="card mycard">
                             <div class="card-header">
                                 <b>Cases Accepted</b>
@@ -77,7 +77,7 @@
                     </div>
                   </div>
                   <div id="menu1" class="tab-pane fade">
-                    <div class="col-lg-9">
+                    <div class="col-lg-12">
                         <div class="card mycard">
                             <div class="card-header">
                                 <b>Cases In Process</b>
@@ -92,7 +92,7 @@
                     </div>
                   </div>
                   <div id="menu2" class="tab-pane fade">
-                    <div class="col-lg-9">
+                    <div class="col-lg-12">
                         <div class="card mycard">
                             <div class="card-header">
                                 <b>New/Pending Cases</b>

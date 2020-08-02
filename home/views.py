@@ -193,7 +193,7 @@ def details(request, category, user, uid, case_id):
             return redirect(paidBribe, user=user)
         if request.GET.get('accept')=='accpt':
             db.collection(category).document(uid).collection(u'all_data').document(case_id).set({
-                u'Status': u'Accepted'
+                u'Status': u'Assessed'
             }, merge=True)
             # Sent Email
             print("Sending Email")
@@ -299,7 +299,7 @@ def details(request, category, user, uid, case_id):
             return redirect(noc, user=user)
         if request.GET.get('accept')=='accpt':
             db.collection(category).document(uid).collection(u'all_data').document(case_id).set({
-                u'Status': u'Accepted'
+                u'Status': u'Assessed'
             }, merge=True)
             return redirect(noc, user=user)
         print("***************",category,"**************")
@@ -324,7 +324,7 @@ def details(request, category, user, uid, case_id):
             return redirect(unusualBehaviour, user=user)
         if request.GET.get('accept')=='accpt':
             db.collection(category).document(uid).collection(u'all_data').document(case_id).set({
-                u'Status': u'Accepted'
+                u'Status': u'Assessed'
             }, merge=True)
             return redirect(unusualBehaviour, user=user)
 
@@ -382,7 +382,7 @@ def paidBribe(request, user):
             date = db.collection(u'PaidBribe').document(u'{}'.format(doc.id)).collection(u'all_data').document(subdoc.id).get().to_dict()['date']
             dates.append(date)
 
-        acceptedDocs = db.collection(u'PaidBribe').document(u'{}'.format(doc.id)).collection(u'all_data').where(u'Status',u'==',u'Accepted').get()
+        acceptedDocs = db.collection(u'PaidBribe').document(u'{}'.format(doc.id)).collection(u'all_data').where(u'Status',u'==',u'Assessed').get()
         for subdoc in acceptedDocs:
             list3.append((subdoc.id,doc.id, email))
             states.append(db.collection(u'PaidBribe').document(u'{}'.format(doc.id)).collection(u'all_data').document(subdoc.id).get().to_dict()['state'])
@@ -423,7 +423,7 @@ def hotReport(request, user):
         uid = request.GET.get('uid')
         case_id = request.GET.get('subid')
         db.collection(u'Hot Report').document(uid).collection(u'all_data').document(case_id).set({
-            u'Status': u'Accepted'
+            u'Status': u'Assessed'
         }, merge=True)
         return redirect(hotReport, user=user)
 
@@ -506,7 +506,7 @@ def unusualBehaviour(request, user):
         for subdoc in inProcessDocs:
             list2.append((subdoc.id,doc.id, email))
 
-        acceptedDocs = db.collection(u'UnusualBehaviour').document(u'{}'.format(doc.id)).collection(u'all_data').where(u'Status',u'==',u'Accepted').get()
+        acceptedDocs = db.collection(u'UnusualBehaviour').document(u'{}'.format(doc.id)).collection(u'all_data').where(u'Status',u'==',u'Assessed').get()
         for subdoc in acceptedDocs:
             list3.append((subdoc.id,doc.id, email))
 
@@ -547,7 +547,7 @@ def noc(request, user):
             # date = db.collection(u'PaidBribe').document(u'{}'.format(doc.id)).collection(u'all_data').document(subdoc.id).get().to_dict()['date']
             # dates.append(date)
 
-        acceptedDocs = db.collection(u'NOC').document(u'{}'.format(doc.id)).collection(u'all_data').where(u'Status',u'==',u'Accepted').get()
+        acceptedDocs = db.collection(u'NOC').document(u'{}'.format(doc.id)).collection(u'all_data').where(u'Status',u'==',u'Assessed').get()
         for subdoc in acceptedDocs:
             list3.append((subdoc.id,doc.id, email))
             # states.append(db.collection(u'PaidBribe').document(u'{}'.format(doc.id)).collection(u'all_data').document(subdoc.id).get().to_dict()['state'])

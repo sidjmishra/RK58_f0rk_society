@@ -8,6 +8,12 @@
             padding-top: 25px;
             background-color: rgba(253, 219, 27, 0.288);
         }
+        .transbox{
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(92, 82, 100, 0.192);
+  padding: 5px;
+}
+
 
   
     </style>
@@ -17,28 +23,28 @@
     {% include "navbar.html" %}
     {% include "card1.html" %}
        
-          <div class="card">
+        <div class="card">
             <div class="container">
-            <div class="row justify-content-around">
-                <div class="col-lg-4">
-                    <div class="card chartcard">
-                        <div id="chartContainer" style="height: 300px; width: 100%;"></div>
-                        {% comment %} <div id="chartContainer" style="height: auto; width: auto;"></div> {% endcomment %}
+                <div class="row justify-content-around">
+                    <div class="col-lg-4">
+                        <div class="card chartcard">
+                            <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+                            {% comment %} <div id="chartContainer" style="height: auto; width: auto;"></div> {% endcomment %}
+                        </div>
                     </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="card chartcard">
-                        <div id="chartContainerState" style="height: 300px; width: 100%;"></div>
+                    <div class="col-lg-4">
+                        <div class="card chartcard">
+                            <div id="chartContainerState" style="height: 300px; width: 100%;"></div>
+                        </div>
                     </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="card chartcard">
-                        <div id="chartContainerTime" style="height: 300px; width: 100%;"></div>        
+                    <div class="col-lg-4">
+                        <div class="card chartcard">
+                            <div id="chartContainerTime" style="height: 300px; width: 100%;"></div>        
+                        </div>
                     </div>
                 </div>
             </div>
-            </div>
-              <div class="container">
+            <div class="container">
                 <ul class="nav nav-tabs">
                   <li class="nav-item">
                     <a class="nav-link" id="pills-home-tab" data-toggle="pill" href="#home" role="tab" aria-controls="pills-home" aria-selected="true">Cases Accepted</a>
@@ -56,7 +62,67 @@
                     <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">...</div>
                   </div> -->
               
-                <div class="tab-content">
+                
+
+
+<!-- Button trigger modal -->
+<!-- <button type="button" class="btn btn-primary" data-toggle="modal" style="background-color: #45a29e;" data-target="#exampleModal">
+    FILTER
+  </button> -->
+  
+  <!-- Modal -->
+ <!--  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">FILTER</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <div class="transbox">
+                <form id="f1">
+                    <div class="container modal-form">
+    
+                        <div class="row">
+                            <label>CATEGORY: </label>
+                            <div class="col-12 ">
+                                <input type="text" class="input inputExpand" placeholder="   Category">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label >CITY: </label>
+                            <div class="col-12 ">
+                                <input class="input" placeholder="   CITY">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label >SORT BY: </label>
+                            <div class="col-12 ">
+                                <input class="input" placeholder="   LATEST/OLDEST">
+                            </div>
+                        </div>
+                        <br>
+                    </div>
+                </form> 
+            </div>
+            
+          
+
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary pull-left" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">APPLY FILTERS</button>
+        </div>
+      </div>
+    </div>
+  </div> -->
+
+
+
+  <div class="tab-content">
                   <div id="home" class="tab-pane fade">
                     <div class="col-lg-12">
                         <div class="card mycard">

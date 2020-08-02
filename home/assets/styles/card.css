@@ -19,16 +19,9 @@ padding-top: 25px;
 background-color: rgba(253, 219, 27, 0.288);
 }
 .card-header{
-background-color: #ffaf01be;
+background-color: #45a29e;
 }
-.mycontainer{
-    height: auto;
-align-items: center;
-justify-content: center;
-text-align: center;
-margin-right: 40px;
-padding-top: 35px;
-}
+
 .card a{
     color: #212529;
 }

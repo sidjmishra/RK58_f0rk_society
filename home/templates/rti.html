@@ -2,7 +2,7 @@
 {% load getkey %}
 <html lang="en">
 {% include "header.html" %}
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css">
+{% comment %} <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css"> {% endcomment %}
 
     <style>
         body{
@@ -48,7 +48,7 @@
                 <strong>User:</strong> {{user}}
             </div>
         </aside> {% endcomment %}
-        <div class="container">
+        <div class="container" style="margin-top: 80px">
             <div class="row justify-content-start">
                 <div class="col-lg">
                     <div class="card mycard">
@@ -76,14 +76,19 @@
                                     </div>
                                     <form action="{% url 'rti' user=user %}" method="POST" style="display: inline;">
                                         {% csrf_token %}
-                                        <input name="message" class="form-control" type="text" style="margin-bottom: 5px;">
+                                        <input name="message" class="form-control" type="text" style="margin-bottom: 5px;" required>
                                         <input name="id" type="hidden" value="{{d|getkey:'id'}}">
                                         <input name="email" type="hidden" value="{{d|getkey:'User Email'}}">
                                         <input name="rdocid" type="hidden" value="{{i}}">
                                         <input name="udocid" type="hidden" value="{{j}}">
                                         <button type="submit" name="evid" class="btn btn-info btn-sm" value="evidence">Send Response</button>
                                     </form>
-                                    <a href="{% url "details" category=c user=user uid=j case_id=d|getkey:"Requested Complain ID" %}" style="text-decoration:none; color: white;" class="btn btn-primary btn-sm">View Case Details</a>
+                                    {% if c == 'PaidBribe' %}
+                                        <a href="{% url "details" category=c user=user uid=j case_id=i %}" style="text-decoration:none; color: white;" class="btn btn-primary btn-sm">View Case Details</a>
+                                    {% endif %}
+                                    {% if c == 'FIR' or c == 'NOC' or c == 'Hot Report' %}
+                                        <a href="{% url "details" category=c user=user uid=j case_id=d|getkey:"Requested Complain ID" %}" style="text-decoration:none; color: white;" class="btn btn-primary btn-sm">View Case Details</a>
+                                    {% endif %}
                                 </li>
                             {% endfor %}
                         </ul>
