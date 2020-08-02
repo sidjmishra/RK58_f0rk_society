@@ -7,7 +7,10 @@ class Dropdown extends StatefulWidget {
 }
 
 class DropdownState extends State<Dropdown> {
-  var _states = ['Maharashtra', 'Karnataka', 'Tamil Nadu'];
+  final _states = ['Andhra Pradesh', 'Andaman and Nicobar', 'Arunachal Pradesh', 'Assam',	'Bihar', 'Chandigarh', 'Chhattisgarh',
+    'Dadra and Nagar Haveli', 'Daman and Diu', 'Delhi', 'Goa', 'Gujarat', 'Haryana', 'Himachal Pradesh',	'Jammu and kashmir',	'Ladakh',
+    'Lakshadweep', 'Jharkhand',	'Karnataka', 'Kerala',	'Madhya Pradesh',	'Maharashtra', 'Manipur',	'Meghalaya', 'Mizoram',	'Nagaland',
+    'Odisha',	'Punjab', 'Rajasthan', 'Sikkim',	'Tamil Nadu',	'Telangana', 'Tripura',	'Uttarakhand', 'Uttar Pradesh', 'West Bengal'];
   var _currentItemSelected;
   TextEditingController state = TextEditingController();
   var category;

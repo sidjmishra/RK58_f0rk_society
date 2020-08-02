@@ -1,6 +1,8 @@
+import 'dart:convert';
 import 'dart:math';
 
 import 'package:block/modal/constants.dart';
+import 'package:block/views/Bribe/webPage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -14,6 +16,7 @@ import 'package:country_pickers/country_pickers.dart';
 import 'package:country_pickers/country.dart';
 import 'package:flutter/cupertino.dart';
 import 'PaidBribeData.dart';
+import 'package:http/http.dart' as http;
 
 class PaidBribe extends StatefulWidget {
   @override
@@ -41,7 +44,8 @@ class _PaidBribeState extends State<PaidBribe> {
     'Dadra and Nagar Haveli', 'Daman and Diu', 'Delhi', 'Goa', 'Gujarat', 'Haryana', 'Himachal Pradesh',	'Jammu and kashmir',	'Ladakh',
     'Lakshadweep', 'Jharkhand',	'Karnataka', 'Kerala',	'Madhya Pradesh',	'Maharashtra', 'Manipur',	'Meghalaya', 'Mizoram',	'Nagaland',
     'Odisha',	'Punjab', 'Rajasthan', 'Sikkim',	'Tamil Nadu',	'Telangana', 'Tripura',	'Uttarakhand', 'Uttar Pradesh', 'West Bengal'];
-  final _category = ['Police', 'Traffic', 'Prison Management', 'Driver licensing', 'Document Verification'];
+  final _category = ['Police', 'Traffic', 'Prison Management', 'Driver licensing', 'Document Verification', 'Property Registration',
+    'Municipal Corporation', 'Electricity Board', 'Transport Office', 'Tax office', 'Water Department', 'Others'];
   String hintCategory = 'Select Category';
   String hintState = 'Select State';
   var _currentSelectedCategory;
@@ -60,39 +64,64 @@ class _PaidBribeState extends State<PaidBribe> {
   List _paths;
   String _extension;
   DateTime date = DateTime.now();
+//
+//  Future openFileExplorer() async {
+//    try {
+//      StorageReference storageReference;
+//      StorageUploadTask storageUploadTask;
+//      var _path;
 
-  Future openFileExplorer() async {
-    try {
-      StorageReference storageReference;
-      StorageUploadTask storageUploadTask;
+//      _paths = await FilePicker.getMultiFile(
+//        type: FileType.custom,
+//        allowedExtensions: ['jpg', 'jpeg', 'png', 'svg', 'mp4'],
+//      );
 
-      _paths = await FilePicker.getMultiFile(
-        type: FileType.custom,
-        allowedExtensions: ['jpg', 'jpeg', 'png', 'svg', 'mp4'],
-      );
-      _paths.forEach((filePath) async {
-        _extension = filePath.toString().split('.').last.toLowerCase();
-        print(_extension);
-        storageReference =
-            FirebaseStorage.instance.ref().child('PaidBribe');
-        storageUploadTask = storageReference
-            .child(date.toString() + '.$_extension')
-            .putFile(filePath);
-        String url =
-            await (await storageUploadTask.onComplete).ref.getDownloadURL();
-        if(url != null) {
-          setState(() {
-            urls.add(url);
-          });
-        }
-      });
-    } on PlatformException catch (e) {
-      print(e.toString());
-    }
-    if (!mounted) {
-      return;
-    }
-  }
+//      storageReference = FirebaseStorage.instance.ref().child('PaidBribe');
+//      storageUploadTask = storageReference.child(date.toString() + '.$_extension').putFile(_path);
+//      String url = await (await storageUploadTask.onComplete).ref.getDownloadURL();
+//      if(_path != null) {
+//        await uploadData(_path.toString());
+//      }
+
+
+//      _paths.forEach((filePath) async {
+//        _extension = filePath.toString().split('.').last.toLowerCase();
+//        print(_extension);
+//        storageReference =
+//            FirebaseStorage.instance.ref().child('PaidBribe');
+//        storageUploadTask = storageReference
+//            .child(date.toString() + '.$_extension')
+//            .putFile(filePath);
+//        String url =
+//            await (await storageUploadTask.onComplete).ref.getDownloadURL();
+//        if(url != null) {
+//          setState(() {
+//            urls.add(url);
+//          });
+//        }
+//      });
+//
+//    } on PlatformException catch (e) {
+//      print(e.toString());
+//    }
+//    if (!mounted) {
+//      return;
+//    }
+//  }
+
+//  Future uploadData(var path) async {
+//    Map data;
+//    String body;
+////    http.Response response;
+//
+//    data = {
+//      'bufferfile': path
+//    };
+//    body = json.encode(data);
+//
+//    var response = await http.MultipartFile.fromPath();
+//    print(response);
+//  }
 
   void randomId() async {
     var number = Random.secure();
@@ -946,18 +975,18 @@ class _PaidBribeState extends State<PaidBribe> {
                           SizedBox(height: 20),
                           OutlineButton(
                             onPressed: () {
-                              openFileExplorer();
-//                              setState(() {
-//                                isLoading = true;
-//                              });
-//                              Clipboard.setData(ClipboardData(text: id));
-//                              Navigator.push(context, MaterialPageRoute(
-//                                  builder: (context) => DataModel()
-//                              ));
+                              setState(() {
+                                isLoading = true;
+                              });
+                              Clipboard.setData(ClipboardData(text: id));
+                              Navigator.push(context, MaterialPageRoute(
+                                  builder: (context) => DataModel()
+                              ));
+//                              openFileExplorer();
                             },
                             child: Text('Add files'),
                           ),
-                          urls.isNotEmpty
+                          isLoading
                               ? Text('Files uploaded')
                               : Text('No files submitted'),
                           SizedBox(height: 20),

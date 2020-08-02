@@ -6,12 +6,15 @@ import 'package:block/services/database.dart';
 import 'package:block/services/location.dart';
 import 'package:block/views/Appointment/appointment.dart';
 import 'package:block/views/Bribe/bribeReport.dart';
+import 'package:block/views/BribeBlog/HomeBlog.dart';
 import 'package:block/views/Chat/ChatRoom.dart';
 import 'package:block/views/DelayAction/delayAction.dart';
 import 'package:block/views/FirNcr/Reporting.dart';
+import 'package:block/views/HotReporting/hotReporting.dart';
 import 'package:block/views/JailManagement/jailManage.dart';
 import 'package:block/views/NOC/Noc.dart';
 import 'package:block/views/Profile/profile.dart';
+import 'package:block/views/Profile/profileView.dart';
 import 'package:block/views/helpline.dart';
 import 'package:block/views/Status/status.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -50,7 +53,7 @@ class _HomePageState extends State<HomePage> {
       for (var index = 0; index < snapshotUserName.documents.length; index++) {
         if (snapshotUserName.documents[index].data['email'] == email) {
           Constants.myName =
-          snapshotUserName.documents[index].data['displayName'];
+              snapshotUserName.documents[index].data['displayName'];
           Constants.myEmail = snapshotUserName.documents[index].data['email'];
           Constants.myUid = snapshotUserName.documents[index].data['uid'];
           print(Constants.myName);
@@ -60,6 +63,20 @@ class _HomePageState extends State<HomePage> {
       }
       getUserProfile();
     });
+  }
+
+  Future getPhone(String aadhar) async {
+    QuerySnapshot querySnapshot;
+    querySnapshot =
+        await Firestore.instance.collection('Aadhar Card').getDocuments();
+    for (var index = 0; index < querySnapshot.documents.length; index++) {
+      if (querySnapshot.documents[index].data['Aadhar'] == aadhar) {
+        setState(() {
+          HotConstants.myPhone = querySnapshot.documents[index].data['Phone'];
+        });
+      }
+    }
+    print(HotConstants.myPhone);
   }
 
   Future getUserProfile() async {
@@ -76,6 +93,7 @@ class _HomePageState extends State<HomePage> {
               snapshotUserName.documents[index].data['U.I.D type'] +
                   ': ' +
                   snapshotUserName.documents[index].data['U.I.D number'];
+          getPhone(snapshotUserName.documents[index].data['U.I.D number']);
           print(HotConstants.myFullName);
           print(HotConstants.myPhone);
           print(HotConstants.myUID);
@@ -131,15 +149,15 @@ class _HomePageState extends State<HomePage> {
         if (message['data']['Type'] == 'Background') {
           await Navigator.pushReplacement(context,
               MaterialPageRoute(builder: (context) {
-                return NotificationScreen(
-                  pincode: message['data']['pincode'],
-                  category: message['data']['category'],
-                  address1: message['data']['address1'],
-                  address2: message['data']['address2'],
-                  date: message['data']['date'],
-                  state: message['data']['state'],
-                );
-              }));
+            return NotificationScreen(
+              pincode: message['data']['pincode'],
+              category: message['data']['category'],
+              address1: message['data']['address1'],
+              address2: message['data']['address2'],
+              date: message['data']['date'],
+              state: message['data']['state'],
+            );
+          }));
         }
       },
       onResume: (Map<String, dynamic> message) async {
@@ -148,15 +166,15 @@ class _HomePageState extends State<HomePage> {
             location.pin == message['data']['pincode']) {
           await Navigator.pushReplacement(context,
               MaterialPageRoute(builder: (context) {
-                return NotificationScreen(
-                  pincode: message['data']['pincode'],
-                  category: message['data']['category'],
-                  address1: message['data']['address1'],
-                  address2: message['data']['address2'],
-                  date: message['data']['date'],
-                  state: message['data']['state'],
-                );
-              }));
+            return NotificationScreen(
+              pincode: message['data']['pincode'],
+              category: message['data']['category'],
+              address1: message['data']['address1'],
+              address2: message['data']['address2'],
+              date: message['data']['date'],
+              state: message['data']['state'],
+            );
+          }));
         }
         print('onResume: $message');
       },
@@ -247,25 +265,59 @@ class _HomePageState extends State<HomePage> {
                       SizedBox(height: 10.0),
                       email != null && sublocal != null
                           ? Text(
-                        'Applicant ID: ${Constants.myUid.substring(0, 4)} \nEmail ID: ${Constants.myEmail} \nLocality: ${location.local}, ${location.subLocal}. ${location.feature}',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w500,
-                          fontSize: 15,
-                        ),
-                      )
+                              'Applicant ID: ${Constants.myUid.substring(0, 4)} \nEmail ID: ${Constants.myEmail} \nLocality: ${location.local}, ${location.subLocal}. ${location.feature}',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w500,
+                                fontSize: 15,
+                              ),
+                            )
                           : Text(
-                        'Tap icon to get ID',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w500,
-                          fontSize: 18,
-                        ),
-                      ),
+                              'Tap icon to get ID',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w500,
+                                fontSize: 18,
+                              ),
+                            ),
                     ],
                   ),
                 ],
               ),
+            ),
+            ListTile(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) {
+                    return HotReport(
+                        uid: Constants.myUid,
+                        hotAddress: location.address,
+                        fullName: HotConstants.myFullName,
+                        phoneNumber: HotConstants.myPhone,
+                        UID: HotConstants.myUID,
+                        startStamp: DateTime.now().toString());
+                  }),
+                );
+              },
+              leading: Icon(AntDesign.antdesign),
+              title: Text('Hot Reporting',
+                  style:
+                      TextStyle(fontWeight: FontWeight.bold, fontSize: 15.0)),
+            ),
+            ListTile(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) {
+                    return ListPost();
+                  }),
+                );
+              },
+              leading: Icon(Icons.insert_chart),
+              title: Text('Aharya Blogs',
+                  style:
+                      TextStyle(fontWeight: FontWeight.bold, fontSize: 15.0)),
             ),
             ListTile(
               onTap: () {
@@ -279,7 +331,7 @@ class _HomePageState extends State<HomePage> {
               leading: Icon(Icons.attach_money),
               title: Text('Bribe Report',
                   style:
-                  TextStyle(fontWeight: FontWeight.bold, fontSize: 15.0)),
+                      TextStyle(fontWeight: FontWeight.bold, fontSize: 15.0)),
             ),
             ListTile(
               onTap: () {
@@ -293,7 +345,7 @@ class _HomePageState extends State<HomePage> {
               leading: Icon(Icons.report),
               title: Text('Reporting',
                   style:
-                  TextStyle(fontWeight: FontWeight.bold, fontSize: 15.0)),
+                      TextStyle(fontWeight: FontWeight.bold, fontSize: 15.0)),
               subtitle: Text('FIR or NCR Reporting'),
             ),
             ListTile(
@@ -308,7 +360,7 @@ class _HomePageState extends State<HomePage> {
               leading: Icon(Icons.business),
               title: Text('Prison Management',
                   style:
-                  TextStyle(fontWeight: FontWeight.bold, fontSize: 15.0)),
+                      TextStyle(fontWeight: FontWeight.bold, fontSize: 15.0)),
               subtitle: Text('Report regarding the prison management'),
             ),
             ListTile(
@@ -323,7 +375,7 @@ class _HomePageState extends State<HomePage> {
               leading: Icon(Icons.receipt),
               title: Text('No Objection Certificate',
                   style:
-                  TextStyle(fontWeight: FontWeight.bold, fontSize: 15.0)),
+                      TextStyle(fontWeight: FontWeight.bold, fontSize: 15.0)),
               subtitle: Text('NOC Request'),
             ),
             ListTile(
@@ -338,7 +390,7 @@ class _HomePageState extends State<HomePage> {
               leading: Icon(Icons.assignment_late),
               title: Text('Delay in actions',
                   style:
-                  TextStyle(fontWeight: FontWeight.bold, fontSize: 15.0)),
+                      TextStyle(fontWeight: FontWeight.bold, fontSize: 15.0)),
               subtitle: Text('Right To Information'),
             ),
             ListTile(
@@ -353,7 +405,7 @@ class _HomePageState extends State<HomePage> {
               leading: Icon(Icons.group_add),
               title: Text('Appointment Request',
                   style:
-                  TextStyle(fontWeight: FontWeight.bold, fontSize: 15.0)),
+                      TextStyle(fontWeight: FontWeight.bold, fontSize: 15.0)),
             ),
             ListTile(
               onTap: () {
@@ -368,7 +420,7 @@ class _HomePageState extends State<HomePage> {
               leading: Icon(Icons.show_chart),
               title: Text('Status',
                   style:
-                  TextStyle(fontWeight: FontWeight.bold, fontSize: 15.0)),
+                      TextStyle(fontWeight: FontWeight.bold, fontSize: 15.0)),
             ),
             ListTile(
               onTap: () {
@@ -382,21 +434,21 @@ class _HomePageState extends State<HomePage> {
               leading: Icon(Icons.info_outline),
               title: Text('Helpline Numbers',
                   style:
-                  TextStyle(fontWeight: FontWeight.bold, fontSize: 15.0)),
+                      TextStyle(fontWeight: FontWeight.bold, fontSize: 15.0)),
             ),
             ListTile(
               onTap: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) {
-                    return Profile();
+                    return ProfileView();
                   }),
                 );
               },
               leading: Icon(Icons.supervised_user_circle),
               title: Text('Profile',
                   style:
-                  TextStyle(fontWeight: FontWeight.bold, fontSize: 15.0)),
+                      TextStyle(fontWeight: FontWeight.bold, fontSize: 15.0)),
             ),
             ListTile(
               onTap: () {
@@ -407,7 +459,7 @@ class _HomePageState extends State<HomePage> {
               leading: Icon(Icons.exit_to_app),
               title: Text('Log Out',
                   style:
-                  TextStyle(fontWeight: FontWeight.bold, fontSize: 15.0)),
+                      TextStyle(fontWeight: FontWeight.bold, fontSize: 15.0)),
             ),
           ],
         ),
@@ -418,175 +470,321 @@ class _HomePageState extends State<HomePage> {
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             colors: [
-              Colors.orange[900],
-              Colors.orange[500],
+              Colors.orange[700],
+              Colors.orange[400],
               Colors.orange[600],
               Colors.orange[800],
               Colors.orange[400],
             ],
           ),
         ),
-        child: HotConstants.myPhone == null
-            ? Column(
-          children: <Widget>[
-            Text('User Not verified'),
-            SizedBox(height: 20.0),
-            RaisedButton(
-              onPressed: () {
-                Navigator.pushReplacement(context, MaterialPageRoute(
-                    builder: (context) => Profile()
-                ));
-              },
-              color: Colors.orangeAccent,
-              child: Text('Add Information'),
-            ),
-          ],
-        ) :  Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Padding(
-              padding: EdgeInsets.all(15),
-              child: Column(
+        child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  FadeAnimation(
-                    1,
-                    Center(
-                      child: Image.asset(
-                        'assets/bprd.png',
-                        height: 60.0,
-                        width: 60.0,
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 10),
-                  Center(
-                    child: Text(
-                      'Bureau of Police Research Development',
-                      maxLines: 2,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w500,
-                        fontSize: 17,
-                      ),
-                    ),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Image.asset(
-                        'assets/makeinIndia.png',
-                        height: 45.0,
-                        width: 45.0,
-                      ),
-                      SizedBox(width: 10),
-                      Text(
-                        'Make In India',
-                        style: TextStyle(
-                            color: Colors.yellow[500],
-                            fontSize: 15.0,
-                            fontWeight: FontWeight.w500),
-                      ),
-                      SizedBox(width: 10),
-                      Icon(
-                        AntDesign.heart,
-                        color: Colors.yellow,
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-            Expanded(
-              // ScrollView
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(60),
-                      topRight: Radius.circular(60)),
-                ),
-                child: Padding(
-                  padding: EdgeInsets.all(30),
-                  child: Column(
-                    children: <Widget>[
-                      // Bribe Reporting
-                      Container(
-                        width: MediaQuery.of(context).size.width,
-                        height: MediaQuery.of(context).size.height * (0.35),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20.0),
-                          border: Border.all(
-                            color: Colors.orange[200],
+                  Padding(
+                    padding: EdgeInsets.all(15),
+                    child: Column(
+                      children: <Widget>[
+                        FadeAnimation(
+                          1,
+                          Center(
+                            child: Image.asset(
+                              'assets/bprd.png',
+                              height: 60.0,
+                              width: 60.0,
+                            ),
                           ),
                         ),
+                        SizedBox(height: 10),
+                        Center(
+                          child: Text(
+                            'Bureau of Police Research Development',
+                            maxLines: 2,
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w500,
+                              fontSize: 17,
+                            ),
+                          ),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Image.asset(
+                              'assets/makeinIndia.png',
+                              height: 45.0,
+                              width: 45.0,
+                            ),
+                            SizedBox(width: 10),
+                            Text(
+                              'Make In India',
+                              style: TextStyle(
+                                  color: Colors.yellow[500],
+                                  fontSize: 15.0,
+                                  fontWeight: FontWeight.w500),
+                            ),
+                            SizedBox(width: 10),
+                            Icon(
+                              AntDesign.heart,
+                              color: Colors.yellow,
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                  Expanded(
+                    // ScrollView
+                    child: SingleChildScrollView(
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(60),
+                              topRight: Radius.circular(60)),
+                        ),
                         child: Padding(
-                          padding: EdgeInsets.all(20.0),
+                          padding: EdgeInsets.all(30),
                           child: Column(
                             children: <Widget>[
-                              Row(
-                                children: <Widget>[
-                                  Image.asset(
-                                    'assets/bprd.png',
-                                    width: 50.0,
-                                    height: 50.0,
+                              // Hot Report
+                              Container(
+                                width: MediaQuery.of(context).size.width,
+                                height:
+                                    MediaQuery.of(context).size.height * (0.35),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20.0),
+                                  border: Border.all(
+                                    color: Colors.orange[200],
                                   ),
-                                  SizedBox(width: 20.0),
-                                  Text(
-                                    'Bribe Reporting',
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.w700,
-                                      fontSize: 20.0,
-                                    ),
+                                ),
+                                child: Padding(
+                                  padding: EdgeInsets.all(20.0),
+                                  child: Column(
+                                    children: <Widget>[
+                                      Row(
+                                        children: <Widget>[
+                                          Image.asset(
+                                            'assets/playstore.png',
+                                            width: 50.0,
+                                            height: 50.0,
+                                          ),
+                                          SizedBox(width: 20.0),
+                                          Text(
+                                            'Hot Reporting',
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.w700,
+                                              fontSize: 20.0,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      SizedBox(height: 10.0),
+                                      Text(
+                                        'A reporting system where you can directly record the evidence and getting it submit to the admin without any hesitation of filling forms and have a quick action on the complain.',
+                                        maxLines: 10,
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 15.0,
+                                        ),
+                                      ),
+                                      SizedBox(height: 10.0),
+                                      GestureDetector(
+                                        onTap: () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      HotReport(
+                                                          uid: Constants.myUid,
+                                                          hotAddress:
+                                                              location.address,
+                                                          fullName: HotConstants
+                                                              .myFullName,
+                                                          phoneNumber:
+                                                              HotConstants
+                                                                  .myPhone,
+                                                          UID: HotConstants
+                                                              .myUID,
+                                                          startStamp: DateTime
+                                                                  .now()
+                                                              .toString())));
+                                        },
+                                        child: Row(
+                                          children: <Widget>[
+                                            Text(
+                                              'Hot Reporting',
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.w500,
+                                                  fontSize: 18.0),
+                                            ),
+                                            SizedBox(width: 20.0),
+                                            Icon(
+                                              Icons.arrow_forward,
+                                              color: Colors.orangeAccent,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                ],
-                              ),
-                              SizedBox(height: 10.0),
-                              Text(
-                                'A simple way to report a bribe with assured security of evidence while submitting the data. The fast way to make your complain reach the official for quick actions.',
-                                maxLines: 10,
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 15.0,
                                 ),
                               ),
-                              SizedBox(height: 10.0),
-                              GestureDetector(
-                                onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              BribeReport()));
-                                },
-                                child: Row(
-                                  children: <Widget>[
-                                    Text(
-                                      'Bribe Reporting',
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: 18.0),
-                                    ),
-                                    SizedBox(width: 20.0),
-                                    Icon(
-                                      Icons.arrow_forward,
-                                      color: Colors.orangeAccent,
-                                    ),
-                                  ],
+                              SizedBox(height: 20.0),
+
+                              // Bribe Reporting
+                              Container(
+                                width: MediaQuery.of(context).size.width,
+                                height:
+                                    MediaQuery.of(context).size.height * (0.35),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20.0),
+                                  border: Border.all(
+                                    color: Colors.orange[200],
+                                  ),
+                                ),
+                                child: Padding(
+                                  padding: EdgeInsets.all(20.0),
+                                  child: Column(
+                                    children: <Widget>[
+                                      Row(
+                                        children: <Widget>[
+                                          Image.asset(
+                                            'assets/bprd.png',
+                                            width: 50.0,
+                                            height: 50.0,
+                                          ),
+                                          SizedBox(width: 20.0),
+                                          Text(
+                                            'Bribe Reporting',
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.w700,
+                                              fontSize: 20.0,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      SizedBox(height: 10.0),
+                                      Text(
+                                        'A simple way to report a bribe with assured security of evidence while submitting the data. The fast way to make your complain reach the official for quick actions.',
+                                        maxLines: 10,
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 15.0,
+                                        ),
+                                      ),
+                                      SizedBox(height: 10.0),
+                                      GestureDetector(
+                                        onTap: () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      BribeReport()));
+                                        },
+                                        child: Row(
+                                          children: <Widget>[
+                                            Text(
+                                              'Bribe Reporting',
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.w500,
+                                                  fontSize: 18.0),
+                                            ),
+                                            SizedBox(width: 20.0),
+                                            Icon(
+                                              Icons.arrow_forward,
+                                              color: Colors.orangeAccent,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              SizedBox(height: 20.0),
+
+                              // Aharya Blogs
+                              Container(
+                                width: MediaQuery.of(context).size.width,
+                                height:
+                                    MediaQuery.of(context).size.height * (0.35),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20.0),
+                                  border: Border.all(
+                                    color: Colors.orange[200],
+                                  ),
+                                ),
+                                child: Padding(
+                                  padding: EdgeInsets.all(20.0),
+                                  child: Column(
+                                    children: <Widget>[
+                                      Row(
+                                        children: <Widget>[
+                                          Image.asset(
+                                            'assets/blog_icon.png',
+                                            width: 50.0,
+                                            height: 50.0,
+                                          ),
+                                          SizedBox(width: 20.0),
+                                          Text(
+                                            'Aharya Blogs',
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.w700,
+                                              fontSize: 20.0,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      SizedBox(height: 10.0),
+                                      Text(
+                                        'A first of the blog application where you can blog about any unusual event occurred and the blog would directly be recognized by the Bureau of Police and Research Department. Take a look at the blog by other users.',
+                                        maxLines: 10,
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 15.0,
+                                        ),
+                                      ),
+                                      SizedBox(height: 10.0),
+                                      GestureDetector(
+                                        onTap: () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      ListPost()));
+                                        },
+                                        child: Row(
+                                          children: <Widget>[
+                                            Text(
+                                              'Aharya Blogs',
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.w500,
+                                                  fontSize: 18.0),
+                                            ),
+                                            SizedBox(width: 20.0),
+                                            Icon(
+                                              Icons.arrow_forward,
+                                              color: Colors.orangeAccent,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ],
                           ),
                         ),
                       ),
-                      SizedBox(height: 20.0),
-                    ],
+                    ),
                   ),
-                ),
+                ],
               ),
-            ),
-          ],
-        ),
       ),
     );
   }

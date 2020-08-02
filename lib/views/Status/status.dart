@@ -63,6 +63,15 @@ class Options extends StatelessWidget {
               },
               child: ButtonDesign(text: 'Unusual Incident')
           ),
+    GestureDetector(
+              onTap: () {
+                print(userId);
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return HotStatus(uid: userId);
+                }));
+              },
+              child: ButtonDesign(text: 'Hot Report')
+          ),
           GestureDetector(
             onTap: () {
               Navigator.push(context, MaterialPageRoute(builder: (context) {

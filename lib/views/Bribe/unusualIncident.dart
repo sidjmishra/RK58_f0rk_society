@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:block/modal/constants.dart';
+import 'package:block/views/Bribe/webPage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -40,7 +41,8 @@ class _HonestOfficialState extends State<HonestOfficial> {
     'Dadra and Nagar Haveli', 'Daman and Diu', 'Delhi', 'Goa', 'Gujarat', 'Haryana', 'Himachal Pradesh',	'Jammu and kashmir',	'Ladakh',
     'Lakshadweep', 'Jharkhand',	'Karnataka', 'Kerala',	'Madhya Pradesh',	'Maharashtra', 'Manipur',	'Meghalaya', 'Mizoram',	'Nagaland',
     'Odisha',	'Punjab', 'Rajasthan', 'Sikkim',	'Tamil Nadu',	'Telangana', 'Tripura',	'Uttarakhand', 'Uttar Pradesh', 'West Bengal'];
-  final _category = ['Police', 'Traffic', 'Prison Management', 'Driver licensing', 'Document Verification'];
+  final _category = ['Police', 'Traffic', 'Prison Management', 'Driver licensing', 'Document Verification', 'Property Registration',
+    'Municipal Corporation', 'Electricity Board', 'Transport Office', 'Tax office', 'Water Department', 'Others'];
   String hintCategory = 'Select Category';
   String hintState = 'Select State';
   var _currentSelectedCategory;
@@ -61,37 +63,37 @@ class _HonestOfficialState extends State<HonestOfficial> {
   String _extension;
   DateTime dateNow = DateTime.now();
 
-  Future openFileExplorer() async {
-    try {
-      StorageReference storageReference;
-      StorageUploadTask storageUploadTask;
-
-      _paths = await FilePicker.getMultiFile(
-        type: FileType.custom,
-        allowedExtensions: ['jpg', 'jpeg', 'png', 'svg', 'mp4'],
-      );
-      _paths.forEach((filePath) async {
-        _extension = filePath.toString().split('.').last;
-        storageReference =
-        FirebaseStorage.instance.ref().child('FIR_NCR');
-        storageUploadTask = storageReference
-            .child(dateNow.toString() + '.$_extension')
-            .putFile(filePath);
-        String url =
-        await (await storageUploadTask.onComplete).ref.getDownloadURL();
-        if(url != null) {
-          setState(() {
-            urls.add(url);
-          });
-        }
-      });
-    } on PlatformException catch (e) {
-      print(e.toString());
-    }
-    if (!mounted) {
-      return;
-    }
-  }
+//  Future openFileExplorer() async {
+//    try {
+//      StorageReference storageReference;
+//      StorageUploadTask storageUploadTask;
+//
+//      _paths = await FilePicker.getMultiFile(
+//        type: FileType.custom,
+//        allowedExtensions: ['jpg', 'jpeg', 'png', 'svg', 'mp4'],
+//      );
+//      _paths.forEach((filePath) async {
+//        _extension = filePath.toString().split('.').last;
+//        storageReference =
+//        FirebaseStorage.instance.ref().child('FIR_NCR');
+//        storageUploadTask = storageReference
+//            .child(dateNow.toString() + '.$_extension')
+//            .putFile(filePath);
+//        String url =
+//        await (await storageUploadTask.onComplete).ref.getDownloadURL();
+//        if(url != null) {
+//          setState(() {
+//            urls.add(url);
+//          });
+//        }
+//      });
+//    } on PlatformException catch (e) {
+//      print(e.toString());
+//    }
+//    if (!mounted) {
+//      return;
+//    }
+//  }
 
   void randomId() async {
     var number = Random.secure();
@@ -998,14 +1000,14 @@ class _HonestOfficialState extends State<HonestOfficial> {
                                 SizedBox(height: 20),
                                 OutlineButton(
                                   onPressed: () {
-                                    openFileExplorer();
-//                                    setState(() {
-//                                      isLoading = true;
-//                                    });
-//                                    Clipboard.setData(ClipboardData(text: id));
-//                                    Navigator.push(context, MaterialPageRoute(
-//                                        builder: (context) => DataModel()
-//                                    ));
+//                                    openFileExplorer();
+                                    setState(() {
+                                      isLoading = true;
+                                    });
+                                    Clipboard.setData(ClipboardData(text: id));
+                                    Navigator.push(context, MaterialPageRoute(
+                                        builder: (context) => DataModel()
+                                    ));
                                   },
                                   child: Text('Add files'),
                                 ),

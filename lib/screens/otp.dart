@@ -68,6 +68,7 @@ class _OtpState extends State<Otp> {
       });
       await Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (context) => HomePage()));
+      randomId();
     }
     return 'error';
   }

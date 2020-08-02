@@ -24,22 +24,25 @@ class _BribeReportState extends State<BribeReport> {
           style: TextStyle(color: Colors.white),
         ),
       ),
-      body: HotConstants.myPhone == null
-          ? Column(
+      body: HotConstants.myPhone == ''
+          ? Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          Text('User Not verified'),
-          SizedBox(height: 20.0),
-          RaisedButton(
-            onPressed: () {
-              Navigator.pushReplacement(context, MaterialPageRoute(
-                  builder: (context) => Profile()
-              ));
-            },
-            color: Colors.orangeAccent,
-            child: Text('Add Information'),
-          ),
+            Text('User Not verified'),
+            SizedBox(height: 20.0),
+            RaisedButton(
+              onPressed: () {
+                Navigator.pushReplacement(context, MaterialPageRoute(
+                    builder: (context) => Profile()
+                ));
+              },
+              color: Colors.orangeAccent,
+              child: Text('Add Information'),
+            ),
         ],
-      ) :  SingleChildScrollView(
+      ),
+          ) :  SingleChildScrollView(
         child: Container(
           decoration: BoxDecoration(
             color: Colors.white,
