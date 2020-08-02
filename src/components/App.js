@@ -137,17 +137,25 @@ async function viewFromBlockchain(uid) {
 
 function LinktoDatabase(hash)
 {
-  evidenceLinkImage=memeHashImage.split('/');
+  var evidenceLinkImage = []
+  var evidenceLinkVideo = []
+  var evidenceLinkImages=memeHashImage.split('/');
   for(var i=0;i<noFiles;i++)
   {
-    evidenceLinkImage[i]=("http://ipfs.io/ipfs/").concat(evidenceLinkImage[i])
+    if(evidenceLinkImages[i].localeCompare("") != 0) {
+      evidenceLinkImage.push(("http://ipfs.io/ipfs/").concat(evidenceLinkImages[i]))
+    }
   }
-  evidenceLinkVideo=memeHashVideo.split('/');
+  var evidenceLinkVideos=memeHashVideo.split('/');
   for(var i=0;i<noFiles;i++)
   {
-    evidenceLinkVideo[i]=("http://ipfs.io/ipfs/").concat(evidenceLinkVideo[i])
+    if(evidenceLinkVideos[i].localeCompare("") != 0) {
+      evidenceLinkVideo.push(("http://ipfs.io/ipfs/").concat(evidenceLinkVideos[i]))
+    }
   }
-  
+  console.log(evidenceLinkImage)
+  console.log("Video")
+  console.log(evidenceLinkVideo)
   db.collection("EvidenceLinks").get().then(function(querySnapshot) {
     querySnapshot.forEach(function(doc) {
       if(uid.localeCompare(doc.id) == 0) {
