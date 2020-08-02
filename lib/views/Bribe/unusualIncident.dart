@@ -22,6 +22,7 @@ class HonestOfficial extends StatefulWidget {
 }
 
 class _HonestOfficialState extends State<HonestOfficial> {
+
   AuthMethods authMethods = AuthMethods();
   final _formKey = GlobalKey<FormState>();
   bool isLoading = false;
@@ -36,58 +37,12 @@ class _HonestOfficialState extends State<HonestOfficial> {
   TextEditingController state = TextEditingController();
   TextEditingController dateCtl = TextEditingController();
 
-  final _states = [
-    'Andhra Pradesh',
-    'Andaman and Nicobar',
-    'Arunachal Pradesh',
-    'Assam',
-    'Bihar',
-    'Chandigarh',
-    'Chhattisgarh',
-    'Dadra and Nagar Haveli',
-    'Daman and Diu',
-    'Delhi',
-    'Goa',
-    'Gujarat',
-    'Haryana',
-    'Himachal Pradesh',
-    'Jammu and kashmir',
-    'Ladakh',
-    'Lakshadweep',
-    'Jharkhand',
-    'Karnataka',
-    'Kerala',
-    'Madhya Pradesh',
-    'Maharashtra',
-    'Manipur',
-    'Meghalaya',
-    'Mizoram',
-    'Nagaland',
-    'Odisha',
-    'Punjab',
-    'Rajasthan',
-    'Sikkim',
-    'Tamil Nadu',
-    'Telangana',
-    'Tripura',
-    'Uttarakhand',
-    'Uttar Pradesh',
-    'West Bengal'
-  ];
-  final _category = [
-    'Police',
-    'Traffic',
-    'Prison Management',
-    'Driver licensing',
-    'Document Verification',
-    'Property Registration',
-    'Municipal Corporation',
-    'Electricity Board',
-    'Transport Office',
-    'Tax office',
-    'Water Department',
-    'Others'
-  ];
+  final _states = ['Andhra Pradesh', 'Andaman and Nicobar', 'Arunachal Pradesh', 'Assam',	'Bihar', 'Chandigarh', 'Chhattisgarh',
+    'Dadra and Nagar Haveli', 'Daman and Diu', 'Delhi', 'Goa', 'Gujarat', 'Haryana', 'Himachal Pradesh',	'Jammu and kashmir',	'Ladakh',
+    'Lakshadweep', 'Jharkhand',	'Karnataka', 'Kerala',	'Madhya Pradesh',	'Maharashtra', 'Manipur',	'Meghalaya', 'Mizoram',	'Nagaland',
+    'Odisha',	'Punjab', 'Rajasthan', 'Sikkim',	'Tamil Nadu',	'Telangana', 'Tripura',	'Uttarakhand', 'Uttar Pradesh', 'West Bengal'];
+  final _category = ['Police', 'Traffic', 'Prison Management', 'Driver licensing', 'Document Verification', 'Property Registration',
+    'Municipal Corporation', 'Electricity Board', 'Transport Office', 'Tax office', 'Water Department', 'Others'];
   String hintCategory = 'Select Category';
   String hintState = 'Select State';
   var _currentSelectedCategory;
@@ -145,17 +100,12 @@ class _HonestOfficialState extends State<HonestOfficial> {
     QuerySnapshot dataID;
 
     id = Constants.myUid.substring(0, 4) + number.nextInt(9999).toString();
-    dataID = await Firestore.instance
-        .collection('UnusualBehaviour')
-        .document(Constants.myUid)
-        .collection('all_data')
-        .getDocuments();
-    if (dataID.documents.isNotEmpty) {
-      for (var index = 0; index < dataID.documents.length; index++) {
-        if (dataID.documents[index].data['id'] == id && id.length < 8) {
+    dataID = await Firestore.instance.collection('UnusualBehaviour').document(Constants.myUid).collection('all_data').getDocuments();
+    if(dataID.documents.isNotEmpty) {
+      for(var index = 0; index < dataID.documents.length; index++) {
+        if(dataID.documents[index].data['id'] == id && id.length < 8) {
           setState(() {
-            id = Constants.myUid.substring(0, 4) +
-                number.nextInt(9999).toString();
+            id = Constants.myUid.substring(0, 4) + number.nextInt(9999).toString();
           });
         }
       }
@@ -177,6 +127,33 @@ class _HonestOfficialState extends State<HonestOfficial> {
     urls.clear();
   }
 
+  void setBlock() {
+    if (_formKey.currentState.validate()) {
+      setState(() {
+        isLoading = true;
+      });
+      PaidBribeDatabase(uid: Constants.myUid)
+          .unusualBehaviour(
+          id,
+          Constants.myEmail,
+          _currentSelectedCategory,
+          add_1.text,
+          add_2.text,
+          city.text,
+          _currentSelectedState,
+          pincode.text,
+          userContact.text,
+          details.text,
+          officialName.text,
+          dateCtl.text,
+          pickedCountry,
+          pickedCountryName,
+//          urls
+      ).then((value) {});
+    }
+  }
+
+
   void setData() {
     if (pickedCountryName == null && pickedCountry == null) {
       pickedCountry = '+91';
@@ -188,28 +165,28 @@ class _HonestOfficialState extends State<HonestOfficial> {
       });
       PaidBribeDatabase(uid: Constants.myUid)
           .unusualBehaviour(
-              id,
-              Constants.myEmail,
-              _currentSelectedCategory,
-              add_1.text,
-              add_2.text,
-              city.text,
-              _currentSelectedState,
-              pincode.text,
-              userContact.text,
-              details.text,
-              officialName.text,
-              dateCtl.text,
-              pickedCountry,
-              pickedCountryName,
-              urls)
-          .then((value) {
+        id,
+        Constants.myEmail,
+        _currentSelectedCategory,
+        add_1.text,
+        add_2.text,
+        city.text,
+        _currentSelectedState,
+        pincode.text,
+        userContact.text,
+        details.text,
+        officialName.text,
+        dateCtl.text,
+        pickedCountry,
+        pickedCountryName,
+//              urls
+      ).then((value) {
         Alert(
             context: context,
             type: AlertType.success,
             title: 'Data Submitted',
             desc:
-                'Report with id: $id\nCategory: $_currentSelectedCategory\nOfficial Name: ${officialName.text}\n'
+            'Report with id: $id\nCategory: $_currentSelectedCategory\nOfficial Name: ${officialName.text}\n'
                 'UserName: ${Constants.myName}, Email: ${Constants.myEmail}'
                 '\n\n(Would recommend to take screenshot of it)',
             buttons: [
@@ -259,15 +236,15 @@ class _HonestOfficialState extends State<HonestOfficial> {
       body: Container(
         width: double.infinity,
         decoration: BoxDecoration(
-//          gradient: LinearGradient(
-//            begin: Alignment.topCenter,
-//            colors: [
-//              Colors.orange[900],
-//              Colors.orange[800],
-//              Colors.orange[400],
-//            ],
-//          ),
-            color: Color(0xff212832)),
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            colors: [
+              Colors.orange[900],
+              Colors.orange[800],
+              Colors.orange[400],
+            ],
+          ),
+        ),
         child: Column(
           children: <Widget>[
             Padding(
@@ -339,7 +316,8 @@ class _HonestOfficialState extends State<HonestOfficial> {
                                 borderRadius: BorderRadius.circular(10),
                                 boxShadow: [
                                   BoxShadow(
-                                    color: Color(0xff99D5D5),
+                                    color:
+                                    Color.fromRGBO(225, 95, 27, .3),
                                     blurRadius: 20,
                                     offset: Offset(0, 10),
                                   ),
@@ -350,19 +328,23 @@ class _HonestOfficialState extends State<HonestOfficial> {
                                 Column(
                                   children: <Widget>[
                                     Container(
-                                      child: DropdownButtonFormField<String>(
-                                        items: _category
-                                            .map((String dropDownStringItem) {
-                                          return DropdownMenuItem<String>(
-                                            value: dropDownStringItem,
-                                            child: Text(dropDownStringItem),
-                                          );
-                                        }).toList(),
-                                        validator: (value) => value == null
+                                      child:
+                                      DropdownButtonFormField<String>(
+                                        items: _category.map(
+                                                (String dropDownStringItem) {
+                                              return DropdownMenuItem<String>(
+                                                value: dropDownStringItem,
+                                                child:
+                                                Text(dropDownStringItem),
+                                              );
+                                            }).toList(),
+                                        validator: (value) =>
+                                        value == null
                                             ? 'Field Required'
                                             : null,
                                         value: _currentSelectedCategory,
-                                        onChanged: (String newValueSelected) {
+                                        onChanged:
+                                            (String newValueSelected) {
                                           setState(() {
                                             _currentSelectedCategory =
                                                 newValueSelected;
@@ -407,7 +389,8 @@ class _HonestOfficialState extends State<HonestOfficial> {
                                 borderRadius: BorderRadius.circular(10),
                                 boxShadow: [
                                   BoxShadow(
-                                    color: Color(0xff99D5D5),
+                                    color:
+                                    Color.fromRGBO(225, 95, 27, .3),
                                     blurRadius: 20,
                                     offset: Offset(0, 10),
                                   ),
@@ -461,7 +444,8 @@ class _HonestOfficialState extends State<HonestOfficial> {
                                 borderRadius: BorderRadius.circular(10),
                                 boxShadow: [
                                   BoxShadow(
-                                    color: Color(0xff99D5D5),
+                                    color:
+                                    Color.fromRGBO(225, 95, 27, .3),
                                     blurRadius: 20,
                                     offset: Offset(0, 10),
                                   ),
@@ -517,7 +501,8 @@ class _HonestOfficialState extends State<HonestOfficial> {
                                 borderRadius: BorderRadius.circular(10),
                                 boxShadow: [
                                   BoxShadow(
-                                    color: Color(0xff99D5D5),
+                                    color:
+                                    Color.fromRGBO(225, 95, 27, .3),
                                     blurRadius: 20,
                                     offset: Offset(0, 10),
                                   ),
@@ -575,10 +560,12 @@ class _HonestOfficialState extends State<HonestOfficial> {
                                     padding: EdgeInsets.all(10),
                                     decoration: BoxDecoration(
                                       color: Colors.white,
-                                      borderRadius: BorderRadius.circular(10),
+                                      borderRadius:
+                                      BorderRadius.circular(10),
                                       boxShadow: [
                                         BoxShadow(
-                                          color: Color(0xff99D5D5),
+                                          color: Color.fromRGBO(
+                                              225, 95, 27, .3),
                                           blurRadius: 20,
                                           offset: Offset(0, 10),
                                         ),
@@ -590,22 +577,26 @@ class _HonestOfficialState extends State<HonestOfficial> {
                                         children: <Widget>[
                                           Container(
                                             child:
-                                                DropdownButtonFormField<String>(
-                                              items: _states.map(
-                                                  (String dropDownStringItem) {
-                                                return DropdownMenuItem<String>(
-                                                  value: dropDownStringItem,
-                                                  child:
-                                                      Text(dropDownStringItem),
+                                            DropdownButtonFormField<
+                                                String>(
+                                              items: _states.map((String
+                                              dropDownStringItem) {
+                                                return DropdownMenuItem<
+                                                    String>(
+                                                  value:
+                                                  dropDownStringItem,
+                                                  child: Text(
+                                                      dropDownStringItem),
                                                 );
                                               }).toList(),
                                               validator: (value) =>
-                                                  value == null
-                                                      ? 'Field Required'
-                                                      : null,
-                                              value: _currentSelectedState,
-                                              onChanged:
-                                                  (String newValueSelected) {
+                                              value == null
+                                                  ? 'Field Required'
+                                                  : null,
+                                              value:
+                                              _currentSelectedState,
+                                              onChanged: (String
+                                              newValueSelected) {
                                                 setState(() {
                                                   _currentSelectedState =
                                                       newValueSelected;
@@ -614,7 +605,8 @@ class _HonestOfficialState extends State<HonestOfficial> {
                                               hint: Text(
                                                 hintState,
                                                 style: TextStyle(
-                                                    color: Colors.grey[300]),
+                                                    color:
+                                                    Colors.grey[300]),
                                               ),
                                             ),
                                           ),
@@ -635,10 +627,12 @@ class _HonestOfficialState extends State<HonestOfficial> {
                                     padding: EdgeInsets.all(10),
                                     decoration: BoxDecoration(
                                       color: Colors.white,
-                                      borderRadius: BorderRadius.circular(10),
+                                      borderRadius:
+                                      BorderRadius.circular(10),
                                       boxShadow: [
                                         BoxShadow(
-                                          color: Color(0xff99D5D5),
+                                          color: Color.fromRGBO(
+                                              225, 95, 27, .3),
                                           blurRadius: 20,
                                           offset: Offset(0, 10),
                                         ),
@@ -652,7 +646,8 @@ class _HonestOfficialState extends State<HonestOfficial> {
                                             decoration: BoxDecoration(
                                               border: Border(
                                                 bottom: BorderSide(
-                                                    color: Colors.grey[300]),
+                                                    color:
+                                                    Colors.grey[300]),
                                               ),
                                             ),
                                             child: TextFormField(
@@ -666,11 +661,12 @@ class _HonestOfficialState extends State<HonestOfficial> {
                                               controller: pincode,
                                               maxLength: 6,
                                               keyboardType:
-                                                  TextInputType.number,
+                                              TextInputType.number,
                                               decoration: InputDecoration(
                                                 hintText: 'Pincode',
                                                 hintStyle: TextStyle(
-                                                    color: Colors.grey[300]),
+                                                    color:
+                                                    Colors.grey[300]),
                                                 border: InputBorder.none,
                                                 counterText: '',
                                               ),
@@ -708,7 +704,8 @@ class _HonestOfficialState extends State<HonestOfficial> {
                                 borderRadius: BorderRadius.circular(10),
                                 boxShadow: [
                                   BoxShadow(
-                                    color: Color(0xff99D5D5),
+                                    color:
+                                    Color.fromRGBO(225, 95, 27, .3),
                                     blurRadius: 20,
                                     offset: Offset(0, 10),
                                   ),
@@ -738,7 +735,7 @@ class _HonestOfficialState extends State<HonestOfficial> {
                                         keyboardType: TextInputType.text,
                                         decoration: InputDecoration(
                                           hintText:
-                                              'Give Details About the Incident',
+                                          'Give Details About the Incident',
                                           hintStyle: TextStyle(
                                               color: Colors.grey[300]),
                                           border: InputBorder.none,
@@ -760,7 +757,8 @@ class _HonestOfficialState extends State<HonestOfficial> {
                             1.3,
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.baseline,
+                              crossAxisAlignment:
+                              CrossAxisAlignment.baseline,
                               textBaseline: TextBaseline.alphabetic,
                               children: <Widget>[
                                 Text(
@@ -799,7 +797,8 @@ class _HonestOfficialState extends State<HonestOfficial> {
                                 borderRadius: BorderRadius.circular(10),
                                 boxShadow: [
                                   BoxShadow(
-                                    color: Color(0xff99D5D5),
+                                    color:
+                                    Color.fromRGBO(225, 95, 27, .3),
                                     blurRadius: 20,
                                     offset: Offset(0, 10),
                                   ),
@@ -827,7 +826,8 @@ class _HonestOfficialState extends State<HonestOfficial> {
                                         maxLength: 20,
                                         keyboardType: TextInputType.text,
                                         decoration: InputDecoration(
-                                          hintText: 'Enter Name of Official',
+                                          hintText:
+                                          'Enter Name of Official',
                                           hintStyle: TextStyle(
                                               color: Colors.grey[300]),
                                           border: InputBorder.none,
@@ -869,7 +869,8 @@ class _HonestOfficialState extends State<HonestOfficial> {
                                 borderRadius: BorderRadius.circular(10),
                                 boxShadow: [
                                   BoxShadow(
-                                    color: Color(0xff99D5D5),
+                                    color:
+                                    Color.fromRGBO(225, 95, 27, .3),
                                     blurRadius: 20,
                                     offset: Offset(0, 10),
                                   ),
@@ -898,7 +899,8 @@ class _HonestOfficialState extends State<HonestOfficial> {
                                         onTap: () async {
                                           DateTime date = DateTime(2000);
                                           FocusScope.of(context)
-                                              .requestFocus(FocusNode());
+                                              .requestFocus(
+                                              FocusNode());
                                           date = await showDatePicker(
                                             context: context,
                                             initialDate: DateTime.now(),
@@ -953,7 +955,8 @@ class _HonestOfficialState extends State<HonestOfficial> {
                                 borderRadius: BorderRadius.circular(10),
                                 boxShadow: [
                                   BoxShadow(
-                                    color: Color(0xff99D5D5),
+                                    color:
+                                    Color.fromRGBO(225, 95, 27, .3),
                                     blurRadius: 20,
                                     offset: Offset(0, 10),
                                   ),
@@ -969,13 +972,14 @@ class _HonestOfficialState extends State<HonestOfficial> {
                                           Expanded(
                                             child: Column(
                                               crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
+                                              CrossAxisAlignment
+                                                  .start,
                                               children: <Widget>[
                                                 ListTile(
                                                   title:
-                                                      _buildCountryPickerDropdown(
-                                                          hasPriorityList:
-                                                              true),
+                                                  _buildCountryPickerDropdown(
+                                                      hasPriorityList:
+                                                      true),
                                                   dense: true,
                                                 ),
                                               ],
@@ -997,49 +1001,47 @@ class _HonestOfficialState extends State<HonestOfficial> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
-                                Text(
-                                  'Copy complaint ID for evidence submission',
+                                Text('Copy complaint ID for evidence submission',
                                   style: TextStyle(color: Colors.grey),
                                 ),
                                 SizedBox(width: 10.0),
-                                Icon(
-                                  Icons.launch,
+                                Icon(Icons.launch,
                                   color: Colors.greenAccent,
                                 ),
                               ],
                             ),
                           ),
-                          SizedBox(height: 20),
-                          FadeAnimation(
-                            1.3,
-                            Text(
-                              'Evidences (Submit if any)',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontSize: 25,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
-                              ),
-                            ),
-                          ),
-                          SizedBox(height: 20),
-                          OutlineButton(
-                            onPressed: () {
+                                SizedBox(height: 20),
+                                FadeAnimation(
+                                  1.3,
+                                  Text(
+                                    'Evidences (Submit if any)',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontSize: 25,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(height: 20),
+                                OutlineButton(
+                                  onPressed: () {
+                                    setBlock();
 //                                    openFileExplorer();
-                              setState(() {
-                                isLoading = true;
-                              });
-                              Clipboard.setData(ClipboardData(text: id));
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => DataModel()));
-                            },
-                            child: Text('Add files'),
-                          ),
-                          urls.isNotEmpty
-                              ? Text('Files Uploaded')
-                              : Text('No Files Uploaded'),
+                                    setState(() {
+                                      isLoading = true;
+                                    });
+                                    Clipboard.setData(ClipboardData(text: id));
+                                    Navigator.push(context, MaterialPageRoute(
+                                        builder: (context) => DataModel()
+                                    ));
+                                  },
+                                  child: Text('Add files'),
+                                ),
+                                isLoading
+                                    ? Text('Files Uploaded')
+                                    : Text('No Files Uploaded'),
                           SizedBox(height: 20),
                           Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
@@ -1048,10 +1050,11 @@ class _HonestOfficialState extends State<HonestOfficial> {
                               Container(
                                 height: 50,
                                 width: 125,
-                                margin: EdgeInsets.symmetric(horizontal: 5),
+                                margin:
+                                EdgeInsets.symmetric(horizontal: 5),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(50),
-                                  color: Color(0xff32E0C3),
+                                  color: Colors.orange[400],
                                 ),
                                 child: Center(
                                   child: FlatButton(
@@ -1072,10 +1075,11 @@ class _HonestOfficialState extends State<HonestOfficial> {
                               Container(
                                 height: 50,
                                 width: 125,
-                                margin: EdgeInsets.symmetric(horizontal: 5),
+                                margin:
+                                EdgeInsets.symmetric(horizontal: 5),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(50),
-                                  color: Color(0xff212832),
+                                  color: Colors.red[400],
                                 ),
                                 child: Center(
                                   child: FlatButton(
@@ -1112,9 +1116,9 @@ class _HonestOfficialState extends State<HonestOfficial> {
 
   _buildCountryPickerDropdown(
       {bool filtered = false,
-      bool sortedByIsoCode = false,
-      bool hasPriorityList = false,
-      bool hasSelectedItemBuilder = false}) {
+        bool sortedByIsoCode = false,
+        bool hasPriorityList = false,
+        bool hasSelectedItemBuilder = false}) {
     double dropdownButtonWidth = MediaQuery.of(context).size.width * 0.4;
     //respect dropdown button icon size
     double dropdownItemWidth = dropdownButtonWidth - 50;
@@ -1129,7 +1133,7 @@ class _HonestOfficialState extends State<HonestOfficial> {
             isDense: false,
             selectedItemBuilder: hasSelectedItemBuilder == true
                 ? (Country country) => _buildDropdownSelectedItemBuilder(
-                    country, dropdownSelectedItemWidth)
+                country, dropdownSelectedItemWidth)
                 : null,
             itemBuilder: (Country country) => hasSelectedItemBuilder == true
                 ? _buildDropdownItemWithLongText(country, dropdownItemWidth)
@@ -1140,8 +1144,8 @@ class _HonestOfficialState extends State<HonestOfficial> {
                 : null,
             priorityList: hasPriorityList
                 ? [
-                    CountryPickerUtils.getCountryByIsoCode('IN'),
-                  ]
+              CountryPickerUtils.getCountryByIsoCode('IN'),
+            ]
                 : null,
             sortComparator: sortedByIsoCode
                 ? (Country a, Country b) => a.isoCode.compareTo(b.isoCode)
@@ -1200,7 +1204,7 @@ class _HonestOfficialState extends State<HonestOfficial> {
       );
 
   Widget _buildDropdownItemWithLongText(
-          Country country, double dropdownItemWidth) =>
+      Country country, double dropdownItemWidth) =>
       SizedBox(
         width: dropdownItemWidth,
         child: Padding(
@@ -1218,7 +1222,7 @@ class _HonestOfficialState extends State<HonestOfficial> {
       );
 
   Widget _buildDropdownSelectedItemBuilder(
-          Country country, double dropdownItemWidth) =>
+      Country country, double dropdownItemWidth) =>
       SizedBox(
         width: dropdownItemWidth,
         child: Padding(
@@ -1231,10 +1235,10 @@ class _HonestOfficialState extends State<HonestOfficial> {
               ),
               Expanded(
                   child: Text(
-                '${country.name}',
-                style:
+                    '${country.name}',
+                    style:
                     TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
-              )),
+                  )),
             ],
           ),
         ),

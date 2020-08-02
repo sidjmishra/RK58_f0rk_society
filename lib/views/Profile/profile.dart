@@ -176,7 +176,7 @@ class _ProfileState extends State<Profile> {
   }
 
   Future setData() async {
-    if (_formKey.currentState.validate() && urls.length == 0) {
+    if (_formKey.currentState.validate() && urls.length == 2) {
       setState(() {
         isLoading = true;
       });
@@ -199,9 +199,10 @@ class _ProfileState extends State<Profile> {
               idNumber.text,
               urls)
           .then((value) {
-        getPhone(idNumber.text);
-        Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => Otp()));
+            getPhone(idNumber.text);
+        Navigator.pushReplacement(context, MaterialPageRoute(
+          builder: (context) => Otp()
+        ));
       });
     } else {
       return 'error';
@@ -209,12 +210,10 @@ class _ProfileState extends State<Profile> {
   }
 
   Future getPhone(String aadhar) async {
-    querySnapshot =
-        await Firestore.instance.collection('Aadhar Card').getDocuments();
+    querySnapshot = await Firestore.instance.collection('Aadhar Card').getDocuments();
     for (var index = 0; index < querySnapshot.documents.length; index++) {
-      if (querySnapshot.documents[index].data['Aadhar'] == aadhar) {
-        HotConstants.myPhone =
-            await querySnapshot.documents[index].data['Phone'];
+      if(querySnapshot.documents[index].data['Aadhar'] == aadhar) {
+        HotConstants.myPhone = await querySnapshot.documents[index].data['Phone'];
       }
     }
     print(HotConstants.myPhone);
@@ -267,7 +266,7 @@ class _ProfileState extends State<Profile> {
                       borderRadius: BorderRadius.circular(10),
                       boxShadow: [
                         BoxShadow(
-                          color: Color(0xff99D5D5),
+                          color: Color.fromRGBO(225, 95, 27, .3),
                           blurRadius: 20,
                           offset: Offset(0, 10),
                         ),
@@ -305,7 +304,7 @@ class _ProfileState extends State<Profile> {
                       borderRadius: BorderRadius.circular(10),
                       boxShadow: [
                         BoxShadow(
-                          color: Color(0xff99D5D5),
+                          color: Color.fromRGBO(225, 95, 27, .3),
                           blurRadius: 20,
                           offset: Offset(0, 10),
                         ),
@@ -335,8 +334,7 @@ class _ProfileState extends State<Profile> {
                             firstDate: DateTime(1900),
                             lastDate: DateTime.now(),
                           );
-                          dateCtl.text =
-                              date.toIso8601String().substring(0, 10);
+                          dateCtl.text = date.toIso8601String().substring(0, 10);
                           print(dateCtl);
                         },
                         keyboardType: TextInputType.text,
@@ -497,7 +495,7 @@ class _ProfileState extends State<Profile> {
                       borderRadius: BorderRadius.circular(10),
                       boxShadow: [
                         BoxShadow(
-                          color: Color(0xff99D5D5),
+                          color: Color.fromRGBO(225, 95, 27, .3),
                           blurRadius: 20,
                           offset: Offset(0, 10),
                         ),
@@ -534,7 +532,7 @@ class _ProfileState extends State<Profile> {
                       borderRadius: BorderRadius.circular(10),
                       boxShadow: [
                         BoxShadow(
-                          color: Color(0xff99D5D5),
+                          color: Color.fromRGBO(225, 95, 27, .3),
                           blurRadius: 20,
                           offset: Offset(0, 10),
                         ),
@@ -570,7 +568,7 @@ class _ProfileState extends State<Profile> {
                       borderRadius: BorderRadius.circular(10),
                       boxShadow: [
                         BoxShadow(
-                          color: Color(0xff99D5D5),
+                          color: Color.fromRGBO(225, 95, 27, .3),
                           blurRadius: 20,
                           offset: Offset(0, 10),
                         ),
@@ -630,9 +628,10 @@ class _ProfileState extends State<Profile> {
                       var val = await setData();
                       print(val);
                       if (val == 'error') {
-                        print('error recieved');
-                        Scaffold.of(context).showSnackBar(SnackBar(
-                          content: Text('Please add files'),
+                        print('error received');
+                        Scaffold.of(context)
+                            .showSnackBar(SnackBar(
+                              content: Text('Please add files'),
                         ));
                       }
                     },
@@ -642,7 +641,7 @@ class _ProfileState extends State<Profile> {
                       margin: EdgeInsets.symmetric(horizontal: 5),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(50),
-                        color: Color(0xff212832),
+                        color: Colors.orange[400],
                       ),
                       child: Center(
                         child: Text(
@@ -661,7 +660,7 @@ class _ProfileState extends State<Profile> {
             ),
           ),
         );
-      }),
+    }),
     );
   }
 }
@@ -682,7 +681,7 @@ class ProfileArea extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
           boxShadow: [
             BoxShadow(
-              color: Color(0xff99D5D5),
+              color: Color.fromRGBO(225, 95, 27, .3),
               blurRadius: 20,
               offset: Offset(0, 10),
             ),

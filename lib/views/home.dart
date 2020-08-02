@@ -12,6 +12,7 @@ import 'package:block/views/DelayAction/delayAction.dart';
 import 'package:block/views/FirNcr/Reporting.dart';
 import 'package:block/views/HotReporting/hotReporting.dart';
 import 'package:block/views/JailManagement/jailManage.dart';
+import 'package:block/views/LiveStream/index.dart';
 import 'package:block/views/NOC/Noc.dart';
 import 'package:block/views/Profile/profile.dart';
 import 'package:block/views/Profile/profileView.dart';
@@ -109,7 +110,7 @@ class _HomePageState extends State<HomePage> {
     getUserInfo();
     ThemeData(
       applyElevationOverlayColor: true,
-      accentColor: Colors.teal,
+      accentColor: Colors.deepOrange,
     );
     _fcm.configure(
       onMessage: (Map<String, dynamic> message) async {
@@ -234,7 +235,7 @@ class _HomePageState extends State<HomePage> {
           children: [
             DrawerHeader(
               decoration: BoxDecoration(
-                color: Colors.teal,
+                color: Colors.orange,
               ),
               child: Column(
                 children: [
@@ -284,6 +285,18 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ],
               ),
+            ),
+            ListTile(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) {
+                    return IndexPage();
+                  }),
+                );
+              },
+              leading: Icon(Icons.live_tv),
+              title: Text('Live Stream', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15.0)),
             ),
             ListTile(
               onTap: () {
@@ -467,316 +480,391 @@ class _HomePageState extends State<HomePage> {
       body: Container(
         width: double.infinity,
         decoration: BoxDecoration(
-//          gradient: LinearGradient(
-//          begin: Alignment.topCenter,
-//          colors: [
-//          Colors.,
-//          Colors.orange[400],
-//          Colors.orange[600],
-//          Colors.orange[800],
-//          Colors.orange[400],
-//          ],
-//        ),
-          color: Color(0xff212832),
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            colors: [
+              Colors.orange[700],
+              Colors.orange[400],
+              Colors.orange[600],
+              Colors.orange[800],
+              Colors.orange[400],
+            ],
+          ),
         ),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Padding(
-              padding: EdgeInsets.all(15),
-              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  FadeAnimation(
-                    1,
-                    Center(
-                      child: Image.asset(
-                        'assets/bprd.png',
-                        height: 60.0,
-                        width: 60.0,
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 10),
-                  Center(
-                    child: Text(
-                      'Bureau of Police Research Development',
-                      maxLines: 2,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w500,
-                        fontSize: 17,
-                      ),
-                    ),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Image.asset(
-                        'assets/makeinIndia.png',
-                        height: 45.0,
-                        width: 45.0,
-                      ),
-                      SizedBox(width: 10),
-                      Text(
-                        'Make In India',
-                        style: TextStyle(
-                            color: Colors.tealAccent,
-                            fontSize: 15.0,
-                            fontWeight: FontWeight.w500),
-                      ),
-                      SizedBox(width: 10),
-                      Icon(
-                        AntDesign.heart,
-                        color: Colors.teal,
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-            Expanded(
-              // ScrollView
-              child: SingleChildScrollView(
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(60),
-                        topRight: Radius.circular(60)),
-                  ),
-                  child: Padding(
-                    padding: EdgeInsets.all(30),
+                  Padding(
+                    padding: EdgeInsets.all(15),
                     child: Column(
                       children: <Widget>[
-                        // Hot Report
-                        Container(
-                          width: MediaQuery.of(context).size.width,
-                          height: MediaQuery.of(context).size.height * (0.35),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20.0),
-                            border: Border.all(
-                              color: Colors.teal,
-                            ),
-                          ),
-                          child: Padding(
-                            padding: EdgeInsets.all(20.0),
-                            child: Column(
-                              children: <Widget>[
-                                Row(
-                                  children: <Widget>[
-                                    Image.asset(
-                                      'assets/playstore.png',
-                                      width: 50.0,
-                                      height: 50.0,
-                                    ),
-                                    SizedBox(width: 20.0),
-                                    Text(
-                                      'Hot Reporting',
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.w700,
-                                        fontSize: 20.0,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(height: 10.0),
-                                Text(
-                                  'A reporting system where you can directly record the evidence and getting it submit to the admin without any hesitation of filling forms and have a quick action on the complain.',
-                                  maxLines: 10,
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 15.0,
-                                  ),
-                                ),
-                                SizedBox(height: 10.0),
-                                GestureDetector(
-                                  onTap: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => HotReport(
-                                                uid: Constants.myUid,
-                                                hotAddress: location.address,
-                                                fullName:
-                                                    HotConstants.myFullName,
-                                                phoneNumber:
-                                                    HotConstants.myPhone,
-                                                UID: HotConstants.myUID,
-                                                startStamp: DateTime.now()
-                                                    .toString())));
-                                  },
-                                  child: Row(
-                                    children: <Widget>[
-                                      Text(
-                                        'Hot Reporting',
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.w500,
-                                            fontSize: 18.0),
-                                      ),
-                                      SizedBox(width: 20.0),
-                                      Icon(
-                                        Icons.arrow_forward,
-                                        color: Colors.teal,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
+                        FadeAnimation(
+                          1,
+                          Center(
+                            child: Image.asset(
+                              'assets/bprd.png',
+                              height: 60.0,
+                              width: 60.0,
                             ),
                           ),
                         ),
-                        SizedBox(height: 20.0),
-
-                        // Bribe Reporting
-                        Container(
-                          width: MediaQuery.of(context).size.width,
-                          height: MediaQuery.of(context).size.height * (0.35),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20.0),
-                            border: Border.all(
-                              color: Color(0xff212832),
-                            ),
-                          ),
-                          child: Padding(
-                            padding: EdgeInsets.all(20.0),
-                            child: Column(
-                              children: <Widget>[
-                                Row(
-                                  children: <Widget>[
-                                    Image.asset(
-                                      'assets/bprd.png',
-                                      width: 50.0,
-                                      height: 50.0,
-                                    ),
-                                    SizedBox(width: 20.0),
-                                    Text(
-                                      'Bribe Reporting',
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.w700,
-                                        fontSize: 20.0,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(height: 10.0),
-                                Text(
-                                  'A simple way to report a bribe with assured security of evidence while submitting the data. The fast way to make your complain reach the official for quick actions.',
-                                  maxLines: 10,
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 15.0,
-                                  ),
-                                ),
-                                SizedBox(height: 10.0),
-                                GestureDetector(
-                                  onTap: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                BribeReport()));
-                                  },
-                                  child: Row(
-                                    children: <Widget>[
-                                      Text(
-                                        'Bribe Reporting',
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.w500,
-                                            fontSize: 18.0),
-                                      ),
-                                      SizedBox(width: 20.0),
-                                      Icon(
-                                        Icons.arrow_forward,
-                                        color: Color(0xff212832),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
+                        SizedBox(height: 10),
+                        Center(
+                          child: Text(
+                            'Bureau of Police Research Development',
+                            maxLines: 2,
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w500,
+                              fontSize: 17,
                             ),
                           ),
                         ),
-                        SizedBox(height: 20.0),
-
-                        // Aharya Blogs
-                        Container(
-                          width: MediaQuery.of(context).size.width,
-                          height: MediaQuery.of(context).size.height * (0.35),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20.0),
-                            border: Border.all(
-                              color: Colors.teal,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Image.asset(
+                              'assets/makeinIndia.png',
+                              height: 45.0,
+                              width: 45.0,
                             ),
-                          ),
-                          child: Padding(
-                            padding: EdgeInsets.all(20.0),
-                            child: Column(
-                              children: <Widget>[
-                                Row(
-                                  children: <Widget>[
-                                    Image.asset(
-                                      'assets/blog_icon.png',
-                                      width: 50.0,
-                                      height: 50.0,
-                                    ),
-                                    SizedBox(width: 20.0),
-                                    Text(
-                                      'Aharya Blogs',
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.w700,
-                                        fontSize: 20.0,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(height: 10.0),
-                                Text(
-                                  'A first of the blog application where you can blog about any unusual event occurred and the blog would directly be recognized by the Bureau of Police and Research Department. Take a look at the blog by other users.',
-                                  maxLines: 10,
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 15.0,
-                                  ),
-                                ),
-                                SizedBox(height: 10.0),
-                                GestureDetector(
-                                  onTap: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => ListPost()));
-                                  },
-                                  child: Row(
-                                    children: <Widget>[
-                                      Text(
-                                        'Aharya Blogs',
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.w500,
-                                            fontSize: 18.0),
-                                      ),
-                                      SizedBox(width: 20.0),
-                                      Icon(
-                                        Icons.arrow_forward,
-                                        color: Colors.teal,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
+                            SizedBox(width: 10),
+                            Text(
+                              'Make In India',
+                              style: TextStyle(
+                                  color: Colors.yellow[500],
+                                  fontSize: 15.0,
+                                  fontWeight: FontWeight.w500),
                             ),
-                          ),
+                            SizedBox(width: 10),
+                            Icon(
+                              AntDesign.heart,
+                              color: Colors.yellow,
+                            ),
+                          ],
                         ),
                       ],
                     ),
                   ),
-                ),
+                  Expanded(
+                    // ScrollView
+                    child: SingleChildScrollView(
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(60),
+                              topRight: Radius.circular(60)),
+                        ),
+                        child: Padding(
+                          padding: EdgeInsets.all(30),
+                          child: Column(
+                            children: <Widget>[
+                              // Hot Report
+                              Container(
+                                width: MediaQuery.of(context).size.width,
+                                height:
+                                    MediaQuery.of(context).size.height * (0.35),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20.0),
+                                  border: Border.all(
+                                    color: Colors.orange[200],
+                                  ),
+                                ),
+                                child: Padding(
+                                  padding: EdgeInsets.all(20.0),
+                                  child: Column(
+                                    children: <Widget>[
+                                      Row(
+                                        children: <Widget>[
+                                          Image.asset(
+                                            'assets/playstore.png',
+                                            width: 50.0,
+                                            height: 50.0,
+                                          ),
+                                          SizedBox(width: 20.0),
+                                          Text(
+                                            'Hot Reporting',
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.w700,
+                                              fontSize: 20.0,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      SizedBox(height: 10.0),
+                                      Text(
+                                        'A reporting system where you can directly record the evidence and getting it submit to the admin without any hesitation of filling forms and have a quick action on the complain.',
+                                        maxLines: 10,
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 15.0,
+                                        ),
+                                      ),
+                                      SizedBox(height: 10.0),
+                                      GestureDetector(
+                                        onTap: () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      HotReport(
+                                                          uid: Constants.myUid,
+                                                          hotAddress:
+                                                              location.address,
+                                                          fullName: HotConstants
+                                                              .myFullName,
+                                                          phoneNumber:
+                                                              HotConstants
+                                                                  .myPhone,
+                                                          UID: HotConstants
+                                                              .myUID,
+                                                          startStamp: DateTime
+                                                                  .now()
+                                                              .toString())));
+                                        },
+                                        child: Row(
+                                          children: <Widget>[
+                                            Text(
+                                              'Hot Reporting',
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.w500,
+                                                  fontSize: 18.0),
+                                            ),
+                                            SizedBox(width: 20.0),
+                                            Icon(
+                                              Icons.arrow_forward,
+                                              color: Colors.orangeAccent,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              SizedBox(height: 20.0),
+
+                              // Bribe Reporting
+                              Container(
+                                width: MediaQuery.of(context).size.width,
+                                height:
+                                    MediaQuery.of(context).size.height * (0.35),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20.0),
+                                  border: Border.all(
+                                    color: Colors.orange[200],
+                                  ),
+                                ),
+                                child: Padding(
+                                  padding: EdgeInsets.all(20.0),
+                                  child: Column(
+                                    children: <Widget>[
+                                      Row(
+                                        children: <Widget>[
+                                          Image.asset(
+                                            'assets/bprd.png',
+                                            width: 50.0,
+                                            height: 50.0,
+                                          ),
+                                          SizedBox(width: 20.0),
+                                          Text(
+                                            'Bribe Reporting',
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.w700,
+                                              fontSize: 20.0,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      SizedBox(height: 10.0),
+                                      Text(
+                                        'A simple way to report a bribe with assured security of evidence while submitting the data. The fast way to make your complain reach the official for quick actions.',
+                                        maxLines: 10,
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 15.0,
+                                        ),
+                                      ),
+                                      SizedBox(height: 10.0),
+                                      GestureDetector(
+                                        onTap: () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      BribeReport()));
+                                        },
+                                        child: Row(
+                                          children: <Widget>[
+                                            Text(
+                                              'Bribe Reporting',
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.w500,
+                                                  fontSize: 18.0),
+                                            ),
+                                            SizedBox(width: 20.0),
+                                            Icon(
+                                              Icons.arrow_forward,
+                                              color: Colors.orangeAccent,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              SizedBox(height: 20.0),
+
+                              // Live Stream
+                        Container(
+                          width: MediaQuery.of(context).size.width,
+                          height: MediaQuery.of(context).size.height * (0.35),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20.0),
+                            border: Border.all(
+                              color: Colors.orange[200],
+                            ),
+                          ),
+                          child: Padding(
+                            padding: EdgeInsets.all(20.0),
+                            child: Column(
+                              children: <Widget>[
+                                Row(
+                                  children: <Widget>[
+                                    Image.asset('assets/live.png',
+                                      width: 50.0,
+                                      height: 50.0,
+                                    ),
+                                    SizedBox(width: 20.0),
+                                    Text('Live Stream',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.w700,
+                                        fontSize: 20.0,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(height: 10.0),
+                                Text('A way from where you can stream a live video which is hosted to the admin side having your name and the current location for exposing corruption.',
+                                  maxLines: 10,
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 15.0,
+                                  ),
+                                ),
+                                SizedBox(height: 10.0),
+                                GestureDetector(
+                                  onTap: () {
+                                    locator();
+                                    Navigator.push(context, MaterialPageRoute(
+                                        builder: (context) => IndexPage(streamAddress: currentAddress)
+                                    ));
+                                  },
+                                  child: Row(
+                                    children: <Widget>[
+                                      Text('Stream Live',
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: 18.0
+                                        ),
+                                      ),
+                                      SizedBox(width: 20.0),
+                                      Icon(Icons.arrow_forward,
+                                        color: Colors.orangeAccent,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: 20.0),
+
+                              // Aharya Blogs
+                              Container(
+                                width: MediaQuery.of(context).size.width,
+                                height:
+                                    MediaQuery.of(context).size.height * (0.35),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20.0),
+                                  border: Border.all(
+                                    color: Colors.orange[200],
+                                  ),
+                                ),
+                                child: Padding(
+                                  padding: EdgeInsets.all(20.0),
+                                  child: Column(
+                                    children: <Widget>[
+                                      Row(
+                                        children: <Widget>[
+                                          Image.asset(
+                                            'assets/blog_icon.png',
+                                            width: 50.0,
+                                            height: 50.0,
+                                          ),
+                                          SizedBox(width: 20.0),
+                                          Text(
+                                            'Aharya Blogs',
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.w700,
+                                              fontSize: 20.0,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      SizedBox(height: 10.0),
+                                      Text(
+                                        'A first of the blog application where you can blog about any unusual event occurred and the blog would directly be recognized by the Bureau of Police and Research Department. Take a look at the blog by other users.',
+                                        maxLines: 10,
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 15.0,
+                                        ),
+                                      ),
+                                      SizedBox(height: 10.0),
+                                      GestureDetector(
+                                        onTap: () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      ListPost()));
+                                        },
+                                        child: Row(
+                                          children: <Widget>[
+                                            Text(
+                                              'Aharya Blogs',
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.w500,
+                                                  fontSize: 18.0),
+                                            ),
+                                            SizedBox(width: 20.0),
+                                            Icon(
+                                              Icons.arrow_forward,
+                                              color: Colors.orangeAccent,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
-            ),
-          ],
-        ),
       ),
     );
   }
