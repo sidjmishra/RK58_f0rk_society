@@ -81,4 +81,20 @@ class DataMethods {
         .where('users', arrayContains: userName)
         .snapshots();
   }
+
+  submitFeedback(String uid, String type, String docid, String feedback,
+      String rating) async {
+    print('pushing data');
+    print(docid);
+    print(type);
+    await Firestore.instance
+        .collection(type)
+        .document(uid)
+        .collection('all_data')
+        .document(docid)
+        .setData({
+      'feedback': feedback,
+      'rating': rating,
+    }, merge: true);
+  }
 }
