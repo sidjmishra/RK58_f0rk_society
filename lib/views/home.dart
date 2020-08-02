@@ -11,7 +11,7 @@ import 'package:block/views/DelayAction/delayAction.dart';
 import 'package:block/views/FirNcr/Reporting.dart';
 import 'package:block/views/JailManagement/jailManage.dart';
 import 'package:block/views/NOC/Noc.dart';
-import 'package:block/views/Profile/profileView.dart';
+import 'package:block/views/Profile/profile.dart';
 import 'package:block/views/helpline.dart';
 import 'package:block/views/Status/status.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -71,8 +71,7 @@ class _HomePageState extends State<HomePage> {
               snapshotUserName.documents[index].data['First Name'] +
                   ' ' +
                   snapshotUserName.documents[index].data['Last Name'];
-          HotConstants.myPhone =
-          snapshotUserName.documents[index].data['Phone Number'];
+//          HotConstants.myPhone = snapshotUserName.documents[index].data['Phone Number'];
           HotConstants.myUID =
               snapshotUserName.documents[index].data['U.I.D type'] +
                   ': ' +
@@ -390,7 +389,7 @@ class _HomePageState extends State<HomePage> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) {
-                    return ProfileView();
+                    return Profile();
                   }),
                 );
               },
@@ -427,7 +426,22 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
         ),
-        child: Column(
+        child: HotConstants.myPhone == null
+            ? Column(
+          children: <Widget>[
+            Text('User Not verified'),
+            SizedBox(height: 20.0),
+            RaisedButton(
+              onPressed: () {
+                Navigator.pushReplacement(context, MaterialPageRoute(
+                    builder: (context) => Profile()
+                ));
+              },
+              color: Colors.orangeAccent,
+              child: Text('Add Information'),
+            ),
+          ],
+        ) :  Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Padding(

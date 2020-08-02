@@ -67,8 +67,21 @@ class _ProfileViewState extends State<ProfileView> {
           ),
         ),
       ),
-      body: name == null ? Center(
-        child: CircularProgressIndicator(),
+      body: HotConstants.myPhone == null
+          ? Column(
+        children: <Widget>[
+          Text('User Not verified'),
+          SizedBox(height: 20.0),
+          RaisedButton(
+            onPressed: () {
+              Navigator.pushReplacement(context, MaterialPageRoute(
+                  builder: (context) => Profile()
+              ));
+            },
+            color: Colors.orangeAccent,
+            child: Text('Add Information'),
+          ),
+        ],
       ) : SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.all(20.0),

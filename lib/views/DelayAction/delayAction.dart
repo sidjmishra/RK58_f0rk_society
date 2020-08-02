@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:block/modal/constants.dart';
 import 'package:block/views/DelayAction/delayData.dart';
+import 'package:block/views/Profile/profile.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:block/Animation/FadeAnimation.dart';
@@ -165,7 +166,22 @@ class _DelayActionState extends State<DelayAction> {
           ),
         ],
       ),
-      body: Container(
+      body: HotConstants.myPhone == null
+          ? Column(
+        children: <Widget>[
+          Text('User Not verified'),
+          SizedBox(height: 20.0),
+          RaisedButton(
+            onPressed: () {
+              Navigator.pushReplacement(context, MaterialPageRoute(
+                  builder: (context) => Profile()
+              ));
+            },
+            color: Colors.orangeAccent,
+            child: Text('Add Information'),
+          ),
+        ],
+      ) : Container(
         width: double.infinity,
         decoration: BoxDecoration(
           gradient: LinearGradient(

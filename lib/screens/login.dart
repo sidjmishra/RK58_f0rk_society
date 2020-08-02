@@ -1,4 +1,5 @@
 import 'package:block/Animation/FadeAnimation.dart';
+import 'package:block/screens/signup.dart';
 import 'package:block/services/auth.dart';
 import 'package:block/services/location.dart';
 import 'package:block/views/home.dart';
@@ -10,8 +11,8 @@ import 'package:block/screens/reset.dart';
 import 'package:block/components/transition.dart';
 
 class LogIn extends StatefulWidget {
-  final Function toggle;
-  LogIn(this.toggle);
+//  final Function toggle;
+//  LogIn(this.toggle);
 
   @override
   _LogInState createState() => _LogInState();
@@ -406,7 +407,9 @@ class _LogInState extends State<LogIn> {
                                     child: Center(
                                       child: FlatButton(
                                         onPressed: () {
-                                          widget.toggle();
+//                                          widget.toggle();
+                                            Navigator.pushReplacement(
+                                                context, MaterialPageRoute(builder: (context) => SignUp()));
                                         },
                                         child: Text(
                                           'SignUp',

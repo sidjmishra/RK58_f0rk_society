@@ -1,12 +1,13 @@
 import 'package:block/Animation/FadeAnimation.dart';
+import 'package:block/screens/login.dart';
 import 'package:block/services/auth.dart';
 import 'package:block/services/database.dart';
 import 'package:block/views/Profile/profile.dart';
 import 'package:flutter/material.dart';
 
 class SignUp extends StatefulWidget {
-  final Function toggle;
-  SignUp(this.toggle);
+//  final Function toggle;
+//  SignUp(this.toggle);
 
   @override
   _SignUpState createState() => _SignUpState();
@@ -16,7 +17,6 @@ class _SignUpState extends State<SignUp> {
   bool isLoading = false;
 
   final _formKey = GlobalKey<FormState>();
-
   AuthMethods authMethods = AuthMethods();
   UserDatabaseServices userDatabaseServices = UserDatabaseServices();
 
@@ -34,16 +34,11 @@ class _SignUpState extends State<SignUp> {
       });
 
       await authMethods
-          .signUpWithEmailAndPassword(
-              emailText.text, passwordText.text, userNameText.text)
+          .signUpWithEmailAndPassword(emailText.text, passwordText.text, userNameText.text)
           .then(
-        (value) {
+            (value) {
           print('$value');
           if (value != 'error') {
-            email = emailText.text;
-            password = passwordText.text;
-
-            print('$email \n $password');
             Navigator.pushReplacement(
                 context, MaterialPageRoute(builder: (context) => Profile()));
           }
@@ -73,7 +68,7 @@ class _SignUpState extends State<SignUp> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                SizedBox(height: 40),
+                SizedBox(height: 20),
                 Padding(
                   padding: EdgeInsets.all(20),
                   child: Column(
@@ -88,24 +83,14 @@ class _SignUpState extends State<SignUp> {
                           ),
                         ),
                       ),
-                      SizedBox(height: 10),
-                      FadeAnimation(
-                        1.3,
-                        Text(
-                          'Welcome!',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 18,
-                          ),
-                        ),
-                      ),
                     ],
                   ),
                 ),
-                SizedBox(height: 20),
+                SizedBox(height: 5),
                 Expanded(
                   child: SingleChildScrollView(
                     child: Container(
+                      height: MediaQuery.of(context).size.height,
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.only(
@@ -277,34 +262,34 @@ class _SignUpState extends State<SignUp> {
                               SizedBox(height: 30),
                               FadeAnimation(
                                 1.7,
-                                Container(
-                                  height: 40,
-                                  margin: EdgeInsets.symmetric(horizontal: 50),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(50),
-                                    color: Colors.orange[900],
-                                  ),
-                                  child: Center(
-                                    child: FlatButton(
-                                      onPressed: () async {
-                                        var val = await signMeUp();
-                                        if (val == 'error') {
-                                          print('error recieved');
-                                          Scaffold.of(context).showSnackBar(
-                                            SnackBar(
-                                              content: Text(authMethods.err),
-                                            ),
-                                          );
-                                        }
-                                      },
-                                      child: Text(
-                                        'SignUp',
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.bold,
+                                GestureDetector(
+                                  onTap: () async {
+                                    var val = await signMeUp();
+                                    if (val == 'error') {
+                                      print('error received');
+                                      Scaffold.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(authMethods.err),
                                         ),
-                                      ),
+                                      );
+                                    }
+                                  },
+                                  child: Container(
+                                    height: 40,
+                                    margin: EdgeInsets.symmetric(horizontal: 50),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(50),
+                                      color: Colors.orange[900],
+                                    ),
+                                    child: Center(
+                                        child: Text(
+                                          'SignUp',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
                                     ),
                                   ),
                                 ),
@@ -319,37 +304,29 @@ class _SignUpState extends State<SignUp> {
                               ),
                               SizedBox(height: 10),
                               FadeAnimation(
-                                1.6,
-                                Text(
-                                  'OR',
-                                  style: TextStyle(
-                                    color: Colors.grey,
-                                  ),
-                                ),
-                              ),
-                              SizedBox(height: 10),
-                              FadeAnimation(
                                 1.7,
-                                Container(
-                                  height: 40,
-                                  margin: EdgeInsets.symmetric(horizontal: 50),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(50),
-                                    color: Colors.orange[400],
-                                  ),
-                                  child: Center(
-                                    child: FlatButton(
-                                      onPressed: () {
-                                        widget.toggle;
-                                      },
-                                      child: Text(
-                                        'Login',
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.bold,
+                                GestureDetector(
+                                  onTap: () {
+//                                    widget.toggle;
+                                    Navigator.pushReplacement(
+                                        context, MaterialPageRoute(builder: (context) => LogIn()));
+                                  },
+                                  child: Container(
+                                    height: 40,
+                                    margin: EdgeInsets.symmetric(horizontal: 50),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(50),
+                                      color: Colors.orange[400],
+                                    ),
+                                    child: Center(
+                                        child: Text(
+                                          'Login',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.bold,
+                                          ),
                                         ),
-                                      ),
                                     ),
                                   ),
                                 ),

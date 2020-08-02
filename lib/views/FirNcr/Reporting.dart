@@ -1,4 +1,6 @@
+import 'package:block/modal/constants.dart';
 import 'package:block/views/FirNcr/FirNcr.dart';
+import 'package:block/views/Profile/profile.dart';
 import 'package:flutter/material.dart';
 
 class Reporting extends StatefulWidget {
@@ -21,7 +23,22 @@ class _ReportingState extends State<Reporting> {
           style: TextStyle(color: Colors.white),
         ),
       ),
-      body: SingleChildScrollView(
+      body: HotConstants.myPhone == null
+          ? Column(
+        children: <Widget>[
+          Text('User Not verified'),
+          SizedBox(height: 20.0),
+          RaisedButton(
+            onPressed: () {
+              Navigator.pushReplacement(context, MaterialPageRoute(
+                  builder: (context) => Profile()
+              ));
+            },
+            color: Colors.orangeAccent,
+            child: Text('Add Information'),
+          ),
+        ],
+      ) : SingleChildScrollView(
         child: Container(
           decoration: BoxDecoration(
             color: Colors.white,

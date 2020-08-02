@@ -1,9 +1,11 @@
+import 'dart:math';
+
 import 'package:block/Animation/FadeAnimation.dart';
 import 'package:block/modal/constants.dart';
+import 'package:block/screens/otp.dart';
 import 'package:block/services/auth.dart';
 import 'package:block/services/database.dart';
 import 'package:block/views/Profile/profileData.dart';
-import 'package:block/views/home.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -25,6 +27,8 @@ class _ProfileState extends State<Profile> {
   DataMethods dataMethods = DataMethods();
   final _auth = FirebaseAuth.instance;
   final _formKey = GlobalKey<FormState>();
+
+  QuerySnapshot querySnapshot;
 
   TextEditingController firstName = TextEditingController();
   TextEditingController lastName = TextEditingController();
@@ -74,7 +78,7 @@ class _ProfileState extends State<Profile> {
     'Uttar Pradesh',
     'West Bengal'
   ];
-  final _idType = ['Passport', 'PAN Card', 'Aadhar Card'];
+  final _idType = ['Aadhar Card'];
   final _gender = ['Male', 'Female', 'Other'];
   String hintState = 'Select State';
   String hintID = 'Select UID type';
@@ -182,6 +186,7 @@ class _ProfileState extends State<Profile> {
               Constants.myUid,
               firstName.text,
               lastName.text,
+              Constants.myEmail,
               _currentSelectedGender,
               dateCtl.text,
               add_1.text,
@@ -194,13 +199,24 @@ class _ProfileState extends State<Profile> {
               idNumber.text,
               urls)
           .then((value) {
+            getPhone(idNumber.text);
         Navigator.pushReplacement(context, MaterialPageRoute(
-          builder: (context) => HomePage()
+          builder: (context) => Otp()
         ));
       });
     } else {
       return 'error';
     }
+  }
+
+  Future getPhone(String aadhar) async {
+    querySnapshot = await Firestore.instance.collection('Aadhar Card').getDocuments();
+    for (var index = 0; index < querySnapshot.documents.length; index++) {
+      if(querySnapshot.documents[index].data['Aadhar'] == aadhar) {
+        HotConstants.myPhone = await querySnapshot.documents[index].data['Phone'];
+      }
+    }
+    print(HotConstants.myPhone);
   }
 
   @override
@@ -461,7 +477,7 @@ class _ProfileState extends State<Profile> {
                       maxLength: 10,
                       maxLines: null,
                       controller: userContact,
-                      keyboardType: TextInputType.text,
+                      keyboardType: TextInputType.phone,
                       decoration: InputDecoration(
                         hintText: 'Phone Number',
                         hintStyle: TextStyle(color: Colors.grey[300]),

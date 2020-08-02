@@ -9,11 +9,12 @@ class ProfileData {
 
   CollectionReference collectionReference = Firestore.instance.collection('User Details');
 
-  Future userSubmitted(String uid, String firstName, String lastName, String gender, String dob, String address1, String address2, String pincode, String city, String phone, String state, String type, String idNumber, urls) async {
+  Future userSubmitted(String uid, String firstName, String lastName, String email, String gender, String dob, String address1, String address2, String pincode, String city, String phone, String state, String type, String idNumber, urls) async {
     await collectionReference.document(uid).setData({
       'uid': uid,
       'First Name': firstName,
       'Last Name': lastName,
+      'Email': email,
       'Gender': gender,
       'Date of Birth': dob,
       'Address Line 1': address1,
@@ -25,6 +26,7 @@ class ProfileData {
       'U.I.D type': type,
       'U.I.D number': idNumber,
       'Urls': urls,
+      'User': 'Not Verified'
     });
   }
 }

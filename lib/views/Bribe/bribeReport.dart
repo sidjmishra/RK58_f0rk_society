@@ -1,5 +1,7 @@
+import 'package:block/modal/constants.dart';
 import 'package:block/views/Bribe/paidBribe.dart';
 import 'package:block/views/Bribe/unusualIncident.dart';
+import 'package:block/views/Profile/profile.dart';
 import 'package:flutter/material.dart';
 
 class BribeReport extends StatefulWidget {
@@ -22,7 +24,22 @@ class _BribeReportState extends State<BribeReport> {
           style: TextStyle(color: Colors.white),
         ),
       ),
-      body: SingleChildScrollView(
+      body: HotConstants.myPhone == null
+          ? Column(
+        children: <Widget>[
+          Text('User Not verified'),
+          SizedBox(height: 20.0),
+          RaisedButton(
+            onPressed: () {
+              Navigator.pushReplacement(context, MaterialPageRoute(
+                  builder: (context) => Profile()
+              ));
+            },
+            color: Colors.orangeAccent,
+            child: Text('Add Information'),
+          ),
+        ],
+      ) :  SingleChildScrollView(
         child: Container(
           decoration: BoxDecoration(
             color: Colors.white,

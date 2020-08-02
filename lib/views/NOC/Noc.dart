@@ -7,6 +7,7 @@ import 'package:block/components/dropdowncategory.dart';
 import 'package:block/modal/constants.dart';
 import 'package:block/services/auth.dart';
 import 'package:block/views/NOC/NOCData.dart';
+import 'package:block/views/Profile/profile.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -171,7 +172,22 @@ class _NOCState extends State<NOC> {
         ],
       ),
       // Add validator
-      body: Container(
+      body: HotConstants.myPhone == null
+          ? Column(
+        children: <Widget>[
+          Text('User Not verified'),
+          SizedBox(height: 20.0),
+          RaisedButton(
+            onPressed: () {
+              Navigator.pushReplacement(context, MaterialPageRoute(
+                  builder: (context) => Profile()
+              ));
+            },
+            color: Colors.orangeAccent,
+            child: Text('Add Information'),
+          ),
+        ],
+      ) : Container(
         width: double.infinity,
         decoration: BoxDecoration(
           gradient: LinearGradient(
