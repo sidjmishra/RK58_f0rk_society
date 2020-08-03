@@ -4,12 +4,8 @@ import pyrebase
 import firebase_admin
 from firebase_admin import credentials, firestore, auth, threading
 from django.core.mail import send_mail
-import cv2
-import os
-#import face_recognition
-import urllib.request as req
-import time
 import datetime
+import os
 from django.http import JsonResponse
 from django.utils.crypto import get_random_string
 
@@ -28,7 +24,9 @@ config={
 firebase = pyrebase.initialize_app(config)
 authpy = firebase.auth()
 
-cred = credentials.Certificate("home\\assets\\bribe-block-firebase-adminsdk-d9igq-1b0de61f8c.json")
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+c = str(BASE_DIR)+"/home/assets/bribe-block-firebase-adminsdk-d9igq-1b0de61f8c.json"
+cred = credentials.Certificate(f'{c}')
 firebase_admin.initialize_app(cred)
 
 db = firestore.client()
@@ -228,6 +226,17 @@ def details(request, category, user, uid, case_id):
             image_evidence.pop()
         if len(video_evidence)>=1:
             video_evidence.pop()
+
+        for i in range(image_evidence.count('http://ipfs.io/ipfs/')):
+            image_evidence.remove('http://ipfs.io/ipfs/')
+        for i in range(image_evidence.count('http://ipfs.io/ipfs/undefined')):
+            image_evidence.remove('http://ipfs.io/ipfs/undefined')
+
+        for i in range(video_evidence.count('http://ipfs.io/ipfs/')):
+            video_evidence.remove('http://ipfs.io/ipfs/')
+        for i in range(video_evidence.count('http://ipfs.io/ipfs/undefined')):
+            video_evidence.remove('http://ipfs.io/ipfs/undefined')
+
         if data['Status'] == 'Pending':
             db.collection(category).document(uid).collection(u'all_data').document(case_id).set({
                 u'Status': u'In Process'
@@ -327,6 +336,18 @@ def details(request, category, user, uid, case_id):
                 u'Status': u'Assessed'
             }, merge=True)
             return redirect(unusualBehaviour, user=user)
+        if request.GET.get('evid')=='evidence':
+            vlen = request.GET.get('vlen')
+            ilen = request.GET.get('ilen')
+            vids = []
+            imgs = []
+            for i in range(int(ilen)):
+                imgs.append(request.GET.get('i'+str(i+1)))
+            for v in range(int(vlen)):
+                vids.append(request.GET.get('i'+str(i+1)))
+            print(imgs)
+            print(vids)
+            face_recog()
 
         print("***************",category,"**************")
         doc_ref = db.collection(category).document(uid).collection(u'all_data').document(case_id)
@@ -335,11 +356,30 @@ def details(request, category, user, uid, case_id):
         data = {}
         for i in sorted(case_data):
             data[i] = case_data[i]
+
+        temp = db.collection('EvidenceLinks').document(data['id']).get().to_dict()
+        image_evidence = temp['EvidenceLinkImage']
+        video_evidence = temp['EvidenceLinkVideo']
+        if len(image_evidence) >= 1:
+            image_evidence.pop()
+        if len(video_evidence)>=1:
+            video_evidence.pop()
+
+        for i in range(image_evidence.count('http://ipfs.io/ipfs/')):
+            image_evidence.remove('http://ipfs.io/ipfs/')
+        for i in range(image_evidence.count('http://ipfs.io/ipfs/undefined')):
+            image_evidence.remove('http://ipfs.io/ipfs/undefined')
+
+        for i in range(video_evidence.count('http://ipfs.io/ipfs/')):
+            video_evidence.remove('http://ipfs.io/ipfs/')
+        for i in range(video_evidence.count('http://ipfs.io/ipfs/undefined')):
+            video_evidence.remove('http://ipfs.io/ipfs/undefined')
+
         if data['Status'] == 'Pending':
             db.collection(category).document(uid).collection(u'all_data').document(case_id).set({
                 u'Status': u'In Process'
             }, merge=True)
-        return render(request, "ubDetails.html", {"user":request.session['username'], "data":data, "metadata":metadata})
+        return render(request, "ubDetails.html", {"user":request.session['username'], "data":data, "images":image_evidence, "videos":video_evidence, "metadata":metadata})
     
 def paidBribe(request, user):
 
@@ -620,7 +660,7 @@ def police(request):
 def faceevidence(request, doc_id, rep_id):
     report = db.collection(u'Hot Report').document(u'{}'.format(doc_id)).collection(u'all_data').document(u'{}'.format(rep_id)).get().to_dict()['Url']
     l=[report]
-    face_recog(l)
+    # face_recog(l)
     BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     UNKNOWN_FACES_DIR = str(BASE_DIR)+'\\home\\evidence'
     for filename in os.listdir(UNKNOWN_FACES_DIR):

@@ -84,10 +84,10 @@
                                         <button type="submit" name="evid" class="btn btn-info btn-sm" value="evidence">Send Response</button>
                                     </form>
                                     {% if c == 'PaidBribe' %}
-                                        <a href="{% url "details" category=c user=user uid=j case_id=i %}" style="text-decoration:none; color: white;" class="btn btn-primary btn-sm">View Case Details</a>
+                                        <a href="{% url "details" category=c user=user uid=j case_id=d|getkey:"Requested Complain ID" %}" style="text-decoration:none; color: white;" class="btn btn-primary btn-sm">View Case Details</a>
                                     {% endif %}
                                     {% if c == 'FIR' or c == 'NOC' or c == 'Hot Report' %}
-                                        <a href="{% url "details" category=c user=user uid=j case_id=d|getkey:"Requested Complain ID" %}" style="text-decoration:none; color: white;" class="btn btn-primary btn-sm">View Case Details</a>
+                                        <a href="{% url "details" category=c user=user uid=j case_id=i %}" style="text-decoration:none; color: white;" class="btn btn-primary btn-sm">View Case Details</a>
                                     {% endif %}
                                 </li>
                             {% endfor %}
