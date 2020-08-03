@@ -5,8 +5,12 @@ Name of Solution-Aharya
 Database - Firebase
 emailid(firebase)-sidjmishra007@student.sfit.ac.in
 password(firebase)-siddevy@2513
+user app = Dart(flutter)
+admin web-app = Python-Django
+admin app = Dart(flutter)
 
-***note***-this repo consist of multiple branches and each branch is been associated with our main entities. 
+***note***-this repo consist of multiple branches and each branch is been associated with our main entities. ex app branch hass the code for user application 
+
 This description shows our implementation till round 3
 
 Here we have tried to provide basic functionality of reporting updating the status of reports submitted by the user
