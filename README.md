@@ -19,7 +19,7 @@ we have 3 main entity
 2-Aharya website(Admin)
 3.Aharya app(admin)
 
-*****Aharya App**********
+***Aharya App****
 
 
 It is an cross platform application which is been build with the help of flutter. Initially it serves to to perform basic functionality of reporting a bribe and reporting 
