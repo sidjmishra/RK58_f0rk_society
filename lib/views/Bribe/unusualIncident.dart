@@ -58,10 +58,10 @@ class _HonestOfficialState extends State<HonestOfficial> {
   String subLocal;
 
   // Files
-  List<String> urls = [];
-  List _paths;
-  String _extension;
-  DateTime dateNow = DateTime.now();
+//  List<String> urls = [];
+//  List _paths;
+//  String _extension;
+//  DateTime dateNow = DateTime.now();
 
 //  Future openFileExplorer() async {
 //    try {
@@ -124,7 +124,7 @@ class _HonestOfficialState extends State<HonestOfficial> {
     _currentSelectedState = null;
     dateCtl.clear();
     userContact.clear();
-    urls.clear();
+//    urls.clear();
   }
 
   void setBlock() {
@@ -149,7 +149,12 @@ class _HonestOfficialState extends State<HonestOfficial> {
           pickedCountry,
           pickedCountryName,
 //          urls
-      ).then((value) {});
+      ).then((value) {
+        Clipboard.setData(ClipboardData(text: id));
+        Navigator.push(context, MaterialPageRoute(
+            builder: (context) => DataModel()
+        ));
+      });
     }
   }
 
@@ -1028,13 +1033,6 @@ class _HonestOfficialState extends State<HonestOfficial> {
                                   onPressed: () {
                                     setBlock();
 //                                    openFileExplorer();
-                                    setState(() {
-                                      isLoading = true;
-                                    });
-                                    Clipboard.setData(ClipboardData(text: id));
-                                    Navigator.push(context, MaterialPageRoute(
-                                        builder: (context) => DataModel()
-                                    ));
                                   },
                                   child: Text('Add files'),
                                 ),

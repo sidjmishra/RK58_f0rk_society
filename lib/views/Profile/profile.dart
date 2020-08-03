@@ -199,9 +199,9 @@ class _ProfileState extends State<Profile> {
               idNumber.text,
               urls)
           .then((value) {
-            getPhone(idNumber.text);
+//            getPhone(idNumber.text);
         Navigator.pushReplacement(context, MaterialPageRoute(
-          builder: (context) => Otp()
+          builder: (context) => Otp(phone: userContact.text)
         ));
       });
     } else {
@@ -209,15 +209,15 @@ class _ProfileState extends State<Profile> {
     }
   }
 
-  Future getPhone(String aadhar) async {
-    querySnapshot = await Firestore.instance.collection('Aadhar Card').getDocuments();
-    for (var index = 0; index < querySnapshot.documents.length; index++) {
-      if(querySnapshot.documents[index].data['Aadhar'] == aadhar) {
-        HotConstants.myPhone = await querySnapshot.documents[index].data['Phone'];
-      }
-    }
-    print(HotConstants.myPhone);
-  }
+//  Future getPhone(String aadhar) async {
+//    querySnapshot = await Firestore.instance.collection('Aadhar Card').getDocuments();
+//    for (var index = 0; index < querySnapshot.documents.length; index++) {
+//      if(querySnapshot.documents[index].data['Aadhar'] == aadhar) {
+//        HotConstants.myPhone = await querySnapshot.documents[index].data['Phone'];
+//      }
+//    }
+//    print(HotConstants.myPhone);
+//  }
 
   @override
   void initState() {

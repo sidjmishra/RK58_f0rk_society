@@ -28,6 +28,7 @@ class _DelayActionState extends State<DelayAction> {
     'NCR Reporting',
     'NOC Filing'
   ];
+  final noData = ['No data'];
   String hintApplication = 'Select Application Type';
   String complains = 'Select the id';
   var _currentComplains;
@@ -54,15 +55,33 @@ class _DelayActionState extends State<DelayAction> {
     for (var index = 0; index < querySnapshot.documents.length; index++) {
       dateFile =
           DateTime.parse(querySnapshot.documents[index].data['Date of Filing']);
-      if (dateNow.difference(dateFile).inDays > 1) {
+      print(dateFile);
+      print(dateNow.difference(dateFile).inDays);
+      if (dateNow.difference(dateFile).inDays + 1 > 1) {
         if (coll == 'PaidBribe' && col == 'all_data') {
-          bribeIDs.add(querySnapshot.documents[index].data['id'].toString());
+          if(bribeIDs.contains(querySnapshot.documents[index].data['id'].toString())){
+            print('err');
+          } else {
+            bribeIDs.add(querySnapshot.documents[index].data['id'].toString());
+          }
         } else if (coll == 'FIR_NCR' && col == 'FIR') {
-          firIDs.add(querySnapshot.documents[index].data['id'].toString());
+          if(firIDs.contains(querySnapshot.documents[index].data['id'].toString())){
+            print('err');
+          } else {
+            firIDs.add(querySnapshot.documents[index].data['id'].toString());
+          }
         } else if (coll == 'FIR_NCR' && col == 'NCR') {
-          ncrIDs.add(querySnapshot.documents[index].data['id'].toString());
+          if(ncrIDs.contains(querySnapshot.documents[index].data['id'].toString())){
+            print('err');
+          } else{
+            ncrIDs.add(querySnapshot.documents[index].data['id'].toString());
+          }
         } else if (coll == 'NOC' && col == 'all_data') {
-          nocIDs.add(querySnapshot.documents[index].data['id'].toString());
+          if(nocIDs.contains(querySnapshot.documents[index].data['id'].toString())){
+            print('err');
+          } else{
+            nocIDs.add(querySnapshot.documents[index].data['id'].toString());
+          }
         } else {
           print('error');
         }
@@ -429,7 +448,8 @@ class _DelayActionState extends State<DelayAction> {
                                                         ),
                                                       ),
                                                     )
-                                                  : Container(
+                                                  : _currentApplication ==
+                                          'NOC Filing' ? Container(
                                                       child: DropdownButton<
                                                           String>(
                                                         items: nocIDs.map((String
@@ -458,7 +478,36 @@ class _DelayActionState extends State<DelayAction> {
                                                                   .grey[300]),
                                                         ),
                                                       ),
-                                                    ),
+                                                    ) : Container(
+                                        child: DropdownButton<
+                                            String>(
+                                          items: noData.map((String
+                                          dropDownStringItem) {
+                                            return DropdownMenuItem<
+                                                String>(
+                                              value:
+                                              dropDownStringItem,
+                                              child: Text(
+                                                  dropDownStringItem),
+                                            );
+                                          }).toList(),
+                                          value:
+                                          _currentComplains,
+                                          onChanged: (String
+                                          newValueSelected) {
+                                            setState(() {
+                                              _currentComplains =
+                                                  newValueSelected;
+                                            });
+                                          },
+                                          hint: Text(
+                                            complains,
+                                            style: TextStyle(
+                                                color: Colors
+                                                    .grey[300]),
+                                          ),
+                                        ),
+                                      ),
                                     ],
                                   ),
                                 ),

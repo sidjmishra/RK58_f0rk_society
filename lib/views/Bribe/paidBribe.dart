@@ -8,6 +8,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/services.dart';
+import 'package:mime/mime.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:block/Animation/FadeAnimation.dart';
@@ -18,6 +19,7 @@ import 'package:country_pickers/country.dart';
 import 'package:flutter/cupertino.dart';
 import 'PaidBribeData.dart';
 import 'package:http/http.dart' as http;
+import 'package:http_parser/http_parser.dart';
 
 class PaidBribe extends StatefulWidget {
   @override
@@ -115,20 +117,13 @@ class _PaidBribeState extends State<PaidBribe> {
 //  Future openFileExplorer() async {
 //    try {
 //      var _path;
-//
+
 //      StorageUploadTask storageUploadTask;
 //      StorageReference storageReference;
 //      _paths = await FilePicker.getMultiFile(
 //        type: FileType.custom,
 //        allowedExtensions: ['jpg', 'jpeg', 'png', 'svg', 'mp4'],
 //      );
-
-//      storageReference = FirebaseStorage.instance.ref().child('PaidBribe');
-//      storageUploadTask = storageReference.child(date.toString() + '.$_extension').putFile(_path);
-//      String url = await (await storageUploadTask.onComplete).ref.getDownloadURL();
-//      if(_path != null) {
-//        await uploadData(_path.toString());
-//      }
 
 //      _paths.forEach((filePath) async {
 //        _extension = filePath.toString().split('.').last.toLowerCase();
@@ -147,15 +142,19 @@ class _PaidBribeState extends State<PaidBribe> {
 //        }
 //      });
 
-//      _path = await FilePicker.getMultiFile(
+//      File _path;
+//      _path = await FilePicker.getFile(
 //        type: FileType.custom,
-//        allowedExtensions: ['jpg', 'jpeg', 'png', 'svg', 'mp4'],
+//        allowedExtensions: ['jpg', 'jpeg', 'png', 'JPG', 'JPEG', 'PNG'],
 //      );
 //
 //      if(_path != null) {
-//        await uploadData(_path.toString());
+//        Map<String, dynamic> response;
+//        response = await uploadData(_path);
+//        print(response);
+//
 //      }
-
+//
 //    } on PlatformException catch (e) {
 //      print(e.toString());
 //    }
@@ -163,20 +162,36 @@ class _PaidBribeState extends State<PaidBribe> {
 //      return;
 //    }
 //  }
+//
+//  Uri address = Uri.parse('https://ipfsapi.herokuapp.com/api/ipfsRoutes/viewfromblockchain');
 
-//  Future uploadData(var path) async {
-
+//  Future<Map<String, dynamic>> uploadData(File evidence) async {
 //    var request = http.MultipartRequest('POST', Uri.parse('https://ipfsapi.herokuapp.com/api/ipfsRoutes/viewfromblockchain'));
 //    request.files.add(
 //      http.MultipartFile.fromBytes(
 //          'bufferfile',
 //          File(path).readAsBytesSync(),
-//          filename: path.split('/').last
 //      )
 //    );
 //    var res = await request.send();
 //    print(res.statusCode);
+
+//    var _path;
+//    _path = await FilePicker.getFile(
+//      type: FileType.custom,
+//      allowedExtensions: ['jpg', 'jpeg', 'png', 'svg', 'mp4'],
+//    );
+//    print(_path);
 //
+//    var request = http.MultipartRequest('POST', Uri.parse('https://ipfsapi.herokuapp.com/api/ipfsRoutes/viewfromblockchain'));
+//    request.files.add(
+//        await http.MultipartFile.fromPath(
+//            'bufferfile', '$_path'
+//        )
+//    );
+//    var res = await request.send();
+//    print(res.statusCode);
+
 //    Map data;
 //    String body;
 //    http.Response response;
@@ -188,11 +203,33 @@ class _PaidBribeState extends State<PaidBribe> {
 //
 //    response = await http.post(
 //      'https://ipfsapi.herokuapp.com/api/ipfsRoutes/uploadfiles',
-//      headers: {'Content-Type': 'application/json'},
+//      headers: {'Content-Type': 'multipart/form-data'},
 //      body: body,
 //    );
+//    print(response.reasonPhrase);
 //    print(response.statusCode);
 //    print(response.headers);
+
+  // Final try
+//    final mimeTypeData = lookupMimeType(evidence.path, headerBytes: [0xFF, 0xD8]).split('/');
+//    final uplaodRequest = http.MultipartRequest('POST', address);
+//    final file = await http.MultipartFile.fromPath('bufferfile', evidence.path,
+//      contentType: MediaType(mimeTypeData[0], mimeTypeData[1])
+//    );
+//
+//    uplaodRequest.files.add(file);
+//
+//    try{
+//      final streamedResponse = await uplaodRequest.send();
+//      final response = await http.Response.fromStream(streamedResponse);
+//      if(response.statusCode != 200) {
+//        return {'response': '${response.statusCode}'};
+//      }
+//      final Map<String, dynamic> responseData = json.decode(response.body);
+//      return responseData;
+//    } catch(e) {
+//      return e;
+//    }
 //  }
 
   void randomId() async {
@@ -257,6 +294,11 @@ class _PaidBribeState extends State<PaidBribe> {
         pickedCountryName.toString(),
 //              urls
       ).then((value) {
+        Clipboard.setData(ClipboardData(text: id));
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => DataModel()));
       });
     }
   }
@@ -1082,15 +1124,8 @@ class _PaidBribeState extends State<PaidBribe> {
                           OutlineButton(
                             onPressed: () {
                               setBlock();
-                              setState(() {
-                                isLoading = true;
-                              });
-                              Clipboard.setData(ClipboardData(text: id));
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => DataModel()));
-//                              openFileExplorer();
+//                              uploadData();
+//                            openFileExplorer();
                             },
                             child: Text('Add files'),
                           ),

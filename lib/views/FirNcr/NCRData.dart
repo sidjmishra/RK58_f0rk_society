@@ -34,7 +34,7 @@ class NCRDatabase {
     type == 'FIR' ? await userCollection
         .document(uid)
         .collection('FIR')
-        .document()
+        .document(id)
         .setData({
       'id': id,
       'email': email,

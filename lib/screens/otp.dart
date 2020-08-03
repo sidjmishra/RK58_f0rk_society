@@ -11,6 +11,10 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class Otp extends StatefulWidget {
+
+  final String phone;
+  Otp({this.phone});
+
   @override
   _OtpState createState() => _OtpState();
 }
@@ -30,7 +34,7 @@ class _OtpState extends State<Otp> {
     id = number.nextInt(999999).toString();
     if (id.length < 6) {
       setState(() {
-        id = number.nextInt(9999999).toString();
+        id = number.nextInt(999999).toString();
       });
     }
     print(id);
@@ -43,7 +47,7 @@ class _OtpState extends State<Otp> {
     http.Response response;
 
     data = {
-      'phoneNumber': HotConstants.myPhone,
+      'phoneNumber': '+91${widget.phone}',
       'message': 'The verification otp is $otp'
     };
     body = json.encode(data);

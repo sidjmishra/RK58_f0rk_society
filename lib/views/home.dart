@@ -11,7 +11,6 @@ import 'package:block/views/Chat/ChatRoom.dart';
 import 'package:block/views/DelayAction/delayAction.dart';
 import 'package:block/views/FirNcr/Reporting.dart';
 import 'package:block/views/HotReporting/hotReporting.dart';
-import 'package:block/views/JailManagement/jailManage.dart';
 import 'package:block/views/LiveStream/index.dart';
 import 'package:block/views/NOC/Noc.dart';
 import 'package:block/views/Profile/profileView.dart';
@@ -65,19 +64,19 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  Future getPhone(String aadhar) async {
-    QuerySnapshot querySnapshot;
-    querySnapshot =
-        await Firestore.instance.collection('Aadhar Card').getDocuments();
-    for (var index = 0; index < querySnapshot.documents.length; index++) {
-      if (querySnapshot.documents[index].data['Aadhar'] == aadhar) {
-        setState(() {
-          HotConstants.myPhone = querySnapshot.documents[index].data['Phone'];
-        });
-      }
-    }
-    print(HotConstants.myPhone);
-  }
+//  Future getPhone(String aadhar) async {
+//    QuerySnapshot querySnapshot;
+//    querySnapshot =
+//        await Firestore.instance.collection('Aadhar Card').getDocuments();
+//    for (var index = 0; index < querySnapshot.documents.length; index++) {
+//      if (querySnapshot.documents[index].data['Aadhar'] == aadhar) {
+//        setState(() {
+//          HotConstants.myPhone = querySnapshot.documents[index].data['Phone'];
+//        });
+//      }
+//    }
+//    print(HotConstants.myPhone);
+//  }
 
   Future getUserProfile() async {
     await dataMethods.getProfile(Constants.myUid).then((value) {
@@ -88,12 +87,12 @@ class _HomePageState extends State<HomePage> {
               snapshotUserName.documents[index].data['First Name'] +
                   ' ' +
                   snapshotUserName.documents[index].data['Last Name'];
-//          HotConstants.myPhone = snapshotUserName.documents[index].data['Phone Number'];
+          HotConstants.myPhone = snapshotUserName.documents[index].data['Phone Number'];
           HotConstants.myUID =
               snapshotUserName.documents[index].data['U.I.D type'] +
                   ': ' +
                   snapshotUserName.documents[index].data['U.I.D number'];
-          getPhone(snapshotUserName.documents[index].data['U.I.D number']);
+//          getPhone(snapshotUserName.documents[index].data['U.I.D number']);
           print(HotConstants.myFullName);
           print(HotConstants.myPhone);
           print(HotConstants.myUID);
@@ -361,21 +360,6 @@ class _HomePageState extends State<HomePage> {
                   style:
                       TextStyle(fontWeight: FontWeight.bold, fontSize: 15.0)),
               subtitle: Text('FIR or NCR Reporting'),
-            ),
-            ListTile(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) {
-                    return JailManage();
-                  }),
-                );
-              },
-              leading: Icon(Icons.business),
-              title: Text('Prison Management',
-                  style:
-                      TextStyle(fontWeight: FontWeight.bold, fontSize: 15.0)),
-              subtitle: Text('Report regarding the prison management'),
             ),
             ListTile(
               onTap: () {
