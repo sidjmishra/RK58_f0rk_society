@@ -1,15 +1,17 @@
+import 'dart:convert';
+
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:block/Animation/FadeAnimation.dart';
 import 'package:block/services/auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:block/services/database.dart';
+import 'package:http/http.dart' as http;
 
 class FeedbackPage extends StatefulWidget {
-  FeedbackPage({this.type, this.uid, this.docid});
-  String type;
-  String uid;
-  String docid;
+  FeedbackPage({this.type, this.uid});
+  final String type;
+  final String uid;
   @override
   _FeedbackPageState createState() => _FeedbackPageState();
 }
@@ -36,11 +38,33 @@ class _FeedbackPageState extends State<FeedbackPage> {
     await data.submitFeedback(
       widget.uid,
       widget.type,
-      widget.docid,
       feedback.text,
       rating,
+    ).then((value) {
+      sendAnalysis();
+      Navigator.pop(context);
+    });
+
+  }
+
+  Future sendAnalysis() async {
+    Map data;
+    String body;
+    http.Response response;
+
+    data = {
+      'text': feedback.text,
+      'api_key': '03guykFK7X7r8Xw7ABcSaIQjiAfgoir91cKtbANGCXU',
+      'lang_code': 'en'
+    };
+    body = json.encode(data);
+
+    response = await http.post(
+      'https://apis.paralleldots.com/v4/sentiment',
+      headers: {'Content-Type': 'application/json'},
+      body: body,
     );
-//    Navigator.pop(context);
+    print(response.statusCode);
   }
 
   @override
@@ -102,16 +126,6 @@ class _FeedbackPageState extends State<FeedbackPage> {
                     ),
                   ),
                   SizedBox(height: 5),
-//                  FadeAnimation(
-//                    1.3,
-//                    Text(
-//                      'Fill details about the incident!',
-//                      style: TextStyle(
-//                        color: Colors.white,
-//                        fontSize: 18,
-//                      ),
-//                    ),
-//                  ),
                 ],
               ),
             ),
@@ -246,7 +260,7 @@ class _FeedbackPageState extends State<FeedbackPage> {
                                           ),
                                         ),
                                         validator: (_currentSelectedCategory) =>
-                                            _currentSelectedCategory == 0
+                                            _currentSelectedCategory.isEmpty
                                                 ? 'Field Required'
                                                 : null,
                                         value: rating,
@@ -339,3 +353,5 @@ class _FeedbackPageState extends State<FeedbackPage> {
     );
   }
 }
+
+

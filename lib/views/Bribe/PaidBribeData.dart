@@ -36,7 +36,6 @@ class PaidBribeDatabase {
 //      'Urls': urls,
       'Status': 'Pending'
     });
-    await evidenceData(id, 'PaidBribe');
   }
 
   // Done
@@ -67,7 +66,6 @@ class PaidBribeDatabase {
 //      'Urls': urls,
       'Status': 'Pending'
     });
-    await evidenceData(id, 'UnusualBehaviour');
   }
 
   Future evidenceData(String id, String type) async {

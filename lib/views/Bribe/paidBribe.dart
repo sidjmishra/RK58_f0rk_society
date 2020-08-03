@@ -114,8 +114,8 @@ class _PaidBribeState extends State<PaidBribe> {
 //  String _extension;
 //  DateTime date = DateTime.now();
 //
-//  Future openFileExplorer() async {
-//    try {
+  Future openFileExplorer() async {
+    try {
 //      var _path;
 
 //      StorageUploadTask storageUploadTask;
@@ -142,30 +142,29 @@ class _PaidBribeState extends State<PaidBribe> {
 //        }
 //      });
 
-//      File _path;
-//      _path = await FilePicker.getFile(
-//        type: FileType.custom,
-//        allowedExtensions: ['jpg', 'jpeg', 'png', 'JPG', 'JPEG', 'PNG'],
-//      );
-//
-//      if(_path != null) {
-//        Map<String, dynamic> response;
-//        response = await uploadData(_path);
-//        print(response);
-//
-//      }
-//
-//    } on PlatformException catch (e) {
-//      print(e.toString());
-//    }
-//    if (!mounted) {
-//      return;
-//    }
-//  }
+      File _path;
+      _path = await FilePicker.getFile(
+        type: FileType.custom,
+      );
+
+      if(_path != null) {
+        Map<String, dynamic> response;
+        response = await uploadData(_path);
+        print(response);
+
+      }
+
+    } on PlatformException catch (e) {
+      print(e.toString());
+    }
+    if (!mounted) {
+      return;
+    }
+  }
 //
 //  Uri address = Uri.parse('https://ipfsapi.herokuapp.com/api/ipfsRoutes/viewfromblockchain');
 
-//  Future<Map<String, dynamic>> uploadData(File evidence) async {
+  Future uploadData(File evidence) async {
 //    var request = http.MultipartRequest('POST', Uri.parse('https://ipfsapi.herokuapp.com/api/ipfsRoutes/viewfromblockchain'));
 //    request.files.add(
 //      http.MultipartFile.fromBytes(
@@ -192,23 +191,23 @@ class _PaidBribeState extends State<PaidBribe> {
 //    var res = await request.send();
 //    print(res.statusCode);
 
-//    Map data;
-//    String body;
-//    http.Response response;
-//
-//    data = {
-//      'bufferfile': path
-//    };
-//    body = json.encode(data);
-//
-//    response = await http.post(
-//      'https://ipfsapi.herokuapp.com/api/ipfsRoutes/uploadfiles',
-//      headers: {'Content-Type': 'multipart/form-data'},
-//      body: body,
-//    );
-//    print(response.reasonPhrase);
-//    print(response.statusCode);
-//    print(response.headers);
+    Map data;
+    String body;
+    http.Response response;
+
+    data = {
+      'bufferfile': '${evidence.path}'
+    };
+    body = json.encode(data);
+
+    response = await http.post(
+      'https://ipfsapi.herokuapp.com/api/ipfsRoutes/uploadfiles',
+      headers: {'Content-Type': 'multipart/form-data'},
+      body: body,
+    );
+    print(response.reasonPhrase);
+    print(response.statusCode);
+    print(response.headers);
 
   // Final try
 //    final mimeTypeData = lookupMimeType(evidence.path, headerBytes: [0xFF, 0xD8]).split('/');
@@ -230,7 +229,7 @@ class _PaidBribeState extends State<PaidBribe> {
 //    } catch(e) {
 //      return e;
 //    }
-//  }
+  }
 
   void randomId() async {
     var number = Random.secure();
@@ -293,6 +292,10 @@ class _PaidBribeState extends State<PaidBribe> {
         pickedCountry.toString(),
         pickedCountryName.toString(),
 //              urls
+      );
+      PaidBribeDatabase(uid: Constants.myUid).evidenceData(
+        id,
+        'PaidBribe'
       ).then((value) {
         Clipboard.setData(ClipboardData(text: id));
         Navigator.push(

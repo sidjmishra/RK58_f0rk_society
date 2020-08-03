@@ -488,7 +488,7 @@ class _HomePageState extends State<HomePage> {
                     1,
                     Center(
                       child: Image.asset(
-                        'assets/bprd.png',
+                        'assets/llogo.png',
                         height: 60.0,
                         width: 60.0,
                       ),
@@ -518,14 +518,14 @@ class _HomePageState extends State<HomePage> {
                       Text(
                         'Make In India',
                         style: TextStyle(
-                            color: Colors.yellow[500],
+                            color: Colors.tealAccent,
                             fontSize: 15.0,
                             fontWeight: FontWeight.w500),
                       ),
                       SizedBox(width: 10),
                       Icon(
                         AntDesign.heart,
-                        color: Colors.yellow,
+                        color: Colors.tealAccent,
                       ),
                     ],
                   ),

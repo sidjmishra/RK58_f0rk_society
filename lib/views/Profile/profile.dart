@@ -600,48 +600,51 @@ class _ProfileState extends State<Profile> {
                     ),
                   ),
                   SizedBox(height: 20),
-                  FadeAnimation(
-                    1.3,
-                    Text(
-                      'Submit Aadhar Card & passport size picture',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 25,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 20),
-                  OutlineButton(
-                    onPressed: () => openFileExplorer(),
-                    child: Text('Open file explorer'),
-                  ),
-                  urls.isEmpty
-                      ? Text('No files submitted(If added then wait)')
-                      : Text('${urls.length} Files Uploaded'),
-                  SizedBox(height: 20),
+//                  FadeAnimation(
+//                    1.3,
+//                    Text(
+//                      'Submit Aadhar Card & passport size picture',
+//                      textAlign: TextAlign.center,
+//                      style: TextStyle(
+//                        fontSize: 25,
+//                        fontWeight: FontWeight.bold,
+//                        color: Colors.black,
+//                      ),
+//                    ),
+//                  ),
+//                  SizedBox(height: 20),
+//                  OutlineButton(
+//                    onPressed: () => openFileExplorer(),
+//                    child: Text('Open file explorer'),
+//                  ),
+//                  urls.isEmpty
+//                      ? Text('No files submitted(If added then wait)')
+//                      : Text('${urls.length} Files Uploaded'),
+//                  SizedBox(height: 20),
 
                   // Button
                   GestureDetector(
-                    onTap: () async {
-                      var val = await setData();
-                      print(val);
-                      if (val == 'error') {
-                        print('error received');
-                        Scaffold.of(context)
-                            .showSnackBar(SnackBar(
-                              content: Text('Please add files'),
-                        ));
-                      }
-                    },
+//                    onTap: () async {
+//                      var val = await setData();
+//                      print(val);
+//                      if (val == 'error') {
+//                        print('error received');
+//                        Scaffold.of(context)
+//                            .showSnackBar(SnackBar(
+//                              content: Text('Please add files'),
+//                        ));
+//                      }
+//                    },
+                  onTap: () {
+                    setData();
+                  },
                     child: Container(
                       height: 50,
                       width: 123,
                       margin: EdgeInsets.symmetric(horizontal: 5),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(50),
-                        color: Color(0xff99D5D5),
+                        color: Colors.teal,
                       ),
                       child: Center(
                         child: Text(

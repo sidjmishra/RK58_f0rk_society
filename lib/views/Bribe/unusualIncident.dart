@@ -149,7 +149,8 @@ class _HonestOfficialState extends State<HonestOfficial> {
           pickedCountry,
           pickedCountryName,
 //          urls
-      ).then((value) {
+      );
+      PaidBribeDatabase(uid: Constants.myUid).evidenceData(id, 'UnusualBehaviour').then((value) {
         Clipboard.setData(ClipboardData(text: id));
         Navigator.push(context, MaterialPageRoute(
             builder: (context) => DataModel()

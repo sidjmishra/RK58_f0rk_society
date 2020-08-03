@@ -1,3 +1,4 @@
+import 'package:block/modal/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class UserDatabaseServices {
@@ -82,19 +83,17 @@ class DataMethods {
         .snapshots();
   }
 
-  submitFeedback(String uid, String type, String docid, String feedback,
+  Future submitFeedback(String uid, String type, String feedback,
       String rating) async {
     print('pushing data');
-    print(docid);
     print(type);
     await Firestore.instance
-        .collection(type)
+        .collection('Feedbacks')
         .document(uid)
-        .collection('all_data')
-        .document(docid)
         .setData({
       'feedback': feedback,
       'rating': rating,
+      'type': type,
     }, merge: true);
   }
 }

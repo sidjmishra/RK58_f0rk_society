@@ -57,8 +57,7 @@ class _PaidState extends State<Paid> {
                                   MaterialPageRoute(
                                       builder: (context) => FeedbackPage(
                                             type: 'PaidBribe',
-                                            uid: widget.uid,
-                                            docid: querySnapshot
+                                            uid: querySnapshot
                                                 .documents[index].data['id'],
                                           )));
                             }
@@ -223,15 +222,14 @@ class _HotStatusState extends State<HotStatus> {
                         child: FlatButton(
                           onPressed: () {
                             if (querySnapshot.documents[index].data['Status'] ==
-                                'Accepted') {
+                                'Assessed') {
                               Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => FeedbackPage(
                                             type: 'Hot Report',
-                                            uid: widget.uid,
-                                            docid: querySnapshot
-                                                .documents[index].data['id'],
+                                            uid: querySnapshot.documents[index]
+                                                .data['complaintID'],
                                           )));
                             }
                           },
@@ -380,8 +378,7 @@ class _UnusualState extends State<Unusual> {
                                   MaterialPageRoute(
                                       builder: (context) => FeedbackPage(
                                             type: 'UnusualBehaviour',
-                                            uid: widget.uid,
-                                            docid: querySnapshot
+                                            uid: querySnapshot
                                                 .documents[index].data['id'],
                                           )));
                             }
@@ -561,8 +558,7 @@ class _FIRState extends State<FIR> {
                                   MaterialPageRoute(
                                       builder: (context) => FeedbackPage(
                                             type: 'FIR_NCR',
-                                            uid: widget.uid,
-                                            docid: querySnapshot
+                                            uid: querySnapshot
                                                 .documents[index].data['id'],
                                           )));
                             }
@@ -746,8 +742,7 @@ class _NOCState extends State<NOC> {
                                   MaterialPageRoute(
                                       builder: (context) => FeedbackPage(
                                             type: 'NOC',
-                                            uid: widget.uid,
-                                            docid: querySnapshot
+                                            uid: querySnapshot
                                                 .documents[index].data['id'],
                                           )));
                             }
@@ -914,8 +909,7 @@ class _RTIState extends State<RTI> {
                                   MaterialPageRoute(
                                       builder: (context) => FeedbackPage(
                                             type: 'Delay In Actions',
-                                            uid: widget.uid,
-                                            docid: querySnapshot
+                                            uid: querySnapshot
                                                 .documents[index].data['id'],
                                           )));
                             }
@@ -1078,8 +1072,7 @@ class _ApointState extends State<Apoint> {
                                   MaterialPageRoute(
                                       builder: (context) => FeedbackPage(
                                             type: 'Appointment',
-                                            uid: widget.uid,
-                                            docid: querySnapshot
+                                            uid: querySnapshot
                                                 .documents[index].data['id'],
                                           )));
                             }
@@ -1274,8 +1267,7 @@ class _JailState extends State<Jail> {
                                   MaterialPageRoute(
                                       builder: (context) => FeedbackPage(
                                             type: 'PaidBribe',
-                                            uid: widget.uid,
-                                            docid: querySnapshot
+                                            uid: querySnapshot
                                                 .documents[index].data['id'],
                                           )));
                             }
