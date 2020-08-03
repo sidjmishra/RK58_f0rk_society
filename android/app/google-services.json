@@ -1,0 +1,77 @@
+{
+  "project_info": {
+    "project_number": "883197621162",
+    "firebase_url": "https://bribe-block.firebaseio.com",
+    "project_id": "bribe-block",
+    "storage_bucket": "bribe-block.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:883197621162:android:45f0ec14a214ebf14eb1d3",
+        "android_client_info": {
+          "package_name": "com.sidjmishra.aharyaadmin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "883197621162-r1gb95mfuudibp1658bkfvg4piguq5hq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBzCEoz_3sLz1wedyBLh-cvuwFYiHP3bwI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "883197621162-r1gb95mfuudibp1658bkfvg4piguq5hq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:883197621162:android:912c24f88f75c2ae4eb1d3",
+        "android_client_info": {
+          "package_name": "com.sidjmishra.block"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "883197621162-ql01jqm1f28io1tugcsijgcekp0sc1vf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sidjmishra.block",
+            "certificate_hash": "20dc171ea5195b579752316652f14e5c626c35f4"
+          }
+        },
+        {
+          "client_id": "883197621162-r1gb95mfuudibp1658bkfvg4piguq5hq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBzCEoz_3sLz1wedyBLh-cvuwFYiHP3bwI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "883197621162-r1gb95mfuudibp1658bkfvg4piguq5hq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
