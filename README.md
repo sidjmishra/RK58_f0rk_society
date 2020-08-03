@@ -5,12 +5,13 @@ Name of Solution-Aharya
 Database - Firebase
 emailid(firebase)-sidjmishra007@student.sfit.ac.in
 password(firebase)-siddevy@2513
-This description shows our implementation till round 2
+This description shows our implementation till round 3
 
 Here we have tried to provide basic functionality of reporting updating the status of reports submitted by the user
-we have 2 main entity 
+we have 3 main entity 
 1-Aharya app(user)
 2-Aharya website(Admin)
+3.Aharya app(admin)
 
 *****Aharya App**********
 
