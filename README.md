@@ -5,6 +5,8 @@ Name of Solution-Aharya
 Database - Firebase
 emailid(firebase)-sidjmishra007@student.sfit.ac.in
 password(firebase)-siddevy@2513
+
+***note***-this repo consist of multiple branches and each branch is been associated with our main entities. 
 This description shows our implementation till round 3
 
 Here we have tried to provide basic functionality of reporting updating the status of reports submitted by the user
