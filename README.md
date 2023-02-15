@@ -3,8 +3,6 @@
 Smart India Hackathon - 2020
 Name of Solution-Aharya
 Database - Firebase
-emailid(firebase)-sidjmishra007@student.sfit.ac.in
-password(firebase)-siddevy@2513
 user app = Dart(flutter)
 admin web-app = Python-Django
 admin app = Dart(flutter)
@@ -76,8 +74,6 @@ we have also use the implementation of various graphs soo that data can be visua
 
 
 *****Note- if you sign up for new user then we havent added and validators for Adhar card and security code field is not added which we would add in future course once signup is done you need to login with that credentials again.RTI is only working for bribery for further types it would work in future versions
-***** predefine credentials- mail-hyp9820@student.sfit.ac.in
-			     pass-12345678 
 How does Aharya Web-App ?
 
 • Getting Started : You can either sign-in with predfine credential given by Govt or else you can signup with your details.
